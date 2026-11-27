@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HRlab｜アプリ開発・SNS運用</title>
+<meta name="description" content="HRlab（代表 笠原斗夢）。アプリ開発とSNS運用、求人票の無料点検。">
+<meta property="og:title" content="HRlab｜アプリ開発・SNS運用">
+<meta property="og:description" content="アプリ開発とSNS運用、求人票の無料点検。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M22 20V100M22 60H60M60 100V20H78A20 20 0 0 1 78 60H60M74 60L96 100' fill='none' stroke='%232563EB' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='104' cy='18' r='8' fill='%23F97316'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F172A; --text:#1E293B; --muted:#475569; --line:#E2E8F0;
+    --bg:#FFFFFF; --soft:#F8FAFC; --accent:#2563EB; --accent-soft:#EFF6FF; --dot:#F97316;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Noto Sans JP',sans-serif;color:var(--text);background:var(--bg);line-height:1.8;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  .en{font-family:'Space Grotesk',sans-serif}
+
+  header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;color:var(--ink)}
+  .brand:hover{text-decoration:none}
+  .brand b{font-family:'Space Grotesk',sans-serif;font-size:24px;letter-spacing:-.5px}
+  .brand b span{color:var(--accent)}
+  nav{display:flex;gap:24px;font-size:15px}
+  nav a{color:var(--muted)}
+  nav a:hover{color:var(--ink);text-decoration:none}
+  .cta-sm{display:none;min-height:44px;align-items:center;padding:0 18px;border-radius:999px;background:var(--accent);color:#fff;font-size:14px;font-weight:500}
+  .cta-sm:hover{text-decoration:none;opacity:.88}
+
+  .hero{padding:104px 0 96px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--line) 1.2px,transparent 1.2px);background-size:24px 24px;mask-image:linear-gradient(90deg,transparent 30%,#000 100%);-webkit-mask-image:linear-gradient(90deg,transparent 30%,#000 100%);pointer-events:none}
+  .hero .wrap{position:relative;display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap}
+  .kicker{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:3px;color:var(--accent);font-weight:500;margin:0 0 16px}
+  h1{font-size:clamp(32px,5vw,52px);line-height:1.35;color:var(--ink);margin:0 0 20px;letter-spacing:.5px}
+  .lead{font-size:18px;color:var(--muted);margin:0 0 32px;max-width:560px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:999px;font-weight:500;font-size:16px}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn:hover{text-decoration:none;opacity:.88}
+  .hero-mark{flex:0 0 auto}
+
+  section{padding:88px 0;border-top:1px solid var(--line)}
+  section.soft{background:var(--soft)}
+  .label{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:3px;color:var(--accent);font-weight:500;margin:0 0 8px}
+  h2{font-size:clamp(24px,3.2vw,32px);color:var(--ink);margin:0 0 40px;line-height:1.5}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}
+  .card .icon{width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .card h3{font-size:19px;color:var(--ink);margin:0 0 8px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+
+  .about{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap}
+  .about .name{flex:0 0 240px}
+  .about .name .role{font-size:14px;color:var(--muted)}
+  .about .name .jp{font-size:30px;font-weight:700;color:var(--ink);letter-spacing:4px;line-height:1.4}
+  .about .name .roma{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:3px;color:var(--muted)}
+  .about .body{flex:1 1 420px;min-width:0}
+  .about .body p{margin:0 0 16px}
+
+  .pillars{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 24px;padding:0;list-style:none}
+  .pillars li{font-size:14px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px}
+  .offer{background:var(--accent-soft);border-radius:16px;padding:24px 28px;color:var(--ink)}
+  .offer strong{color:var(--accent)}
+
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .link{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:14px;padding:20px 24px;color:var(--ink);background:#fff;min-height:64px}
+  .link:hover{border-color:var(--accent);text-decoration:none}
+  .link .name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px}
+  .link .id{font-size:14px;color:var(--muted)}
+  .link svg{flex:0 0 auto;color:var(--accent)}
+
+  .contact{text-align:center}
+  .contact p{color:var(--muted);margin:0 0 28px}
+  .mail{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,3vw,28px);font-weight:500}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;font-size:13px;color:var(--muted)}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media (max-width:640px){
+    nav{display:none}
+    .cta-sm{display:inline-flex}
+    .btn{width:100%;justify-content:center}
+    .hero{padding:64px 0}
+    .hero-mark svg{width:120px;height:120px}
+    section{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="HRlab トップへ">
+      <svg width="34" height="34" viewBox="0 0 120 120" aria-hidden="true"><path d="M22 20V100M22 60H60M60 100V20H78A20 20 0 0 1 78 60H60M74 60L96 100" fill="none" stroke="#2563EB" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><circle cx="104" cy="18" r="8" fill="#F97316"/></svg>
+      <b>HR<span>lab</span></b>
+    </a>
+    <nav aria-label="ページ内">
+      <a href="#services">事業内容</a>
+      <a href="#about">代表</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+    <a class="cta-sm" href="contact.html">お問い合わせ</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="kicker">APP DEVELOPMENT / SOCIAL MEDIA</p>
+        <h1>つくって、伝えて、<br>届くまでを。</h1>
+        <p class="lead">HRlabは、アプリ開発とSNS運用を手がけています。採用（HR）の現場の知識を活かして、中小企業の求人票づくりもお手伝いしています。</p>
+        <div class="btns">
+          <a class="btn primary" href="contact.html">お問い合わせ</a>
+          <a class="btn ghost" href="#services">事業内容を見る</a>
+        </div>
+      </div>
+      <div class="hero-mark">
+        <svg width="200" height="200" viewBox="0 0 120 120" role="img" aria-label="HRlabのロゴ"><path d="M22 20V100M22 60H60M60 100V20H78A20 20 0 0 1 78 60H60M74 60L96 100" fill="none" stroke="#2563EB" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><circle cx="104" cy="18" r="8" fill="#F97316"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <section id="services" class="soft">
+    <div class="wrap">
+      <p class="label">SERVICES</p>
+      <h2>事業内容</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></div>
+          <h3>アプリ開発</h3>
+          <p>日々の仕事や暮らしの「ちょっと面倒」を減らすアプリを企画からつくります。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div>
+          <h3>SNS運用</h3>
+          <p>投稿の企画、原稿づくり、振り返りまで。続けられる発信の仕組みを整えます。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div>
+          <h3>求人票の無料点検</h3>
+          <p>お問い合わせフォームから求人票の内容を送ってもらえれば、直すところを3つ返します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <p class="label">ABOUT</p>
+      <h2>代表プロフィール</h2>
+      <div class="about">
+        <div class="name">
+          <div class="role">代表</div>
+          <div class="jp">笠原 斗夢</div>
+          <div class="roma">TOMU KASAHARA</div>
+        </div>
+        <div class="body">
+          <p>アプリ開発とSNS運用を軸に、HRlabを運営しています。</p>
+          <p>中小企業の経営者・採用担当の方に向けて、求人票・面接・定着の見直しを現場の目線でお手伝いしています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="label">CONTACT</p>
+      <h2>お問い合わせ</h2>
+      <p>アプリ開発・SNS運用のご相談、求人票の無料点検は、フォームからお気軽にどうぞ。</p>
+      <a class="btn primary" href="contact.html">お問い合わせフォームへ</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="en">© 2026 HRlab</span>
+    <span>代表 笠原 斗夢</span>
+  </div>
+</footer>
+
+</body>
+</html>
