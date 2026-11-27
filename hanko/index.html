@@ -13,8 +13,12 @@
     gtag('config', 'G-YPSE6ZHVK1', { page_location: location.origin + location.pathname + (q ? '?' + q : '') }); })();
 </script>
 <title>まいにちハンコ｜習慣を、ラジオ体操カードみたいに続ける</title>
-<meta name="description" content="やると決めたことを、1日1つハンコを押して続ける習慣アプリ。30日で1枚のカードが埋まっていきます。登録不要・無料。記録はあなたの端末の中だけに保存。">
+<meta name="description" content="やると決めたことを、1日1つハンコを押して続ける習慣アプリ。30日で1枚のカードが埋まっていきます。広告なし・登録不要・無料のままずっと使えます。記録はあなたの端末の中だけに保存。">
 <meta name="theme-color" content="#F4EEE3">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="まいにちハンコ">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='9' fill='%23C23B22'/%3E%3Crect x='10' y='10' width='44' height='44' rx='5' fill='none' stroke='%23F4EEE3' stroke-width='3'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='30' font-family='serif' fill='%23F4EEE3'%3E%E6%97%A5%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,6 +58,35 @@
   .dots i{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--ink-3);display:inline-block}
   .dots i.on{border-color:var(--shu);background:radial-gradient(circle,var(--shu) 0 2.5px,transparent 3px)}
   .lead{font-size:14px;color:var(--ink-2);margin:14px 0 26px;max-width:36em}
+  .promise{font-size:12px;color:var(--ink-2);border-left:3px solid var(--shu);padding:2px 0 2px 10px;margin:-14px 0 26px}
+
+  /* 見出しの付箋（グループ） */
+  .tabs{display:flex;gap:2px;margin:22px 0 0;overflow-x:auto;scrollbar-width:none;border-bottom:1.5px solid var(--ink)}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{padding:7px 14px 5px;font-family:var(--mincho);font-weight:800;font-size:14px;white-space:nowrap;border:1.5px solid var(--ink-3);border-bottom:0;background:var(--rule-2);color:var(--ink-2);margin-bottom:-1.5px}
+  .tab[aria-selected=true]{background:var(--card);color:var(--ink);border-color:var(--ink);padding-bottom:6px}
+
+  /* この一週間（一覧表） */
+  .week{background:var(--card);border:1.5px solid var(--ink);margin:18px 0 34px;overflow:hidden}
+  .week-head{display:flex;justify-content:space-between;align-items:center;padding:8px 10px 6px 14px;border-bottom:1px solid var(--ink)}
+  .week-head b{font-family:var(--mincho);font-weight:800;font-size:16px;letter-spacing:.1em}
+  .week-head .nav{display:flex;align-items:center;gap:2px;font-size:12px;color:var(--ink-2)}
+  .week-head .nav button{width:34px;height:34px;font-size:18px;font-family:var(--mincho)}
+  .week-head .nav button:disabled{opacity:.25;cursor:default}
+  table.wk{width:100%;border-collapse:collapse;table-layout:fixed}
+  .wk th,.wk td{border-bottom:1px solid var(--rule-2);padding:0;text-align:center}
+  .wk thead th{font-family:var(--mincho);font-weight:600;font-size:11px;color:var(--ink-2);padding:6px 0 4px;line-height:1.25}
+  .wk thead th b{display:block;font-size:14px;color:var(--ink)}
+  .wk thead th.sun b{color:var(--shu)} .wk thead th.sat b{color:var(--ai)}
+  .wk th.nm{text-align:left;padding:0 6px 0 14px;font-family:var(--mincho);font-weight:800;font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:32%}
+  .wk thead th.nm{font-weight:600;color:var(--ink-2);font-size:11px}
+  .wk .is-today{background:rgba(194,59,34,.06)}
+  .wk td button{width:100%;height:46px;position:relative;display:grid;place-items:center}
+  .wk td button:disabled{cursor:default}
+  .wk td .mark{width:30px;height:30px;position:relative}
+  .wk td .mark .stamp{inset:0}
+  .wk tr:last-child th,.wk tr:last-child td{border-bottom:0}
+  .part{font-family:var(--mincho);font-weight:800;font-size:12px;color:var(--shu);letter-spacing:0}
 
   /* カード（ラジオ体操カード） */
   .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:30px 26px;align-items:start}
@@ -63,11 +96,12 @@
   .cards>.card:nth-child(3n+2){transform:rotate(.3deg)}
   .card-head{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:start;padding-bottom:8px;border-bottom:1px solid var(--ink);margin-bottom:10px}
   .card-name{font-family:var(--mincho);font-weight:800;font-size:21px;line-height:1.35;margin:0;overflow-wrap:anywhere}
-  .card-no{font-family:var(--mincho);font-size:12px;color:var(--ink-2);white-space:nowrap;padding-top:6px}
+  .card-no{font-family:var(--mincho);font-size:12px;color:var(--ink-2);white-space:nowrap;padding-top:6px;text-align:right}
+  .card-no .grp{display:table;margin:3px 0 0 auto;font-size:10.5px;line-height:1.6;border:1px solid var(--ink-3);padding:0 6px;font-family:var(--gothic);color:var(--ink-2)}
   .card-sub{grid-column:1/-1;font-size:12px;color:var(--ink-2);display:flex;gap:12px;flex-wrap:wrap}
   .streak b{font-family:var(--mincho);font-size:15px;color:var(--ink);font-weight:800;margin:0 1px}
   .grid{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
-  .cell{position:relative;aspect-ratio:1;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:block;width:100%}
+  .cell{position:relative;aspect-ratio:1;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:block;width:100%;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
   .cell .d{position:absolute;left:4px;top:2px;font-family:var(--mincho);font-size:11px;color:var(--ink-2);line-height:1.2;pointer-events:none}
   .cell .d small{font-size:9px;color:var(--shu);letter-spacing:0;margin-right:1px}
   .cell.future .d{color:var(--ink-3);opacity:.6}
@@ -75,16 +109,19 @@
   .cell.today{background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(194,59,34,.05) 6px 7px)}
   .cell .pencil{position:absolute;inset:16% 10% 8% 12%;pointer-events:none;opacity:.75}
   .cell .hint{position:absolute;left:12%;right:10%;top:16%;bottom:8%;display:grid;place-items:center;font-family:var(--mincho);font-size:11px;color:var(--shu);letter-spacing:.2em;padding-left:.2em;pointer-events:none}
-  .stamp{position:absolute;inset:15% 7% 5% 13%;pointer-events:none;mix-blend-mode:multiply}
+  .cell .cnt{position:absolute;left:12%;right:8%;top:18%;bottom:6%;display:grid;place-items:center;pointer-events:none}
+  .cell .memo{position:absolute;right:0;top:0;width:0;height:0;border-style:solid;border-width:0 11px 11px 0;border-color:transparent var(--ink-3) transparent transparent;pointer-events:none}
+  .stamp{position:absolute;inset:15% 7% 5% 13%;pointer-events:none;mix-blend-mode:multiply;transform:rotate(var(--r))}
   .stamp svg{width:100%;height:100%;display:block;overflow:visible}
   .stamp.pop{animation:press .34s cubic-bezier(.2,.9,.25,1.25) both}
   @keyframes press{0%{transform:scale(1.65) rotate(var(--r));opacity:0;filter:blur(1.5px)}55%{transform:scale(.9) rotate(var(--r));opacity:1;filter:blur(0)}100%{transform:scale(1) rotate(var(--r));opacity:1}}
-  .stamp{transform:rotate(var(--r))}
   .card.thump{animation:thump .22s ease-out}
   @keyframes thump{0%{translate:0 0}40%{translate:0 1.5px}100%{translate:0 0}}
-  .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:12px;color:var(--ink-2)}
+  .card-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:9px;font-size:12px;color:var(--ink-2)}
   .card-foot .tally{font-family:var(--mincho);font-size:13px;color:var(--ink)}
-  .menu-btn{padding:4px 2px 4px 10px;font-size:12px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--rule)}
+  .card-foot .stat{font-size:11px;color:var(--ink-2)}
+  .menu-btn{padding:4px 2px 4px 10px;font-size:12px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--rule);white-space:nowrap}
+  .howto{font-size:11.5px;color:var(--ink-2);margin:-18px 0 22px}
 
   /* 白紙のカード（追加） */
   .blank{margin:5px;min-height:240px;border:1.5px dashed var(--ink-3);display:grid;place-items:center;text-align:center;color:var(--ink-2);
@@ -123,19 +160,20 @@
   /* アルバム */
   .album{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
   .mini{background:var(--card);border:1px solid var(--ink);padding:8px;box-shadow:3px 4px 0 rgba(60,45,25,.06)}
-  .mini .t{font-family:var(--mincho);font-weight:800;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mini .t{font-family:var(--mincho);font-weight:800;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
   .mini .s{font-size:10.5px;color:var(--ink-2)}
   .mini .g{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;margin:6px 0 4px}
   .mini .g i{aspect-ratio:1;border:1px solid var(--rule-2);border-radius:50%}
   .mini .g i.on{border:0;background:radial-gradient(circle,transparent 0 38%,currentColor 40% 50%,transparent 52%)}
+  .mini .g i.rest{border:1px dashed var(--ink-3)}
   .locked{border:1px dashed var(--ink-3);padding:16px;font-size:13px;color:var(--ink-2);background:rgba(251,248,241,.6)}
   .locked button{text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
 
   /* ボタン類 */
   .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border:1.5px solid var(--ink);background:var(--card);font-weight:700;font-size:14px}
   .btn.ink{background:var(--ink);color:var(--paper)}
-  .btn.shu{background:var(--shu);border-color:var(--shu);color:#fff}
   .btn:disabled{opacity:.45;cursor:default}
+  .btn.sm{min-height:36px;padding:0 12px;font-size:13px}
   .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
   .tools{display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
   .tools button{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--ink-3);color:var(--ink-2)}
@@ -146,9 +184,12 @@
   dialog::backdrop{background:rgba(43,38,34,.42)}
   .sheet{padding:20px 20px 18px}
   .sheet h3{font-family:var(--mincho);font-weight:800;font-size:20px;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+  .sheet h3 small{display:block;font-size:12px;font-family:var(--gothic);font-weight:500;color:var(--ink-2);margin-top:2px}
   label,.lbl{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
   input[type=text]{width:100%;font:inherit;font-size:16px;padding:10px 2px;border:0;border-bottom:1.5px solid var(--ink);background:transparent;border-radius:0;color:var(--ink)}
   input[type=text]:focus{outline:none;border-bottom-color:var(--shu)}
+  select{font:inherit;font-size:16px;padding:8px 6px;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
   .chips button{font-size:12px;border:1px solid var(--rule);padding:3px 10px;background:var(--paper)}
   .chips button:hover{border-color:var(--ink)}
@@ -162,8 +203,20 @@
   .preview .pv .stamp{inset:8%}
   .note{font-size:12px;color:var(--ink-2)}
   .err{color:var(--shu);font-size:12.5px;min-height:1.2em;margin-top:8px}
-  .sheet .actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px;align-items:center}
+  .sheet .actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px;align-items:center;flex-wrap:wrap}
   .danger{color:var(--shu);font-size:13px;text-decoration:underline;text-underline-offset:3px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--ink);margin-top:6px}
+  .stats div{padding:8px 4px;text-align:center;border-right:1px solid var(--rule)}
+  .stats div:last-child{border-right:0}
+  .stats b{display:block;font-family:var(--mincho);font-weight:800;font-size:20px;line-height:1.3}
+  .stats span{font-size:11px;color:var(--ink-2)}
+  .stepper{display:flex;align-items:center;gap:0;border:1.5px solid var(--ink);width:max-content}
+  .stepper button{width:46px;height:44px;font-size:20px;font-family:var(--mincho)}
+  .stepper output{min-width:70px;text-align:center;font-family:var(--mincho);font-weight:800;font-size:18px;border-left:1px solid var(--rule);border-right:1px solid var(--rule);line-height:44px}
+  .check{display:flex;align-items:flex-start;gap:10px;margin-top:14px;font-size:14px;cursor:pointer}
+  .check input{width:22px;height:22px;accent-color:var(--ink);margin-top:2px;flex:none}
+  .check{font-weight:700}
+  .check small{display:block;font-size:12px;color:var(--ink-2);font-weight:400;margin-top:2px}
 
   /* 知らせ */
   .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;background:var(--ink);color:var(--paper);
@@ -173,13 +226,15 @@
 
   .foot{margin:64px 0 0;padding:16px 0 calc(40px + env(safe-area-inset-bottom));border-top:1.5px solid var(--ink);font-size:12px;color:var(--ink-2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .hide{display:none!important}
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
   @media (max-width:420px){
     .wrap{padding:0 14px}
+    .sheet .actions .danger{flex:1 0 100%;text-align:left;margin-bottom:4px}
     .cards{grid-template-columns:1fr;gap:26px}
     .card{padding:14px 12px 10px}
     .cell .d{font-size:10px;left:3px}
+    .wk th.nm{padding-left:10px;font-size:12px;width:30%}
+    .wk td .mark{width:26px;height:26px}
   }
   @media (prefers-reduced-motion:reduce){
     .stamp.pop,.card.thump{animation:none}
@@ -212,10 +267,24 @@
     <span id="wareki"></span>
     <span class="today-count" id="today-count"></span>
   </div>
-  <p class="lead" id="lead">やると決めたことを、1日ひとつずつ。できた日にハンコを押すと、30日で1枚のカードが埋まります。夏休みのラジオ体操カードのように。</p>
+  <div id="intro">
+    <p class="lead">やると決めたことを、1日ひとつずつ。できた日にハンコを押すと、30日で1枚のカードが埋まります。夏休みのラジオ体操カードのように。</p>
+    <p class="promise">広告なし。無料のまま、ずっと使えます。お試し期間が終わって記録がロックされる、ということはありません。</p>
+  </div>
 
   <main>
+    <nav class="tabs hide" id="tabs" role="tablist" aria-label="グループ"></nav>
+
+    <section class="week hide" id="week" aria-labelledby="week-h">
+      <div class="week-head">
+        <b id="week-h">この一週間</b>
+        <div class="nav"><button type="button" id="wk-prev" aria-label="前の週">‹</button><span id="wk-range"></span><button type="button" id="wk-next" aria-label="次の週">›</button></div>
+      </div>
+      <table class="wk" id="wk"></table>
+    </section>
+
     <div class="cards" id="cards"></div>
+    <p class="howto hide" id="howto">マスを押すとハンコ。もう一度押すと、回数・お休み・メモを変えられます（長押しでも開きます）。</p>
 
     <section class="sec" aria-labelledby="album-h">
       <div class="sec-h"><h2 id="album-h">アルバム</h2><span id="album-n">満了したカード</span></div>
@@ -227,18 +296,18 @@
       <div class="sec-h"><h2 id="pr-h">プレミアム</h2><span>続けたい人のために</span></div>
       <div class="menu">
         <p class="menu-title">お品書き</p>
-        <p class="menu-sub">いずれも税込</p>
+        <p class="menu-sub">いずれも税込・広告なし</p>
         <ul class="perks">
           <li>習慣の数が無制限（無料は3つまで）</li>
           <li>ハンコの文字（1〜2字）と、朱・藍・墨・松葉の4色</li>
           <li>満了したカードを、アルバムでいつでも見返せる</li>
-          <li>記録のバックアップと、別の端末への引き継ぎ</li>
+          <li>別の端末へ、購入を引き継げる</li>
         </ul>
         <div id="pr-free">
           <button class="plan" type="button" data-plan="monthly"><span class="nm">月ぎめ</span><span class="nt">毎月更新</span><span class="ld"></span><span class="pr">300<small>円</small></span></button>
           <button class="plan" type="button" data-plan="yearly"><span class="nm">一年</span><span class="nt">月あたり約167円</span><span class="ld"></span><span class="pr">2,000<small>円</small></span></button>
-          <button class="plan" type="button" data-plan="lifetime"><span class="nm">買い切り</span><span class="nt">ずっと使える</span><span class="ld"></span><span class="pr">4,800<small>円</small></span></button>
-          <p class="fine">月ぎめ・一年は自動で更新されます。解約は「購入の管理」からいつでもでき、次の更新日まで使えます。お支払いは Stripe で処理され、カード情報はこのアプリに保存されません。<a href="tokushoho.html">特定商取引法に基づく表記</a></p>
+          <button class="plan" type="button" data-plan="lifetime"><span class="nm">買い切り</span><span class="nt">ずっと使える</span><span class="ld"></span><span class="pr">2,980<small>円</small></span></button>
+          <p class="fine">月ぎめ・一年は自動で更新されます。解約は「購入の管理」からいつでもでき、次の更新日まで使えます。やめても、それまでのカードとハンコはそのまま残ります。お支払いは Stripe で処理され、カード情報はこのアプリに保存されません。<a href="tokushoho.html">特定商取引法に基づく表記</a></p>
           <span class="testflag hide" id="pr-test">テスト中：実際の請求は発生しません</span>
           <details style="margin-top:14px">
             <summary class="note" style="cursor:pointer">購入済みの方（別の端末で使う）</summary>
@@ -264,6 +333,7 @@
 
     <section class="sec" aria-labelledby="tools-h">
       <div class="sec-h"><h2 id="tools-h">記録の保管</h2><span>記録はこの端末の中だけにあります</span></div>
+      <p class="note" style="margin:0 0 10px">記録が消えないよう、ときどきバックアップを書き出しておくと安心です（無料）。ホーム画面に追加すると、アプリのように開けます（iPhone は共有ボタンから「ホーム画面に追加」）。</p>
       <div class="tools">
         <button type="button" id="btn-export">バックアップを書き出す</button>
         <button type="button" id="btn-import">バックアップから戻す</button>
@@ -280,14 +350,26 @@
   </footer>
 </div>
 
-<!-- 新しいカード／カードの編集 -->
+<!-- 新しいカード／カードの設定 -->
 <dialog id="sheet" aria-labelledby="sheet-h">
   <form class="sheet" id="sheet-form" method="dialog" novalidate>
     <h3 id="sheet-h">新しいカード</h3>
+    <div id="f-stats" class="hide"></div>
     <label for="f-name">続けたいこと</label>
     <input id="f-name" type="text" maxlength="20" autocomplete="off" placeholder="例：朝、10分歩く">
     <div class="chips" id="examples">
       <button type="button">朝、10分歩く</button><button type="button">水を2リットル</button><button type="button">英単語を10個</button><button type="button">寝る前にストレッチ</button><button type="button">日記を3行</button>
+    </div>
+    <div class="two">
+      <div>
+        <label for="f-target">1日の回数</label>
+        <select id="f-target"><option value="1">1回</option><option value="2">2回</option><option value="3">3回</option><option value="4">4回</option><option value="5">5回</option></select>
+      </div>
+      <div>
+        <label for="f-group">グループ（なくてもOK）</label>
+        <input id="f-group" type="text" maxlength="8" autocomplete="off" list="groups" placeholder="例：朝">
+        <datalist id="groups"></datalist>
+      </div>
     </div>
     <span class="lbl">ハンコ</span>
     <div class="preview">
@@ -299,6 +381,7 @@
       </div>
     </div>
     <p class="note" id="f-lock">文字と色を変えられるのはプレミアムです。無料では朱色の「済」です。</p>
+    <div class="row hide" id="f-order" style="margin-top:12px"><span class="note">並び順</span><button type="button" class="btn sm" id="f-up">前へ</button><button type="button" class="btn sm" id="f-down">後ろへ</button></div>
     <div class="err" id="f-err" role="alert"></div>
     <div class="actions">
       <button type="button" class="danger hide" id="f-delete">このカードを捨てる</button>
@@ -309,11 +392,33 @@
   </form>
 </dialog>
 
+<!-- 1日の記録（回数・お休み・メモ） -->
+<dialog id="day" aria-labelledby="day-h">
+  <form class="sheet" id="day-form" method="dialog" novalidate>
+    <h3 id="day-h">十一月二十八日<small id="day-sub"></small></h3>
+    <span class="lbl" id="d-count-l">回数</span>
+    <div class="stepper" role="group" aria-labelledby="d-count-l">
+      <button type="button" id="d-minus" aria-label="1回へらす">−</button>
+      <output id="d-count" aria-live="polite">0 / 1</output>
+      <button type="button" id="d-plus" aria-label="1回ふやす">＋</button>
+    </div>
+    <label class="check"><input type="checkbox" id="d-rest"><span>お休みにする<small>雨の日、体調の悪い日に。お休みの日は「つづけて◯日」が途切れません。</small></span></label>
+    <label for="d-memo">ひとことメモ</label>
+    <input id="d-memo" type="text" maxlength="40" autocomplete="off" placeholder="例：雨なので室内でストレッチ">
+    <div class="actions">
+      <button type="button" class="danger" id="d-clear">この日の記録を消す</button>
+      <span style="flex:1"></span>
+      <button type="button" class="btn" id="d-cancel">やめる</button>
+      <button type="submit" class="btn ink">保存する</button>
+    </div>
+  </form>
+</dialog>
+
 <!-- 上限 -->
 <dialog id="limit" aria-labelledby="limit-h">
   <div class="sheet">
     <h3 id="limit-h">無料は3枚までです</h3>
-    <p style="margin:0" id="limit-msg">プレミアムにすると、習慣の数が無制限になります。無料のまま使う場合は、今のカードを捨ててから新しくつくってください。</p>
+    <p style="margin:0" id="limit-msg">プレミアムにすると、習慣の数が無制限になります。無料のまま使う場合は、今のカードを捨ててから新しくつくってください。今のカードとハンコは、無料のままずっと使えます。</p>
     <div class="actions"><span></span><button type="button" class="btn" id="limit-close">閉じる</button><button type="button" class="btn ink" id="limit-plans">お品書きを見る</button></div>
   </div>
 </dialog>
@@ -331,12 +436,14 @@
   const LINKS = {
     monthly: 'https://buy.stripe.com/test_fZucN52Fz2bV0ti9U0fjG05',
     yearly: 'https://buy.stripe.com/test_14A7sL6VP8Ajek83vCfjG06',
-    lifetime: 'https://buy.stripe.com/test_bJe7sLeohbMva3S1nufjG07'
+    lifetime: 'https://buy.stripe.com/test_cNiaEXdkdg2L2Bq3vCfjG08'
   };
-  const PRICE = { monthly: 300, yearly: 2000, lifetime: 4800 };
+  const PRICE = { monthly: 300, yearly: 2000, lifetime: 2980 };
   const PLAN_NAME = { hanko_monthly: '月ぎめ', hanko_yearly: '一年', hanko_lifetime: '買い切り' };
   const GRACE = 7 * 24 * 3600 * 1000;
   const COLORS = { shu: ['朱', '#C23B22'], ai: ['藍', '#2E4A6B'], sumi: ['墨', '#2B2622'], matsu: ['松葉', '#3F6B4F'] };
+  const WD = '日月火水木金土';
+  const MILESTONE = { 3: '三日坊主、卒業です。', 7: '一週間つづきました。', 14: '二週間。もう習慣のはじまりです。', 21: '三週間つづきました。', 30: '三十日。カード一枚ぶんです。', 50: '五十日つづきました。', 100: '百日。お見事です。' };
 
   const $ = (id) => document.getElementById(id);
   const track = (name, params) => { try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch (e) {} };
@@ -345,7 +452,9 @@
   const todayKey = () => keyOf(new Date());
   const parse = (k) => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); };
   const addDays = (k, n) => { const d = parse(k); d.setDate(d.getDate() + n); return keyOf(d); };
-  const diffDays = (a, b) => Math.round((Date.UTC(...b.split('-').map((x, i) => i === 1 ? x - 1 : +x)) - Date.UTC(...a.split('-').map((x, i) => i === 1 ? x - 1 : +x))) / 86400000);
+  const utc = (k) => { const [y, m, d] = k.split('-').map(Number); return Date.UTC(y, m - 1, d); };
+  const diffDays = (a, b) => Math.round((utc(b) - utc(a)) / 86400000);
+  const isDay = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
 
   // 漢数字（日付の表記用）
   function kan(n) {
@@ -353,58 +462,87 @@
     if (n < 10) return D[n];
     if (n < 20) return '十' + (n % 10 ? D[n % 10] : '');
     if (n < 100) return D[Math.floor(n / 10)] + '十' + (n % 10 ? D[n % 10] : '');
+    if (n < 1000) return (Math.floor(n / 100) === 1 ? '' : D[Math.floor(n / 100)]) + '百' + (n % 100 ? kan(n % 100) : '');
     return String(n);
   }
   function wareki(d) {
     const y = d.getFullYear() - 2018;
-    return '令和' + (y === 1 ? '元' : kan(y)) + '年 ' + kan(d.getMonth() + 1) + '月' + kan(d.getDate()) + '日（' + '日月火水木金土'[d.getDay()] + '）';
+    return '令和' + (y === 1 ? '元' : kan(y)) + '年 ' + kan(d.getMonth() + 1) + '月' + kan(d.getDate()) + '日（' + WD[d.getDay()] + '）';
   }
 
-  // 日付と習慣ごとに決まる傾き（毎回同じ角度になる）
+  // ハンコの絵
   function tilt(seed) { let h = 2166136261; for (let i = 0; i < seed.length; i++) { h ^= seed.charCodeAt(i); h = Math.imul(h, 16777619); } return ((h >>> 0) % 25) - 12; }
-  function stampSVG(char, color) {
-    const c = (COLORS[color] || COLORS.shu)[1];
-    const chars = [...(char || '済')].slice(0, 2);
-    const txt = chars.length === 1
-      ? '<text x="50" y="53" text-anchor="middle" dominant-baseline="central" font-family="Yuji Syuku, Shippori Mincho B1, serif" font-size="50" fill="' + c + '">' + esc(chars[0]) + '</text>'
-      : '<text x="50" y="33" text-anchor="middle" dominant-baseline="central" font-family="Yuji Syuku, Shippori Mincho B1, serif" font-size="34" fill="' + c + '">' + esc(chars[0]) + '</text><text x="50" y="68" text-anchor="middle" dominant-baseline="central" font-family="Yuji Syuku, Shippori Mincho B1, serif" font-size="34" fill="' + c + '">' + esc(chars[1]) + '</text>';
-    return '<svg viewBox="0 0 100 100" aria-hidden="true"><g filter="url(#ink)"><circle cx="50" cy="50" r="43" fill="none" stroke="' + c + '" stroke-width="6.5"/>' + txt + '</g></svg>';
-  }
   const esc = (s) => String(s).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+  const FONT = 'font-family="Yuji Syuku, Shippori Mincho B1, serif"';
+  function stampSVG(char, color, rest) {
+    const c = rest ? '#9C9285' : (COLORS[color] || COLORS.shu)[1];
+    const chars = rest ? ['休'] : [...(char || '済')].slice(0, 2);
+    const ring = rest ? '<circle cx="50" cy="50" r="43" fill="none" stroke="' + c + '" stroke-width="4" stroke-dasharray="7 6"/>' : '<circle cx="50" cy="50" r="43" fill="none" stroke="' + c + '" stroke-width="6.5"/>';
+    const txt = chars.length === 1
+      ? '<text x="50" y="53" text-anchor="middle" dominant-baseline="central" ' + FONT + ' font-size="50" fill="' + c + '">' + esc(chars[0]) + '</text>'
+      : '<text x="50" y="33" text-anchor="middle" dominant-baseline="central" ' + FONT + ' font-size="34" fill="' + c + '">' + esc(chars[0]) + '</text><text x="50" y="68" text-anchor="middle" dominant-baseline="central" ' + FONT + ' font-size="34" fill="' + c + '">' + esc(chars[1]) + '</text>';
+    return '<svg viewBox="0 0 100 100" aria-hidden="true"><g filter="url(#ink)">' + ring + txt + '</g></svg>';
+  }
   const PENCIL = '<svg class="pencil" viewBox="0 0 100 100" aria-hidden="true"><path d="M52 12c22-1 38 14 37 36-1 23-19 38-40 37-21-1-36-17-35-37 1-18 14-31 31-34 4 0 9-1 12 1" fill="none" stroke="#2B2622" stroke-width="2.2" stroke-linecap="round"/></svg>';
 
-  // データ（この端末の中だけ）
-  let db = { habits: [] };
-  try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && Array.isArray(v.habits)) db = v; } catch (e) {}
+  // データ（この端末の中だけ）。古い形（stamps の配列）は log に移す
+  function normalize(h) {
+    const target = Math.min(5, Math.max(1, parseInt(h.target, 10) || 1));
+    const log = {};
+    if (h.log && typeof h.log === 'object') {
+      Object.keys(h.log).forEach((k) => {
+        const e = h.log[k]; if (!isDay(k) || !e || typeof e !== 'object') return;
+        const n = Math.min(target, Math.max(0, parseInt(e.n, 10) || 0)); const rest = !!e.rest; const memo = typeof e.memo === 'string' ? e.memo.slice(0, 40) : '';
+        if (n || rest || memo) log[k] = { n, rest, memo };
+      });
+    }
+    if (Array.isArray(h.stamps)) h.stamps.forEach((k) => { if (isDay(k)) log[k] = { n: target, rest: false, memo: (log[k] && log[k].memo) || '' }; });
+    return { id: String(h.id), name: String(h.name || '').slice(0, 20), char: [...String(h.char || '済')].slice(0, 2).join(''), color: COLORS[h.color] ? h.color : 'shu',
+      start: isDay(h.start) ? h.start : todayKey(), target, group: String(h.group || '').trim().slice(0, 8), log, seen: Number(h.seen) || 0, created: Number(h.created) || Date.now(), best: Number(h.best) || 0 };
+  }
+  let db = { habits: [], ui: { group: '' } };
+  try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && Array.isArray(v.habits)) db = { habits: v.habits.filter((h) => h && h.id).map(normalize), ui: v.ui || { group: '' } }; } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} };
 
-  // カードの計算
+  // 計算
+  const entry = (h, d) => h.log[d] || { n: 0, rest: false, memo: '' };
+  const isDone = (h, d) => entry(h, d).n >= h.target;
+  const isRest = (h, d) => !!entry(h, d).rest && !isDone(h, d);
   function cardInfo(h, today) {
     today = today || todayKey();
     const passed = Math.max(0, diffDays(h.start, today));
     const k = Math.floor(passed / CARD_DAYS);
-    const from = addDays(h.start, k * CARD_DAYS);
-    const to = addDays(from, CARD_DAYS - 1);
-    const stamps = new Set(h.stamps || []);
-    let n = 0; for (let i = 0; i < CARD_DAYS; i++) if (stamps.has(addDays(from, i))) n++;
+    const from = addDays(h.start, k * CARD_DAYS); const to = addDays(from, CARD_DAYS - 1);
+    let n = 0; for (let i = 0; i < CARD_DAYS; i++) if (isDone(h, addDays(from, i))) n++;
     return { k, from, to, count: n };
   }
   function pastCards(h, today) {
-    const cur = cardInfo(h, today).k; const s = new Set(h.stamps || []); const out = [];
+    const cur = cardInfo(h, today).k; const out = [];
     for (let k = 0; k < cur; k++) {
       const from = addDays(h.start, k * CARD_DAYS); const days = [];
-      for (let i = 0; i < CARD_DAYS; i++) days.push(s.has(addDays(from, i)));
-      out.push({ k, from, to: addDays(from, CARD_DAYS - 1), days, count: days.filter(Boolean).length });
+      for (let i = 0; i < CARD_DAYS; i++) { const d = addDays(from, i); days.push(isDone(h, d) ? 1 : isRest(h, d) ? 2 : 0); }
+      out.push({ k, from, to: addDays(from, CARD_DAYS - 1), days, count: days.filter((x) => x === 1).length });
     }
     return out;
   }
+  // つづけて◯日：お休みの日は数えないが、途切れない
   function streak(h, today) {
-    today = today || todayKey(); const s = new Set(h.stamps || []);
-    let d = s.has(today) ? today : addDays(today, -1); let n = 0;
-    while (s.has(d)) { n++; d = addDays(d, -1); }
+    today = today || todayKey();
+    let d = (isDone(h, today) || isRest(h, today)) ? today : addDays(today, -1); let n = 0;
+    while (d >= h.start) { if (isDone(h, d)) n++; else if (!isRest(h, d)) break; d = addDays(d, -1); }
     return n;
   }
-  window.__hanko = { cardInfo, pastCards, streak, wareki, kan, tilt };
+  function stats(h, today) {
+    today = today || todayKey();
+    let best = 0, run = 0, done = 0, rest = 0; const days = Math.max(1, diffDays(h.start, today) + 1);
+    for (let i = 0; i < days; i++) {
+      const d = addDays(h.start, i);
+      if (isDone(h, d)) { done++; run++; if (run > best) best = run; } else if (isRest(h, d)) { rest++; } else if (d !== today) { run = 0; }
+    }
+    const base = Math.max(1, days - rest);
+    return { best, done, rate: Math.round(done / base * 100), days };
+  }
+  window.__hanko = { cardInfo, pastCards, streak, stats, wareki, kan, tilt, normalize };
 
   // プレミアム
   let prem = null; try { prem = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) { prem = null; }
@@ -412,74 +550,173 @@
   const isPremium = () => !!(prem && prem.premium && Date.now() - (prem.checkedAt || 0) < GRACE);
 
   let toastTimer = null;
-  function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('on'), 2600); }
+  function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('on'), 2800); }
+
+  // グループ
+  const groups = () => [...new Set(db.habits.map((h) => h.group).filter(Boolean))];
+  const visible = () => { const g = db.ui.group; return g && groups().includes(g) ? db.habits.filter((h) => h.group === g) : db.habits; };
+
+  // マス（カード・一週間の表で共通）を描く
+  function fillMark(el, h, day, pop, big) {
+    const e = entry(h, day);
+    if (isDone(h, day) || isRest(h, day)) {
+      const s = document.createElement('span'); s.className = 'stamp'; s.style.setProperty('--r', tilt(h.id + day) + 'deg');
+      s.innerHTML = stampSVG(h.char, h.color, !isDone(h, day));
+      if (pop) s.classList.add('pop');
+      el.append(s);
+    } else if (e.n > 0) {
+      const c = document.createElement('span'); c.className = big ? 'cnt' : ''; c.innerHTML = '<span class="part">' + e.n + '/' + h.target + '</span>'; el.append(c);
+    }
+  }
+  function label(h, day) {
+    const d = parse(day); const e = entry(h, day);
+    const st = isDone(h, day) ? 'ハンコあり' : isRest(h, day) ? 'お休み' : e.n ? e.n + '回（あと' + (h.target - e.n) + '回）' : 'まだ';
+    return h.name + '、' + (d.getMonth() + 1) + '月' + d.getDate() + '日' + (day === todayKey() ? '（きょう）' : '') + '、' + st + (e.memo ? '、メモあり' : '');
+  }
+  // 押す：足りない時は1回ふやす。済み・お休みの日は、1日の記録を開く
+  function press(h, day, origin) {
+    if (day > todayKey() || day < h.start) return;
+    if (isDone(h, day) || isRest(h, day)) { openDay(h, day); return; }
+    const e = Object.assign({ n: 0, rest: false, memo: '' }, h.log[day]); e.n = Math.min(h.target, e.n + 1); e.rest = false; h.log[day] = e; save();
+    const done = isDone(h, day);
+    render(done ? h.id : null, done ? day : null, origin);
+    try { if (navigator.vibrate) navigator.vibrate(done ? 14 : 6); } catch (x) {}
+    if (done) {
+      const sk = streak(h); const st = stats(h); if (st.best > h.best) { h.best = st.best; save(); }
+      if (day === todayKey()) toast(h.name + '：' + (MILESTONE[sk] || (sk >= 2 ? 'つづけて' + sk + '日。' : 'きょうのハンコを押しました。')));
+      track('stamp', { streak: sk, today: day === todayKey(), target: h.target });
+    } else {
+      toast(h.name + '：' + e.n + '回目。あと' + (h.target - e.n) + '回でハンコです。'); track('count_up', { n: e.n, target: h.target });
+    }
+  }
+  // 長押し（右クリック）でも1日の記録を開く
+  function bindPress(btn, h, day, origin) {
+    let t = null; let long = false;
+    btn.addEventListener('pointerdown', () => { long = false; clearTimeout(t); t = setTimeout(() => { long = true; openDay(h, day); }, 520); });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) => btn.addEventListener(ev, () => clearTimeout(t)));
+    btn.addEventListener('contextmenu', (e) => { e.preventDefault(); clearTimeout(t); if (!long) { long = true; openDay(h, day); } });
+    btn.addEventListener('click', () => { if (long) { long = false; return; } press(h, day, origin); });
+  }
 
   // 描画
-  function render(popId, popDay) {
+  let weekBack = 0;
+  function render(popId, popDay, origin) {
     const t = todayKey(); const now = new Date();
     $('wareki').textContent = wareki(now);
-    const done = db.habits.filter((h) => (h.stamps || []).includes(t)).length;
+    const done = db.habits.filter((h) => isDone(h, t)).length;
     const tc = $('today-count'); tc.innerHTML = '';
     if (db.habits.length) {
       const dots = document.createElement('span'); dots.className = 'dots'; dots.setAttribute('aria-hidden', 'true');
-      db.habits.slice(0, 12).forEach((h) => { const i = document.createElement('i'); if ((h.stamps || []).includes(t)) i.className = 'on'; dots.append(i); });
+      db.habits.slice(0, 12).forEach((h) => { const i = document.createElement('i'); if (isDone(h, t)) i.className = 'on'; dots.append(i); });
       const s = document.createElement('span'); s.textContent = 'きょうのハンコ ' + done + ' / ' + db.habits.length;
       tc.append(dots, s);
     }
-    $('lead').classList.toggle('hide', db.habits.length > 0);
+    $('intro').classList.toggle('hide', db.habits.length > 0);
+    $('howto').classList.toggle('hide', db.habits.length === 0);
+    renderTabs(); renderWeek(t, popId, popDay, origin);
 
     const wrap = $('cards'); wrap.innerHTML = '';
-    db.habits.forEach((h, idx) => {
+    visible().forEach((h) => {
       const ci = cardInfo(h, t);
       const card = document.createElement('article'); card.className = 'card'; card.dataset.id = h.id;
       card.setAttribute('aria-label', h.name + 'のカード');
       const head = document.createElement('div'); head.className = 'card-head';
       const nm = document.createElement('h2'); nm.className = 'card-name'; nm.textContent = h.name;
       const no = document.createElement('div'); no.className = 'card-no'; no.textContent = '第' + kan(ci.k + 1) + '枚';
+      if (h.group) { const g = document.createElement('span'); g.className = 'grp'; g.textContent = h.group; no.append(g); }
       const sub = document.createElement('div'); sub.className = 'card-sub';
       const f = parse(ci.from), e = parse(ci.to);
       const per = document.createElement('span'); per.textContent = (f.getMonth() + 1) + '月' + f.getDate() + '日 〜 ' + (e.getMonth() + 1) + '月' + e.getDate() + '日';
       const st = document.createElement('span'); st.className = 'streak'; const sk = streak(h, t);
       st.innerHTML = sk ? 'つづけて<b>' + sk + '</b>日' : 'きょうから、もう一度';
-      sub.append(per, st); head.append(nm, no, sub);
+      sub.append(per, st);
+      if (h.target > 1) { const tg = document.createElement('span'); tg.textContent = '1日' + h.target + '回'; sub.append(tg); }
+      head.append(nm, no, sub);
 
       const grid = document.createElement('div'); grid.className = 'grid'; grid.setAttribute('role', 'group'); grid.setAttribute('aria-label', h.name + 'の30日');
-      const set = new Set(h.stamps || []);
       for (let i = 0; i < CARD_DAYS; i++) {
         const day = addDays(ci.from, i); const d = parse(day);
         const cell = document.createElement('button'); cell.type = 'button'; cell.className = 'cell'; cell.dataset.day = day;
-        const fut = day > t; const isToday = day === t; const on = set.has(day);
+        const fut = day > t; const isToday = day === t;
         if (fut) { cell.classList.add('future'); cell.disabled = true; }
         if (isToday) cell.classList.add('today');
         const lab = document.createElement('span'); lab.className = 'd';
         lab.innerHTML = (d.getDate() === 1 || i === 0 ? '<small>' + (d.getMonth() + 1) + '/</small>' : '') + d.getDate();
         cell.append(lab);
-        if (isToday && !on) { cell.insertAdjacentHTML('beforeend', PENCIL + '<span class="hint">おす</span>'); }
-        if (on) {
-          const s = document.createElement('span'); s.className = 'stamp'; s.style.setProperty('--r', tilt(h.id + day) + 'deg');
-          s.innerHTML = stampSVG(h.char, h.color);
-          if (popId === h.id && popDay === day) s.classList.add('pop');
-          cell.append(s);
-        }
-        cell.setAttribute('aria-label', (d.getMonth() + 1) + '月' + d.getDate() + '日' + (isToday ? '（きょう）' : '') + '、' + (fut ? 'まだ先' : on ? 'ハンコあり。押すと取り消し' : 'ハンコなし。押すとハンコ'));
-        cell.setAttribute('aria-pressed', on ? 'true' : 'false');
-        if (!fut) cell.addEventListener('click', () => toggle(h, day, card));
+        const en = entry(h, day);
+        if (isToday && !isDone(h, day) && !isRest(h, day) && !en.n) cell.insertAdjacentHTML('beforeend', PENCIL + '<span class="hint">おす</span>');
+        fillMark(cell, h, day, popId === h.id && popDay === day && origin !== 'week', true);
+        if (en.memo) { const m = document.createElement('span'); m.className = 'memo'; cell.append(m); }
+        cell.setAttribute('aria-label', fut ? (d.getMonth() + 1) + '月' + d.getDate() + '日、まだ先' : label(h, day));
+        cell.setAttribute('aria-pressed', isDone(h, day) ? 'true' : 'false');
+        if (!fut) bindPress(cell, h, day, 'card');
         grid.append(cell);
       }
       const foot = document.createElement('div'); foot.className = 'card-foot';
       const tally = document.createElement('span'); tally.className = 'tally'; tally.textContent = '三十日のうち ' + ci.count + ' 日';
+      const sv = stats(h, t);
+      const stat = document.createElement('span'); stat.className = 'stat'; stat.textContent = '最長' + sv.best + '日・達成' + sv.rate + '%';
       const menu = document.createElement('button'); menu.type = 'button'; menu.className = 'menu-btn'; menu.textContent = 'カードの設定';
       menu.setAttribute('aria-label', h.name + 'のカードの設定');
       menu.addEventListener('click', () => openSheet(h));
-      foot.append(tally, menu);
+      foot.append(tally, stat, menu);
       card.append(head, grid, foot); wrap.append(card);
-      if (popId === h.id) { card.classList.add('thump'); }
+      if (popId === h.id) card.classList.add('thump');
     });
     const blank = document.createElement('button'); blank.type = 'button'; blank.className = 'blank'; blank.id = 'btn-new';
     blank.innerHTML = '<div><b>＋ 新しいカード</b><span>' + (db.habits.length ? '続けたいことを、もうひとつ' : 'まずは1枚、つくってみましょう') + '</span></div>';
     blank.addEventListener('click', () => openSheet(null));
     wrap.append(blank);
     renderAlbum(); renderPremium();
+  }
+
+  function renderTabs() {
+    const gs = groups(); const nav = $('tabs'); nav.innerHTML = '';
+    nav.classList.toggle('hide', gs.length === 0);
+    if (!gs.length) { db.ui.group = ''; return; }
+    if (db.ui.group && !gs.includes(db.ui.group)) db.ui.group = '';
+    ['', ...gs].forEach((g) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'tab'; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', db.ui.group === g ? 'true' : 'false'); b.textContent = g || 'すべて';
+      b.addEventListener('click', () => { db.ui.group = g; save(); render(); track('group_tab', {}); });
+      nav.append(b);
+    });
+  }
+
+  function renderWeek(t, popId, popDay, origin) {
+    const list = visible(); const box = $('week');
+    box.classList.toggle('hide', list.length === 0);
+    if (!list.length) return;
+    const end = addDays(t, -7 * weekBack); const days = []; for (let i = 6; i >= 0; i--) days.push(addDays(end, -i));
+    const a = parse(days[0]), b = parse(days[6]);
+    $('wk-range').textContent = (a.getMonth() + 1) + '/' + a.getDate() + '〜' + (b.getMonth() + 1) + '/' + b.getDate();
+    $('wk-next').disabled = weekBack === 0;
+    const tb = $('wk'); tb.innerHTML = '';
+    const thead = document.createElement('thead'); const hr = document.createElement('tr');
+    const h0 = document.createElement('th'); h0.className = 'nm'; h0.scope = 'col'; h0.textContent = '習慣'; hr.append(h0);
+    days.forEach((d) => {
+      const dt = parse(d); const th = document.createElement('th'); th.scope = 'col';
+      th.className = (dt.getDay() === 0 ? 'sun' : dt.getDay() === 6 ? 'sat' : '') + (d === t ? ' is-today' : '');
+      th.innerHTML = WD[dt.getDay()] + '<b>' + dt.getDate() + '</b>'; hr.append(th);
+    });
+    thead.append(hr); tb.append(thead);
+    const body = document.createElement('tbody');
+    list.forEach((h) => {
+      const tr = document.createElement('tr');
+      const th = document.createElement('th'); th.className = 'nm'; th.scope = 'row'; th.textContent = h.name; tr.append(th);
+      days.forEach((d) => {
+        const td = document.createElement('td'); if (d === t) td.className = 'is-today';
+        const btn = document.createElement('button'); btn.type = 'button';
+        const off = d > t || d < h.start;
+        if (off) { btn.disabled = true; btn.setAttribute('aria-label', h.name + '、' + (d < h.start ? '始める前' : 'まだ先')); }
+        else { btn.setAttribute('aria-label', label(h, d)); btn.setAttribute('aria-pressed', isDone(h, d) ? 'true' : 'false'); bindPress(btn, h, d, 'week'); }
+        const mk = document.createElement('span'); mk.className = 'mark';
+        if (!off) fillMark(mk, h, d, popId === h.id && popDay === d && origin === 'week', false);
+        btn.append(mk); td.append(btn); tr.append(td);
+      });
+      body.append(tr);
+    });
+    tb.append(body);
   }
 
   function renderAlbum() {
@@ -490,7 +727,7 @@
     const lock = $('album-locked');
     if (!on) {
       lock.classList.remove('hide');
-      lock.innerHTML = all.length ? '満了したカードが ' + all.length + ' 枚あります。アルバムで見返せるのはプレミアムです。 <button type="button" id="album-unlock">お品書きを見る</button>'
+      lock.innerHTML = all.length ? '満了したカードが ' + all.length + ' 枚あります。アルバムで見返せるのはプレミアムです（記録は消えずに残っています）。 <button type="button" id="album-unlock">お品書きを見る</button>'
         : '30日たつと、カードがここに収まります（アルバムはプレミアムの機能です）。';
       const b = $('album-unlock'); if (b) b.addEventListener('click', () => goPremium('album'));
       return;
@@ -499,8 +736,8 @@
     if (!all.length) { lock.textContent = '30日たつと、満了したカードがここに収まります。'; return; }
     all.forEach(({ h, c }) => {
       const m = document.createElement('div'); m.className = 'mini'; m.style.color = (COLORS[h.color] || COLORS.shu)[1];
-      const t = document.createElement('div'); t.className = 't'; t.style.color = 'var(--ink)'; t.textContent = h.name;
-      const g = document.createElement('div'); g.className = 'g'; c.days.forEach((x) => { const i = document.createElement('i'); if (x) i.className = 'on'; g.append(i); });
+      const t = document.createElement('div'); t.className = 't'; t.textContent = h.name;
+      const g = document.createElement('div'); g.className = 'g'; c.days.forEach((x) => { const i = document.createElement('i'); if (x === 1) i.className = 'on'; else if (x === 2) i.className = 'rest'; g.append(i); });
       const s = document.createElement('div'); s.className = 's'; const f = parse(c.from); const e = parse(c.to);
       s.textContent = '第' + kan(c.k + 1) + '枚 ' + (f.getMonth() + 1) + '/' + f.getDate() + '〜' + (e.getMonth() + 1) + '/' + e.getDate() + ' ・ ' + c.count + '日';
       m.append(t, g, s); al.append(m);
@@ -523,23 +760,6 @@
     $('my-code').value = prem.token || '';
   }
 
-  // ハンコを押す・取り消す
-  function toggle(h, day, cardEl) {
-    const s = new Set(h.stamps || []);
-    if (s.has(day)) {
-      const d = parse(day);
-      if (!confirm((d.getMonth() + 1) + '月' + d.getDate() + '日のハンコを取り消しますか？')) return;
-      s.delete(day); h.stamps = [...s].sort(); save(); render(); track('unstamp', {});
-      return;
-    }
-    s.add(day); h.stamps = [...s].sort(); save();
-    render(h.id, day);
-    try { if (navigator.vibrate) navigator.vibrate(12); } catch (e) {}
-    const sk = streak(h);
-    if (day === todayKey()) toast(sk >= 2 ? h.name + '：つづけて' + sk + '日。' : h.name + '：きょうのハンコを押しました。');
-    track('stamp', { streak: sk, today: day === todayKey() });
-  }
-
   // 満了したカードのお知らせ（1回だけ）
   function checkComplete() {
     let changed = false;
@@ -554,7 +774,39 @@
     if (changed) save();
   }
 
-  // カードの作成・編集
+  // 1日の記録（回数・お休み・メモ）
+  let dayH = null, dayD = null, dayN = 0;
+  function openDay(h, day) {
+    if (day > todayKey() || day < h.start) return;
+    dayH = h; dayD = day; const e = entry(h, day); dayN = e.n;
+    const d = parse(day);
+    $('day-h').firstChild.textContent = kan(d.getMonth() + 1) + '月' + kan(d.getDate()) + '日（' + WD[d.getDay()] + '）';
+    $('day-sub').textContent = h.name + (h.target > 1 ? '・1日' + h.target + '回' : '');
+    $('d-rest').checked = !!e.rest && !isDone(h, day); $('d-memo').value = e.memo || '';
+    drawCount();
+    try { $('day').showModal(); } catch (x) {}
+  }
+  function drawCount() { $('d-count').textContent = dayN + ' / ' + dayH.target; $('d-minus').disabled = dayN <= 0; $('d-plus').disabled = dayN >= dayH.target; }
+  $('d-minus').addEventListener('click', () => { dayN = Math.max(0, dayN - 1); drawCount(); });
+  $('d-plus').addEventListener('click', () => { dayN = Math.min(dayH.target, dayN + 1); if (dayN > 0) $('d-rest').checked = false; drawCount(); });
+  $('d-rest').addEventListener('change', () => { if ($('d-rest').checked) { dayN = 0; drawCount(); } });
+  $('d-cancel').addEventListener('click', () => $('day').close());
+  $('day-form').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const was = isDone(dayH, dayD); const rest = $('d-rest').checked && dayN < dayH.target; const memo = $('d-memo').value.trim().slice(0, 40);
+    if (!dayN && !rest && !memo) delete dayH.log[dayD]; else dayH.log[dayD] = { n: dayN, rest, memo };
+    save(); $('day').close();
+    const now = isDone(dayH, dayD);
+    render(!was && now ? dayH.id : null, dayD);
+    track('day_edit', { n: dayN, rest, memo: !!memo });
+    toast(rest ? 'お休みにしました。つづけて◯日は途切れません。' : memo && !now && !dayN ? 'メモを残しました。' : '保存しました。');
+  });
+  $('d-clear').addEventListener('click', () => {
+    if (!confirm('この日のハンコ・お休み・メモを消しますか？')) return;
+    delete dayH.log[dayD]; save(); $('day').close(); render(); track('unstamp', {}); toast('この日の記録を消しました。');
+  });
+
+  // カードの作成・設定
   let editing = null; let pick = { char: '済', color: 'shu' };
   function drawSwatches() {
     const box = $('f-colors'); box.innerHTML = ''; const on = isPremium();
@@ -572,22 +824,38 @@
     if (!h && db.habits.length >= FREE_LIMIT && !isPremium()) {
       track('limit_reached', {}); try { $('limit').showModal(); } catch (e) {} return;
     }
-    editing = h;
-    const on = isPremium();
+    editing = h; const on = isPremium();
     $('sheet-h').textContent = h ? 'カードの設定' : '新しいカード';
     $('f-ok').textContent = h ? '保存する' : 'カードをつくる';
     $('f-name').value = h ? h.name : '';
+    $('f-target').value = String(h ? h.target : 1);
+    $('f-group').value = h ? h.group : (db.ui.group || '');
+    $('groups').innerHTML = groups().map((g) => '<option value="' + esc(g) + '">').join('');
     pick = { char: h ? h.char : '済', color: h ? h.color : 'shu' };
     $('f-char').value = pick.char; $('f-char').disabled = !on;
     $('f-lock').classList.toggle('hide', on);
-    $('f-delete').classList.toggle('hide', !h);
+    $('f-delete').classList.toggle('hide', !h); $('f-order').classList.toggle('hide', !h);
     $('examples').classList.toggle('hide', !!h);
+    const fs = $('f-stats'); fs.classList.toggle('hide', !h); fs.innerHTML = '';
+    if (h) {
+      const s = stats(h);
+      fs.innerHTML = '<div class="stats"><div><b>' + s.best + '</b><span>最長の連続（日）</span></div><div><b>' + s.done + '</b><span>押した日の合計</span></div><div><b>' + s.rate + '%</b><span>達成率</span></div></div>' +
+        '<p class="note" style="margin:6px 0 0">' + parse(h.start).getFullYear() + '年' + (parse(h.start).getMonth() + 1) + '月' + parse(h.start).getDate() + '日から' + s.days + '日。お休みの日は達成率に含めません。</p>';
+      const idx = db.habits.indexOf(h); $('f-up').disabled = idx <= 0; $('f-down').disabled = idx >= db.habits.length - 1;
+    }
     $('f-err').textContent = '';
     drawSwatches(); drawPreview();
     try { $('sheet').showModal(); } catch (e) {}
     setTimeout(() => { if (!h) $('f-name').focus(); }, 50);
   }
-  $('examples').addEventListener('click', (e) => { if (e.target.tagName === 'BUTTON') { $('f-name').value = e.target.textContent; $('f-name').focus(); } });
+  function move(dir) {
+    const i = db.habits.indexOf(editing); const j = i + dir; if (i < 0 || j < 0 || j >= db.habits.length) return;
+    [db.habits[i], db.habits[j]] = [db.habits[j], db.habits[i]]; save(); render(); track('reorder', {});
+    $('f-up').disabled = j <= 0; $('f-down').disabled = j >= db.habits.length - 1;
+  }
+  $('f-up').addEventListener('click', () => move(-1));
+  $('f-down').addEventListener('click', () => move(1));
+  $('examples').addEventListener('click', (e) => { if (e.target.tagName === 'BUTTON') { $('f-name').value = e.target.textContent; if (e.target.textContent.includes('水')) $('f-target').value = '1'; $('f-name').focus(); } });
   $('f-char').addEventListener('input', () => { pick.char = [...$('f-char').value.trim()].slice(0, 2).join(''); drawPreview(); });
   $('f-cancel').addEventListener('click', () => $('sheet').close());
   $('sheet-form').addEventListener('submit', (e) => {
@@ -597,13 +865,17 @@
     const on = isPremium();
     const ch = on ? ([...(pick.char || '').trim()].slice(0, 2).join('') || '済') : (editing ? editing.char : '済');
     const col = on ? pick.color : (editing ? editing.color : 'shu');
+    const target = Math.min(5, Math.max(1, parseInt($('f-target').value, 10) || 1));
+    const group = $('f-group').value.trim().slice(0, 8);
     if (editing) {
-      editing.name = name.slice(0, 20); editing.char = ch; editing.color = col; save();
-      $('sheet').close(); render(); toast('カードを書き直しました。');
+      editing.name = name.slice(0, 20); editing.char = ch; editing.color = col; editing.group = group;
+      if (target !== editing.target) { Object.values(editing.log).forEach((x) => { x.n = Math.min(x.n, target); }); editing.target = target; }
+      save(); $('sheet').close(); render(); toast('カードを書き直しました。');
     } else {
-      const h = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: name.slice(0, 20), char: ch, color: col, start: todayKey(), stamps: [], seen: 0, created: Date.now() };
-      db.habits.push(h); save(); $('sheet').close(); render();
-      track('habit_add', { count: db.habits.length });
+      const h = normalize({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name, char: ch, color: col, start: todayKey(), target, group, log: {}, seen: 0, created: Date.now() });
+      db.habits.push(h); if (db.ui.group && group !== db.ui.group) db.ui.group = '';
+      save(); $('sheet').close(); render();
+      track('habit_add', { count: db.habits.length, target, group: !!group });
       toast('新しいカードができました。きょうのマスを押してみましょう。');
       const el = document.querySelector('.card[data-id="' + h.id + '"]'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -615,6 +887,8 @@
   });
   $('limit-close').addEventListener('click', () => $('limit').close());
   $('limit-plans').addEventListener('click', () => { $('limit').close(); goPremium('limit'); });
+  $('wk-prev').addEventListener('click', () => { weekBack++; render(); });
+  $('wk-next').addEventListener('click', () => { if (weekBack > 0) { weekBack--; render(); } });
 
   // プレミアム
   const msg = (t) => { $('pr-msg').textContent = t || ''; };
@@ -690,23 +964,20 @@
     } catch (e) { msg('通信できませんでした。電波の良い所でもう一度お試しください。'); }
   });
 
-  // 記録の保管
+  // 記録の保管（無料）
   const tmsg = (t) => { $('tools-msg').textContent = t || ''; };
   $('btn-export').addEventListener('click', () => {
-    if (!isPremium()) { tmsg('バックアップはプレミアムの機能です。'); goPremium('backup'); return; }
-    const blob = new Blob([JSON.stringify({ app: 'hanko', v: 1, exported: new Date().toISOString(), habits: db.habits }, null, 1)], { type: 'application/json' });
+    if (!db.habits.length) { tmsg('書き出すカードがありません。'); return; }
+    const blob = new Blob([JSON.stringify({ app: 'hanko', v: 2, exported: new Date().toISOString(), habits: db.habits }, null, 1)], { type: 'application/json' });
     const a = document.createElement('a'); const d = new Date();
     a.href = URL.createObjectURL(blob); a.download = 'まいにちハンコ_' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '.json';
     document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     track('backup_export', { count: db.habits.length }); tmsg('書き出しました。ファイルを大切に保管してください。');
   });
-  $('btn-import').addEventListener('click', () => {
-    if (!isPremium()) { tmsg('バックアップはプレミアムの機能です。'); goPremium('backup'); return; }
-    $('import-file').click();
-  });
+  $('btn-import').addEventListener('click', () => $('import-file').click());
   function validHabit(h) {
-    return h && typeof h.id === 'string' && h.id.length <= 40 && typeof h.name === 'string' && h.name.trim() && /^\d{4}-\d{2}-\d{2}$/.test(h.start) &&
-      Array.isArray(h.stamps) && h.stamps.every((s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s));
+    return h && typeof h.id === 'string' && h.id.length <= 40 && typeof h.name === 'string' && h.name.trim() && isDay(h.start) &&
+      ((Array.isArray(h.stamps) && h.stamps.every(isDay)) || (h.log && typeof h.log === 'object' && Object.keys(h.log).every(isDay)));
   }
   $('import-file').addEventListener('change', async (e) => {
     const f = e.target.files && e.target.files[0]; e.target.value = '';
@@ -716,25 +987,25 @@
       const j = JSON.parse(await f.text());
       if (!j || j.app !== 'hanko' || !Array.isArray(j.habits) || !j.habits.every(validHabit)) throw new Error('format');
       if (!confirm('バックアップの ' + j.habits.length + ' 枚のカードで、今の記録を置き換えますか？')) return;
-      db.habits = j.habits.map((h) => ({ id: h.id, name: String(h.name).slice(0, 20), char: [...String(h.char || '済')].slice(0, 2).join(''), color: COLORS[h.color] ? h.color : 'shu', start: h.start, stamps: [...new Set(h.stamps)].sort(), seen: Number(h.seen) || 0, created: Number(h.created) || Date.now() }));
+      db.habits = j.habits.map(normalize);
       save(); render(); track('backup_import', { count: db.habits.length }); tmsg('バックアップから戻しました。');
     } catch (x) { tmsg('このファイルは読み込めませんでした。まいにちハンコで書き出したファイルを選んでください。'); }
   });
   $('btn-clear').addEventListener('click', () => {
     if (!db.habits.length) return;
     if (!confirm('すべてのカードとハンコを消しますか？ 元に戻せません。')) return;
-    db.habits = []; save(); render(); track('clear_all', {}); tmsg('すべて消しました。');
+    db.habits = []; db.ui.group = ''; save(); render(); track('clear_all', {}); tmsg('すべて消しました。');
   });
 
   // 日付が変わったら描き直す
   let lastDay = todayKey();
-  setInterval(() => { if (todayKey() !== lastDay) { lastDay = todayKey(); checkComplete(); render(); } }, 30000);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && todayKey() !== lastDay) { lastDay = todayKey(); checkComplete(); render(); } });
+  setInterval(() => { if (todayKey() !== lastDay) { lastDay = todayKey(); weekBack = 0; checkComplete(); render(); } }, 30000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && todayKey() !== lastDay) { lastDay = todayKey(); weekBack = 0; checkComplete(); render(); } });
 
   // 起動
+  save();
   checkComplete();
   render();
-  // ウェブフォントが届いたら、ハンコの文字を描き直す
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => render());
   const sid = new URLSearchParams(location.search).get('session_id');
   if (sid && /^cs_(test|live)_[A-Za-z0-9]+$/.test(sid)) verifyPurchase(sid); else refreshStatus();
