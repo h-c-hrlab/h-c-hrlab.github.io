@@ -147,15 +147,40 @@
     </div>
   </section>
 
-  <section class="card premium" aria-labelledby="pr-h">
-    <h2 id="pr-h">プレミアム（近日公開）</h2>
-    <p style="margin:0 0 6px">無料版は10件まで登録できます。プレミアムでは、件数無制限・CSV書き出し・家族で共有・更新日の通知が使えます。</p>
-    <div class="plans">
-      <button class="plan" type="button" data-plan="monthly"><b>月250円</b><span>月額</span></button>
-      <button class="plan" type="button" data-plan="yearly"><b>年1,980円</b><span>年額（月165円相当）</span></button>
-      <button class="plan" type="button" data-plan="lifetime"><b>3,980円</b><span>買い切り</span></button>
+  <section class="card premium" aria-labelledby="pr-h" id="premium">
+    <h2 id="pr-h">プレミアム</h2>
+    <div id="pr-free">
+      <p style="margin:0 0 6px">無料版は10件まで登録できます。プレミアムにすると、<b>件数が無制限</b>になり、<b>CSVで書き出し</b>（家計簿や表計算ソフトに取り込み）ができます。</p>
+      <div class="plans">
+        <button class="plan" type="button" data-plan="monthly"><b>月250円</b><span>月額</span></button>
+        <button class="plan" type="button" data-plan="yearly"><b>年1,980円</b><span>年額（月165円相当）</span></button>
+        <button class="plan" type="button" data-plan="lifetime"><b>3,980円</b><span>買い切り</span></button>
+      </div>
+      <p class="note">月額・年額は自動で更新されます。解約はいつでも「購入の管理」からでき、次の更新日まで使えます。お支払いは Stripe で処理され、カード情報はこのアプリに保存されません。<a href="tokushoho.html">特定商取引法に基づく表記</a></p>
+      <p class="note" id="pr-test" hidden>現在はテスト中のため、実際の請求は発生しません。</p>
+      <details style="margin-top:10px">
+        <summary class="note" style="cursor:pointer">購入済みの方（別の端末で使う）</summary>
+        <label for="restore-code" style="margin-top:8px">引き継ぎコード</label>
+        <div class="row">
+          <input id="restore-code" type="text" autocomplete="off" spellcheck="false" placeholder="購入した端末に表示されるコード">
+          <button class="ghost small" type="button" id="btn-restore">引き継ぐ</button>
+        </div>
+      </details>
     </div>
-    <p class="note" id="pr-msg" aria-live="polite">気になるプランを押してください。公開の参考にします。</p>
+    <div id="pr-on" hidden>
+      <p style="margin:0 0 6px"><b id="pr-plan">ご利用中</b></p>
+      <p class="note" id="pr-period"></p>
+      <div class="row" style="margin-top:10px;flex-wrap:wrap">
+        <button class="ghost small" type="button" id="btn-portal">購入の管理（解約・カード変更・領収書）</button>
+        <button class="ghost small" type="button" id="btn-show-code">別の端末で使う</button>
+      </div>
+      <div id="code-box" hidden style="margin-top:10px">
+        <p class="note">下のコードを、使いたい端末の「購入済みの方」に貼り付けてください。このコードがあると購入の管理画面を開けるため、他の人には見せないでください。</p>
+        <textarea id="my-code" readonly rows="3" style="width:100%;font-size:12px;word-break:break-all"></textarea>
+        <button class="ghost small" type="button" id="btn-copy">コピー</button>
+      </div>
+    </div>
+    <p class="note" id="pr-msg" aria-live="polite"></p>
   </section>
 
   <p class="note">スマホ料金の目安は、2026年11月時点で各社が公表している通常料金（税込・割引やキャンペーンを含まない）です。料金は変わることがあります。契約を変える前に、各社の公式サイトで条件を確認してください。保険は保障の内容によって必要性が変わるため、このアプリでは削減額を計算しません。</p>
@@ -163,17 +188,28 @@
 
 <dialog id="limit">
   <h2 style="margin-top:0;font-size:18px">無料版は10件までです</h2>
-  <p>件数無制限はプレミアム（月250円から・近日公開）で使えるようになります。今は、使っていない項目を消して入れ替えてください。</p>
-  <button class="primary" type="button" id="limit-ok">わかりました</button>
+  <p>プレミアム（月250円から）にすると、件数が無制限になります。無料のまま使う場合は、使っていない項目を消して入れ替えてください。</p>
+  <div class="row"><button class="primary" type="button" id="limit-plans">プランを見る</button><button class="ghost" type="button" id="limit-ok">閉じる</button></div>
 </dialog>
 
-<footer>固定費みなおし ・ 運営 HRlab</footer>
+<footer>固定費みなおし ・ 運営 HRlab ・ <a href="tokushoho.html">特定商取引法に基づく表記</a></footer>
 
 <script>
 (function () {
   'use strict';
   const FREE_LIMIT = 10;
   const KEY = 'koteihi_v1';
+  const PKEY = 'koteihi_premium_v1';
+  // 支払い確認サーバーと Stripe の支払いページ
+  const API = 'https://kotei-premium.h-c-hrlab.workers.dev';
+  const LINKS = {
+    monthly: 'https://buy.stripe.com/test_8x2bJ193X9Engsg8PWfjG00',
+    yearly: 'https://buy.stripe.com/test_eVqeVda8103Ndg4eagfjG01',
+    lifetime: 'https://buy.stripe.com/test_bJe4gz0xr9En4JyfekfjG02'
+  };
+  const PRICE = { monthly: 250, yearly: 1980, lifetime: 3980 };
+  const PLAN_NAME = { monthly: '月額プラン', yearly: '年額プラン', lifetime: '買い切り' };
+  const OFFLINE_GRACE = 7 * 24 * 3600 * 1000; // 通信できない時も、最後の確認から7日間は使える
   // 2026年11月時点・通常料金（税込）・オンライン専用プランの目安
   const PHONE_BENCH = [
     { upto: 3, price: 990, label: '3GBまで' },
@@ -191,6 +227,13 @@
   let items = [];
   try { items = JSON.parse(localStorage.getItem(KEY) || '[]'); if (!Array.isArray(items)) items = []; } catch (e) { items = []; }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} };
+
+  // プレミアムの状態（トークンは端末内だけに保存）
+  let prem = null;
+  try { prem = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) { prem = null; }
+  const savePrem = () => { try { if (prem) localStorage.setItem(PKEY, JSON.stringify(prem)); else localStorage.removeItem(PKEY); } catch (e) {} };
+  const isPremium = () => !!(prem && prem.premium && (Date.now() - (prem.checkedAt || 0) < OFFLINE_GRACE));
+  const limit = () => isPremium() ? Infinity : FREE_LIMIT;
 
   const monthly = (it) => it.cycle === 'year' ? it.amount / 12 : it.amount;
   const bench = (gb) => PHONE_BENCH.find((b) => gb <= b.upto);
@@ -276,7 +319,74 @@
       right.append(a, del); li.append(left, right); ul.append(li);
     });
     $('empty').classList.toggle('hide', items.length > 0);
-    $('count').textContent = '（' + items.length + ' / ' + FREE_LIMIT + '件）';
+    $('count').textContent = isPremium() ? '（' + items.length + '件）' : '（' + items.length + ' / ' + FREE_LIMIT + '件）';
+    renderPremium();
+  }
+
+  function renderPremium() {
+    const on = isPremium();
+    $('pr-free').hidden = on; $('pr-on').hidden = !on;
+    $('pr-test').hidden = !Object.values(LINKS).some((u) => u.indexOf('/test_') > -1);
+    if (!on) return;
+    $('pr-plan').textContent = 'プレミアムをご利用中（' + (PLAN_NAME[prem.plan] || 'プレミアム') + '）';
+    let per = '';
+    if (prem.plan === 'lifetime') per = '買い切りのため、期限はありません。';
+    else if (prem.current_period_end) {
+      const d = new Date(prem.current_period_end * 1000);
+      const ds = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
+      per = prem.cancel_at_period_end ? '解約済みです。' + ds + 'まで使えます。' : '次回の更新日：' + ds;
+    }
+    $('pr-period').textContent = per;
+    $('my-code').value = prem.token || '';
+  }
+
+  const msg = (t) => { $('pr-msg').textContent = t; };
+  async function api(path, body) {
+    const opt = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {};
+    const r = await fetch(API + path, opt);
+    let j = {}; try { j = await r.json(); } catch (e) {}
+    return { ok: r.ok, status: r.status, data: j };
+  }
+
+  // 支払い直後（?session_id=...）：購入を確認して開放
+  async function verifyPurchase(sid) {
+    msg('ご購入を確認しています…');
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    try {
+      const r = await api('/verify?session_id=' + encodeURIComponent(sid));
+      if (r.ok && r.data.premium && r.data.token) {
+        prem = { token: r.data.token, plan: r.data.plan, premium: true, checkedAt: Date.now() };
+        savePrem();
+        track('purchase', { transaction_id: sid, value: PRICE[r.data.plan] || 0, currency: 'JPY', items: [{ item_id: 'kotei_' + r.data.plan, item_name: PLAN_NAME[r.data.plan] }] });
+        await refreshStatus(true);
+        render();
+        msg('ありがとうございます。プレミアムが使えるようになりました。');
+        $('pr-h').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        msg('ご購入を確認できませんでした。お支払いが完了している場合は、少し待ってからページを開き直してください。');
+        track('purchase_verify_failed', { reason: r.data.error || String(r.status) });
+      }
+    } catch (e) {
+      try { history.replaceState(null, '', location.pathname + '?session_id=' + encodeURIComponent(sid)); } catch (x) {}
+      msg('通信できませんでした。電波の良い所でページを開き直すと、もう一度確認します。');
+    }
+  }
+
+  // 起動時：今も有効か確認（解約・期限切れを反映）
+  async function refreshStatus(quiet) {
+    if (!prem || !prem.token) return;
+    try {
+      const r = await api('/status', { token: prem.token });
+      if (!r.ok) return; // サーバー側の一時的なエラーは、今の状態のまま
+      prem.premium = !!r.data.premium;
+      prem.checkedAt = Date.now();
+      if (r.data.plan) prem.plan = r.data.plan;
+      prem.cancel_at_period_end = !!r.data.cancel_at_period_end;
+      prem.current_period_end = r.data.current_period_end || null;
+      if (r.data.reason === 'invalid_token') prem = null;
+      savePrem();
+      if (!quiet) render();
+    } catch (e) { /* 通信できない時は最後の確認から7日間そのまま */ }
   }
 
   function syncFields() {
@@ -292,7 +402,7 @@
   $('add').addEventListener('submit', (e) => {
     e.preventDefault();
     const err = $('add-err'); err.textContent = '';
-    if (items.length >= FREE_LIMIT) { track('limit_reached', {}); try { $('limit').showModal(); } catch (x) { err.textContent = '無料版は10件までです。'; } return; }
+    if (items.length >= limit()) { track('limit_reached', {}); try { $('limit').showModal(); } catch (x) { err.textContent = '無料版は10件までです。'; } return; }
     const cat = $('cat').value;
     const name = $('name').value.trim() || CAT[cat];
     const amount = Number($('amount').value);
@@ -309,18 +419,71 @@
 
   $('limit-ok').addEventListener('click', () => $('limit').close());
   $('btn-clear').addEventListener('click', () => { if (!items.length) return; if (confirm('登録した固定費をすべて消しますか？')) { items = []; save(); render(); track('clear_all', {}); } });
+  $('limit-plans').addEventListener('click', () => { $('limit').close(); $('pr-h').scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+
+  function toCSV(list) {
+    const q = (v) => { const t = v === undefined || v === null ? '' : String(v); return /[",\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t; };
+    const head = ['種類', '名前', '金額（円）', '周期', '月あたり（円）', 'データ使用量（GB）', 'サブスクの種類', '先月の利用回数'];
+    const rows = list.map((it) => [CAT[it.cat], it.name, it.amount, it.cycle === 'year' ? '毎年' : '毎月', Math.round(monthly(it)), it.gb, it.cat === 'sub' ? KIND[it.kind || 'other'] : '', it.uses]);
+    return '\ufeff' + [head].concat(rows).map((r) => r.map(q).join(',')).join('\r\n') + '\r\n';
+  }
   $('btn-csv').addEventListener('click', () => {
-    track('premium_interest', { plan: 'csv_export' });
-    $('pr-msg').textContent = 'CSV書き出しはプレミアムの機能です（近日公開）。';
-    $('pr-h').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!isPremium()) {
+      track('premium_interest', { plan: 'csv_export' });
+      msg('CSV書き出しはプレミアムの機能です。');
+      $('pr-h').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (!items.length) { msg('書き出す固定費がありません。'); return; }
+    const blob = new Blob([toCSV(items)], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    const d = new Date();
+    a.href = URL.createObjectURL(blob);
+    a.download = '固定費_' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '.csv';
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    track('csv_export', { count: items.length });
   });
   document.querySelectorAll('.plan').forEach((b) => b.addEventListener('click', () => {
-    track('premium_interest', { plan: b.dataset.plan });
-    $('pr-msg').textContent = 'ありがとうございます。「' + b.querySelector('b').textContent + '」への関心を記録しました。公開までもうしばらくお待ちください。';
+    const plan = b.dataset.plan;
+    track('begin_checkout', { value: PRICE[plan], currency: 'JPY', items: [{ item_id: 'kotei_' + plan, item_name: PLAN_NAME[plan] }] });
+    location.href = LINKS[plan];
   }));
+  $('btn-portal').addEventListener('click', async () => {
+    const btn = $('btn-portal'); btn.disabled = true; msg('管理画面を開いています…');
+    try {
+      const r = await api('/portal', { token: prem.token });
+      if (r.ok && r.data.url) { track('open_portal', { plan: prem.plan }); location.href = r.data.url; return; }
+      msg('管理画面を開けませんでした。時間をおいてもう一度お試しください。');
+    } catch (e) { msg('通信できませんでした。電波の良い所でもう一度お試しください。'); }
+    btn.disabled = false;
+  });
+  $('btn-show-code').addEventListener('click', () => { $('code-box').hidden = !$('code-box').hidden; });
+  $('btn-copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText($('my-code').value); msg('コピーしました。'); }
+    catch (e) { $('my-code').select(); msg('コードを選択しました。長押し（右クリック）でコピーしてください。'); }
+  });
+  $('btn-restore').addEventListener('click', async () => {
+    const code = $('restore-code').value.trim();
+    if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(code)) { msg('コードの形が正しくありません。購入した端末の「別の端末で使う」に出るコードを、そのまま貼り付けてください。'); return; }
+    msg('確認しています…');
+    try {
+      const r = await api('/status', { token: code });
+      if (r.ok && r.data.premium) {
+        prem = { token: code, plan: r.data.plan, premium: true, checkedAt: Date.now(), cancel_at_period_end: !!r.data.cancel_at_period_end, current_period_end: r.data.current_period_end || null };
+        savePrem(); render(); $('restore-code').value = '';
+        track('premium_restore', { plan: r.data.plan });
+        msg('引き継ぎました。この端末でもプレミアムが使えます。');
+      } else if (r.ok && r.data.reason === 'no_active_subscription') {
+        msg('このコードのプランは終了しています。');
+      } else { msg('このコードは使えませんでした。'); }
+    } catch (e) { msg('通信できませんでした。電波の良い所でもう一度お試しください。'); }
+  });
 
   syncFields(); render();
-  window.__kotei = { diagnose, bench, monthly };
+  const sid = new URLSearchParams(location.search).get('session_id');
+  if (sid) verifyPurchase(sid); else refreshStatus(false);
+  window.__kotei = { diagnose, bench, monthly, toCSV, isPremium };
 })();
 </script>
 </body>
