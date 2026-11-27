@@ -10,7 +10,8 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-YPSE6ZHVK1', { page_location: location.origin + location.pathname + location.search });
+  (function () { var sp = new URLSearchParams(location.search); sp.delete('session_id'); var q = sp.toString();
+    gtag('config', 'G-YPSE6ZHVK1', { page_location: location.origin + location.pathname + (q ? '?' + q : '') }); })();
 </script>
 <title>ふたりの生活費｜立て替えを記録して、毎月かんたんに精算</title>
 <meta name="description" content="同棲・共働きのふたりのための、立て替え記録と毎月の精算アプリ。財布は分けたまま、負担の割合（6:4など）どおりに「誰が誰にいくら払うか」を自動で計算。登録不要・無料。">
@@ -82,6 +83,10 @@
   .plan b{display:block;font-size:17px;color:var(--ink)}
   .plan span{font-size:12px;color:var(--muted)}
   .note{font-size:12px;color:var(--muted)}
+  .badge{display:inline-block;font-size:11px;font-weight:700;color:var(--acc);background:var(--acc-soft);border-radius:999px;padding:1px 8px;vertical-align:middle}
+  .bar{display:grid;grid-template-columns:7.5em 1fr auto;gap:8px;align-items:center;font-size:13px;margin:4px 0}
+  .bar i{display:block;height:10px;border-radius:5px;background:var(--acc);min-width:2px}
+  .bar span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .status{font-size:12px;color:var(--muted);text-align:right;min-height:1.2em}
   footer{padding:24px 0 40px;font-size:12px;color:var(--muted);text-align:center}
   footer a,.note a{color:var(--muted)}
@@ -152,6 +157,11 @@
         <div><span id="s-b-l">Bが払った</span><b id="s-b">0円</b></div>
       </div>
       <div class="row" style="margin-top:12px"><button class="ghost" type="button" id="btn-settle">精算済みにする</button></div>
+      <div style="margin-top:14px">
+        <span class="lbl">カテゴリ別 <span class="badge">プレミアム</span></span>
+        <div id="cats"></div>
+        <button class="ghost small hide" type="button" id="cats-unlock">プレミアムで見る</button>
+      </div>
       <div class="status" id="sync" aria-live="polite"></div>
     </section>
 
@@ -189,16 +199,63 @@
       <h2 id="list-h">この月の記録 <span class="note" id="count"></span></h2>
       <ul class="items" id="items"></ul>
       <p class="empty" id="empty">この月の記録はまだありません。</p>
+      <div class="row" style="margin-top:12px"><button class="ghost small" type="button" id="btn-csv" style="flex:0 0 auto">全期間をCSVで書き出す</button></div>
     </section>
 
-    <section class="card premium" aria-labelledby="pr-h">
-      <h2 id="pr-h">プレミアム（準備中）</h2>
-      <p style="margin:0 0 6px">家賃などの<b>毎月の固定費を自動で記録</b>、<b>カテゴリ別の集計</b>、<b>全期間のCSV書き出し</b>ができるようになります。1つの契約で、ふたりとも使えます。</p>
-      <div class="plans">
-        <button class="plan" type="button" data-plan="monthly"><b>月180円</b><span>月額</span></button>
-        <button class="plan" type="button" data-plan="yearly"><b>年1,800円</b><span>年額（月150円相当）</span></button>
+    <section class="card" aria-labelledby="tpl-h">
+      <h2 id="tpl-h">毎月の固定費 <span class="badge">プレミアム</span></h2>
+      <p class="note" style="margin:-6px 0 10px">家賃や光熱費など、毎月決まって払うものを登録すると、毎月自動で記録します。</p>
+      <div id="tpl-locked">
+        <button class="ghost" type="button" id="tpl-unlock">プレミアムで使う</button>
       </div>
-      <p class="note" id="pr-msg" aria-live="polite">今の機能は、このまま無料で使えます。</p>
+      <div id="tpl-on" class="hide">
+        <ul class="items" id="tpls"></ul>
+        <p class="empty" id="tpl-empty">まだ登録がありません。</p>
+        <details style="margin-top:8px" id="tpl-add-box">
+          <summary style="cursor:pointer;font-weight:600;color:var(--ink)">固定費を追加</summary>
+          <form id="tpl-add" novalidate style="margin-top:12px">
+            <div class="grid">
+              <div class="full">
+                <span class="lbl" id="t-payer-l">払う人</span>
+                <div class="seg" role="radiogroup" aria-labelledby="t-payer-l">
+                  <label><input type="radio" name="t-payer" value="a" checked><span id="tp-a">A</span></label>
+                  <label><input type="radio" name="t-payer" value="b"><span id="tp-b">B</span></label>
+                </div>
+              </div>
+              <div><label for="t-amount">金額（円）</label><input id="t-amount" type="number" inputmode="numeric" min="1" step="1" placeholder="例：85000"></div>
+              <div><label for="t-day">毎月の日付</label><select id="t-day"></select></div>
+              <div>
+                <label for="t-cat">カテゴリ</label>
+                <select id="t-cat"><option value="rent">家賃</option><option value="utility">電気・ガス・水道</option><option value="comm">通信・サブスク</option><option value="food">食費</option><option value="daily">日用品</option><option value="eatout">外食・おでかけ</option><option value="other">その他</option></select>
+              </div>
+              <div><label for="t-split">分け方</label><select id="t-split"><option value="ratio">割合どおり</option><option value="half">半分ずつ</option><option value="a">A が全額負担</option><option value="b">B が全額負担</option></select></div>
+              <div class="full"><label for="t-memo">名前</label><input id="t-memo" type="text" maxlength="40" autocomplete="off" placeholder="例：家賃"></div>
+            </div>
+            <div class="err" id="tpl-err" role="alert"></div>
+            <button class="primary" type="submit">登録する（今月の分から記録）</button>
+          </form>
+        </details>
+      </div>
+    </section>
+
+    <section class="card premium" aria-labelledby="pr-h" id="premium">
+      <h2 id="pr-h">プレミアム</h2>
+      <div id="pr-free">
+        <p style="margin:0 0 6px">家賃などの<b>毎月の固定費を自動で記録</b>、<b>カテゴリ別の集計</b>、<b>全期間のCSV書き出し</b>ができます。<b>1つの契約で、ふたりとも使えます。</b></p>
+        <div class="plans">
+          <button class="plan" type="button" data-plan="monthly"><b>月180円</b><span>月額</span></button>
+          <button class="plan" type="button" data-plan="yearly"><b>年1,800円</b><span>年額（月150円相当）</span></button>
+        </div>
+        <p class="note">自動で更新されます。解約は、購入した端末の「購入の管理」からいつでもでき、次の更新日まで使えます。お支払いは Stripe で処理され、カード情報はこのアプリに保存されません。<a href="tokushoho.html">特定商取引法に基づく表記</a></p>
+        <p class="note" id="pr-test" hidden>現在はテスト中のため、実際の請求は発生しません。</p>
+      </div>
+      <div id="pr-on" class="hide">
+        <p style="margin:0 0 6px"><b id="pr-plan">プレミアムをご利用中</b></p>
+        <p class="note" id="pr-period"></p>
+        <button class="ghost small" type="button" id="btn-portal">購入の管理（解約・カード変更・領収書）</button>
+        <p class="note hide" id="pr-other">購入の管理は、購入した端末から開けます。</p>
+      </div>
+      <p class="note" id="pr-msg" aria-live="polite"></p>
     </section>
 
     <details class="card" id="settings">
@@ -239,6 +296,18 @@
   const CACHE = 'futari_cache_v1';  // 通信できない時に表示する、最後に読んだ内容
   const CAT = { food: '食費', daily: '日用品', rent: '家賃', utility: '電気・ガス・水道', comm: '通信・サブスク', eatout: '外食・おでかけ', other: 'その他' };
   const POLL = 30000;
+  // プレミアム：支払い確認サーバー（固定費みなおしと共通）と Stripe の支払いページ
+  const PAY_API = 'https://kotei-premium.h-c-hrlab.workers.dev';
+  const LINKS = {
+    monthly: 'https://buy.stripe.com/test_9B6fZh4NHdUD1xm8PWfjG03',
+    yearly: 'https://buy.stripe.com/test_8x25kDcg95o7dg4eagfjG04'
+  };
+  const PRICE = { monthly: 180, yearly: 1800 };
+  const PLAN_NAME = { futari_monthly: '月額プラン', futari_yearly: '年額プラン' };
+  const PKEY = 'futari_premium_v1';  // 最後に確認した結果（家計ごと）
+  const BKEY = 'futari_buyer_v1';    // この端末で買ったトークン（購入の管理はこの端末だけ）
+  const RECHECK = 3600 * 1000;       // 1時間ごとに確認し直す
+  const GRACE = 7 * 24 * 3600 * 1000; // 通信できない時も、最後の確認から7日間は使える
 
   const $ = (id) => document.getElementById(id);
   const yen = (n) => Math.round(n).toLocaleString('ja-JP') + '円';
@@ -266,6 +335,30 @@
   window.__futari = { settle, shareA };
 
   let hid = null; let data = null; let month = thisMonth(); let timer = null; let busy = 0;
+  let prem = null; try { prem = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) { prem = null; }
+  const savePrem = () => { try { if (prem) localStorage.setItem(PKEY, JSON.stringify(prem)); else localStorage.removeItem(PKEY); } catch (e) {} };
+  const sharedToken = () => (data && data.household && data.household.premium_token) || null;
+  const isPremium = () => !!(prem && prem.premium && prem.hid === hid && prem.token === sharedToken() && Date.now() - (prem.checkedAt || 0) < GRACE);
+  const isBuyer = () => { try { return !!sharedToken() && localStorage.getItem(BKEY) === sharedToken(); } catch (e) { return false; } };
+
+  async function payApi(path, body) {
+    const opt = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {};
+    const r = await fetch(PAY_API + path, opt);
+    let j = {}; try { j = await r.json(); } catch (e) {}
+    return { ok: r.ok, status: r.status, data: j };
+  }
+  // 家計に保存された購入情報が、今も有効かを確認する
+  async function refreshPremium(force) {
+    const tok = sharedToken();
+    if (!tok) { if (prem && prem.hid === hid) { prem = null; savePrem(); } return; }
+    if (!force && prem && prem.hid === hid && prem.token === tok && Date.now() - (prem.checkedAt || 0) < RECHECK) return;
+    try {
+      const r = await payApi('/status', { token: tok });
+      if (!r.ok) return; // 一時的なエラーは今の状態のまま
+      prem = { hid, token: tok, premium: !!r.data.premium, plan: r.data.plan || null, checkedAt: Date.now(), cancel_at_period_end: !!r.data.cancel_at_period_end, current_period_end: r.data.current_period_end || null };
+      savePrem();
+    } catch (e) { /* 通信できない時は最後の確認から7日間そのまま */ }
+  }
 
   function setMsg(t) { $('global-msg').textContent = t || ''; }
   function setSync(t) { $('sync').textContent = t || ''; }
@@ -301,8 +394,11 @@
       if (!r.ok) { setSync('うまく読み込めませんでした。少し待ってからもう一度開いてください。'); return; }
       if (busy) return; // 送信中は、送信後の読み込みにまかせる
       data = r.data;
+      if (!data.templates) data.templates = [];
       try { localStorage.setItem(CACHE, JSON.stringify({ hid, data })); } catch (e) {}
+      await refreshPremium(false);
       render();
+      if (isPremium()) applyTemplates();
       const d = new Date(); setSync('最新の状態です（' + d.getHours() + ':' + pad(d.getMinutes()) + '）');
     } catch (e) {
       setSync('通信できません。電波の良い所で開き直すと、最新の状態になります。');
@@ -366,6 +462,89 @@
       $('e-r-txt').textContent = ratioText(h.ratio_a, h.name_a, h.name_b);
     }
     $('share-url').value = shareUrl();
+    renderPremium(list);
+  }
+
+  function renderPremium(list) {
+    const h = data.household; const on = isPremium();
+    // カテゴリ別
+    const cats = $('cats'); cats.innerHTML = '';
+    $('cats-unlock').classList.toggle('hide', on);
+    if (on) {
+      const by = {}; list.forEach((e) => { by[e.cat] = (by[e.cat] || 0) + e.amount; });
+      const rows = Object.keys(by).sort((a, b) => by[b] - by[a]); const max = rows.length ? by[rows[0]] : 0;
+      if (!rows.length) { const p = document.createElement('p'); p.className = 'empty'; p.style.margin = '0'; p.textContent = 'この月の記録はまだありません。'; cats.append(p); }
+      rows.forEach((k) => {
+        const row = document.createElement('div'); row.className = 'bar';
+        const n = document.createElement('span'); n.textContent = CAT[k];
+        const w = document.createElement('span'); const i = document.createElement('i'); i.style.width = Math.max(2, Math.round(by[k] / max * 100)) + '%'; w.append(i);
+        const a = document.createElement('span'); a.textContent = yen(by[k]);
+        row.append(n, w, a); cats.append(row);
+      });
+    }
+    // 毎月の固定費
+    $('tpl-locked').classList.toggle('hide', on); $('tpl-on').classList.toggle('hide', !on);
+    $('tp-a').textContent = h.name_a; $('tp-b').textContent = h.name_b;
+    $('t-split').options[0].textContent = '割合どおり（' + h.ratio_a + ':' + (100 - h.ratio_a) + '）';
+    $('t-split').options[2].textContent = h.name_a + ' が全額負担';
+    $('t-split').options[3].textContent = h.name_b + ' が全額負担';
+    const ul = $('tpls'); ul.innerHTML = '';
+    (data.templates || []).forEach((t) => {
+      const li = document.createElement('li');
+      const left = document.createElement('div'); left.className = 'it-main';
+      const n = document.createElement('div'); n.className = 'it-name'; n.textContent = t.memo || CAT[t.cat];
+      const meta = document.createElement('div'); meta.className = 'it-meta';
+      const sp = t.split === 'ratio' ? '割合どおり' : t.split === 'half' ? '半分ずつ' : (t.split === 'a' ? h.name_a : h.name_b) + 'が全額';
+      meta.textContent = '毎月' + t.day + '日・' + (t.payer === 'a' ? h.name_a : h.name_b) + 'が払う・' + sp;
+      left.append(n, meta);
+      const right = document.createElement('div'); right.className = 'it-side';
+      const a = document.createElement('span'); a.className = 'it-amt'; a.textContent = yen(t.amount);
+      const del = document.createElement('button'); del.className = 'ghost small'; del.type = 'button'; del.textContent = '解除';
+      del.setAttribute('aria-label', n.textContent + 'の自動記録をやめる');
+      del.addEventListener('click', () => removeTemplate(t));
+      right.append(a, del); li.append(left, right); ul.append(li);
+    });
+    $('tpl-empty').classList.toggle('hide', (data.templates || []).length > 0);
+    // プレミアムの欄
+    $('pr-free').classList.toggle('hide', on); $('pr-on').classList.toggle('hide', !on);
+    $('pr-test').hidden = !Object.values(LINKS).some((u) => u.indexOf('/test_') > -1);
+    if (on) {
+      $('pr-plan').textContent = 'プレミアムをご利用中（' + (PLAN_NAME[prem.plan] || 'プレミアム') + '）';
+      let per = '';
+      if (prem.current_period_end) {
+        const d = new Date(prem.current_period_end * 1000);
+        const ds = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
+        per = prem.cancel_at_period_end ? '解約済みです。' + ds + 'まで使えます。' : '次回の更新日：' + ds;
+      }
+      $('pr-period').textContent = per;
+      $('btn-portal').classList.toggle('hide', !isBuyer()); $('pr-other').classList.toggle('hide', isBuyer());
+    }
+  }
+
+  // 毎月の固定費を、まだ記録していない月の分だけ記録する（同じIDで送るので、ふたりの端末が同時に動いても二重にならない）
+  let applying = false;
+  async function applyTemplates() {
+    if (applying || !data || !isPremium()) return;
+    const now = thisMonth();
+    const due = (data.templates || []).filter((t) => t.last_month < now);
+    if (!due.length) return;
+    applying = true; busy++;
+    try {
+      for (const t of due) {
+        let m = shiftMonth(t.last_month, 1); let n = 0;
+        while (m <= now && n < 12) {
+          const body = { date: m + '-' + pad(t.day), payer: t.payer, amount: t.amount, split: t.split, cat: t.cat, memo: t.memo };
+          const r = await api('PUT', '/h/' + hid + '/e/r' + t.id + m.replace('-', ''), body);
+          if (!r.ok) throw new Error('entry');
+          m = shiftMonth(m, 1); n++;
+        }
+        const { id, ...tb } = t;
+        const r = await api('PUT', '/h/' + hid + '/t/' + t.id, Object.assign(tb, { last_month: now }));
+        if (!r.ok) throw new Error('template');
+      }
+    } catch (e) { /* 次に開いた時にやり直す */ }
+    finally { busy--; applying = false; }
+    await load(true);
   }
 
   async function send(method, path, body, okMsg) {
@@ -481,11 +660,99 @@
     if (ok) { track('household_delete', {}); try { localStorage.removeItem(KEY); localStorage.removeItem(CACHE); } catch (e) {} showStart(); setMsg('家計を削除しました。'); }
   });
 
-  // プレミアム（準備中：関心を数える）
+  // プレミアム
+  const prMsg = (t) => { $('pr-msg').textContent = t || ''; };
+  const goPremium = (feature) => { track('premium_interest', { plan: feature }); $('pr-h').scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  $('tpl-unlock').addEventListener('click', () => goPremium('templates'));
+  $('cats-unlock').addEventListener('click', () => goPremium('categories'));
   document.querySelectorAll('.plan').forEach((b) => b.addEventListener('click', () => {
-    track('premium_interest', { plan: b.dataset.plan });
-    $('pr-msg').textContent = 'ありがとうございます。プレミアムは準備中です。今の機能は、このまま無料で使えます。';
+    const plan = b.dataset.plan;
+    if (!hid) return;
+    track('begin_checkout', { value: PRICE[plan], currency: 'JPY', items: [{ item_id: 'futari_' + plan, item_name: PLAN_NAME['futari_' + plan] }] });
+    location.href = LINKS[plan];
   }));
+  $('btn-portal').addEventListener('click', async () => {
+    const btn = $('btn-portal'); btn.disabled = true; prMsg('管理画面を開いています…');
+    try {
+      const r = await payApi('/portal', { token: sharedToken() });
+      if (r.ok && r.data.url) { track('open_portal', { plan: prem && prem.plan }); location.href = r.data.url; return; }
+      prMsg('管理画面を開けませんでした。時間をおいてもう一度お試しください。');
+    } catch (e) { prMsg('通信できませんでした。電波の良い所でもう一度お試しください。'); }
+    btn.disabled = false;
+  });
+
+  // 支払い直後（?session_id=...）：購入を確認して、家計に保存する（ふたりとも使えるようになる）
+  async function verifyPurchase(sid) {
+    prMsg('ご購入を確認しています…');
+    const keepHash = location.hash;
+    try { history.replaceState(null, '', location.pathname + keepHash); } catch (e) {}
+    try {
+      const r = await payApi('/verify?session_id=' + encodeURIComponent(sid));
+      if (!(r.ok && r.data.premium && r.data.token)) {
+        track('purchase_verify_failed', { reason: r.data.error || String(r.status) });
+        prMsg('ご購入を確認できませんでした。お支払いが完了している場合は、少し待ってからページを開き直してください。');
+        return;
+      }
+      const s = await api('PUT', '/h/' + hid + '/premium', { token: r.data.token });
+      if (!s.ok) { prMsg('ご購入は確認できましたが、保存できませんでした。ページを開き直してください。'); try { history.replaceState(null, '', location.pathname + '?session_id=' + encodeURIComponent(sid) + keepHash); } catch (e) {} return; }
+      try { localStorage.setItem(BKEY, r.data.token); } catch (e) {}
+      track('purchase', { transaction_id: sid, value: PRICE[r.data.plan.replace('futari_', '')] || 0, currency: 'JPY', items: [{ item_id: r.data.plan, item_name: PLAN_NAME[r.data.plan] }] });
+      await load(true); await refreshPremium(true); render();
+      prMsg('ありがとうございます。プレミアムが使えるようになりました。パートナーの端末でも使えます。');
+      $('pr-h').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (e) {
+      try { history.replaceState(null, '', location.pathname + '?session_id=' + encodeURIComponent(sid) + keepHash); } catch (x) {}
+      prMsg('通信できませんでした。電波の良い所でページを開き直すと、もう一度確認します。');
+    }
+  }
+
+  // 毎月の固定費
+  for (let d = 1; d <= 28; d++) { const o = document.createElement('option'); o.value = d; o.textContent = d + '日'; $('t-day').append(o); }
+  $('t-day').value = '27';
+  const newTid = () => (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).slice(0, 16);
+  $('tpl-add').addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const err = $('tpl-err'); err.textContent = '';
+    if (!data || !isPremium()) { goPremium('templates'); return; }
+    const amount = Number($('t-amount').value);
+    if (!$('t-amount').value || !Number.isInteger(amount) || amount < 1 || amount > 10000000) { err.textContent = '金額を1円以上の整数で入れてください。'; $('t-amount').focus(); return; }
+    if ((data.templates || []).length >= 30) { err.textContent = '毎月の固定費は30件まで登録できます。'; return; }
+    const t = { payer: document.querySelector('input[name=t-payer]:checked').value, amount, split: $('t-split').value, cat: $('t-cat').value, memo: $('t-memo').value.trim().slice(0, 40), day: Number($('t-day').value), last_month: shiftMonth(thisMonth(), -1) };
+    const btn = ev.submitter || $('tpl-add').querySelector('button'); btn.disabled = true;
+    const ok = await send('PUT', '/h/' + hid + '/t/' + newTid(), t, '登録しました。今月の分を記録しました。');
+    btn.disabled = false;
+    if (ok) { track('template_add', { category: t.cat }); $('t-amount').value = ''; $('t-memo').value = ''; $('tpl-add-box').open = false; }
+  });
+  async function removeTemplate(t) {
+    if (!confirm((t.memo || CAT[t.cat]) + 'の自動記録をやめますか？ これまでの記録は残ります。')) return;
+    data.templates = data.templates.filter((x) => x.id !== t.id); render();
+    if (await send('DELETE', '/h/' + hid + '/t/' + t.id, undefined, '自動記録をやめました。')) track('template_delete', { category: t.cat });
+  }
+
+  // CSV（全期間）
+  function toCSV(list, h) {
+    const q = (v) => { const t = v === undefined || v === null ? '' : String(v); return /[",\n\r]/.test(t) || /^[=+\-@]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t; };
+    const SP = { ratio: '割合どおり', half: '半分ずつ', a: h.name_a + 'が全額', b: h.name_b + 'が全額' };
+    const head = ['日付', 'カテゴリ', 'メモ', '払った人', '金額（円）', '分け方', h.name_a + 'の負担（円）', h.name_b + 'の負担（円）'];
+    const rows = list.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.created_at - b.created_at)).map((e) => {
+      const sa = shareA(e, h.ratio_a);
+      return [e.date, CAT[e.cat], e.memo, e.payer === 'a' ? h.name_a : h.name_b, e.amount, SP[e.split], sa, e.amount - sa];
+    });
+    return '﻿' + [head].concat(rows).map((r) => r.map(q).join(',')).join('\r\n') + '\r\n';
+  }
+  window.__futari.toCSV = toCSV;
+  $('btn-csv').addEventListener('click', () => {
+    if (!data) return;
+    if (!isPremium()) { setMsg('CSV書き出しはプレミアムの機能です。'); goPremium('csv_export'); return; }
+    if (!data.entries.length) { setMsg('書き出す記録がありません。'); return; }
+    const blob = new Blob([toCSV(data.entries, data.household)], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a'); const d = new Date();
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ふたりの生活費_' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '.csv';
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    track('csv_export', { count: data.entries.length });
+  });
 
   // 同じタブで別の共有リンクを開いた時（# だけ変わる時）は開き直す
   window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (validId(h) && h !== hid) location.reload(); });
@@ -493,6 +760,7 @@
   // 起動
   $('date').value = today();
   syncNewRatio();
+  const startSid = new URLSearchParams(location.search).get('session_id');
   const fromHash = location.hash.slice(1);
   let saved = null; try { saved = localStorage.getItem(KEY); } catch (e) {}
   if (validId(fromHash)) {
@@ -501,13 +769,17 @@
     $('share-card').classList.add('hide');
   } else if (validId(saved)) {
     hid = saved; $('share-card').classList.add('hide');
-    try { history.replaceState(null, '', '#' + hid); } catch (e) {}
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + hid); } catch (e) {}
   }
   if (hid) {
     try { const c = JSON.parse(localStorage.getItem(CACHE) || 'null'); if (c && c.hid === hid && c.data && c.data.household) { data = c.data; render(); } } catch (e) {}
     if (!data) showApp();
-    load(); startPoll();
-  } else { showStart(); }
+    load().then(() => { if (startSid && /^cs_(test|live)_[A-Za-z0-9]+$/.test(startSid) && data) verifyPurchase(startSid); });
+    startPoll();
+  } else {
+    showStart();
+    if (startSid) setMsg('ご購入を確認するには、ふたりの家計を開いた端末（共有リンク）でこのページを開いてください。');
+  }
 })();
 </script>
 </body>
