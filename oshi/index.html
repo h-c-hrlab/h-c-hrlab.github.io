@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YPSE6ZHVK1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  (function () { var sp = new URLSearchParams(location.search); sp.delete('session_id'); var q = sp.toString();
+    gtag('config', 'G-YPSE6ZHVK1', { page_location: location.origin + location.pathname + (q ? '?' + q : '') }); })();
+</script>
+<title>推し活レシート｜推しにいくら使った？ 推して何日？ 現場と当落もひとつに</title>
+<meta name="description" content="推しごとの出費をレシートのように記録。推して何日、カレンダー、現場の当落と入金期限、推し貯金。今月の推し活をレシート画像にしてシェア。広告なし・登録不要・無料で推し3人まで。">
+<meta name="theme-color" content="#F2EFE8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="推し活レシート">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=BIZ+UDGothic:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2EFE8; --paper:#FFFFFF; --ink:#18181B; --ink-2:#55555E; --ink-3:#9A9AA3; --rule:#DEDAD0; --rule-2:#ECE9E1;
+    --hot:#E5323B; --ok:#2FA25B; --warn:#D98A00;
+    --disp:"Dela Gothic One","Hiragino Sans","Noto Sans JP",sans-serif;
+    --mono:"BIZ UDGothic","Osaka-Mono","MS Gothic",monospace;
+    --body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(rgba(24,24,27,.06) 1px,transparent 1.2px);background-size:14px 14px;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
+  .mono{font-family:var(--mono)}
+  .disp{font-family:var(--disp);font-weight:400;letter-spacing:.02em}
+  .hide{display:none!important}
+
+  /* 上 */
+  header.top{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding:18px 0 10px}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo i{width:38px;height:44px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-family:var(--disp);font-style:normal;font-size:18px;
+    -webkit-mask:radial-gradient(circle at 50% 0,transparent 5px,#000 5.5px) top/100% 51% no-repeat,radial-gradient(circle at 50% 100%,transparent 5px,#000 5.5px) bottom/100% 51% no-repeat;mask:radial-gradient(circle at 50% 0,transparent 5px,#000 5.5px) top/100% 51% no-repeat,radial-gradient(circle at 50% 100%,transparent 5px,#000 5.5px) bottom/100% 51% no-repeat}
+  .logo b{font-family:var(--disp);font-weight:400;font-size:22px;line-height:1.1;display:block}
+  .logo small{display:block;font-size:11px;color:var(--ink-2);letter-spacing:.12em}
+  .today{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-align:right}
+  h2.sec{font-family:var(--disp);font-weight:400;font-size:19px;margin:26px 0 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  h2.sec small{font-family:var(--body);font-size:12px;color:var(--ink-2)}
+  .promise{font-size:12px;color:var(--ink-2);border-left:3px solid var(--ink);padding:1px 0 1px 10px;margin:4px 0 14px}
+
+  /* チケット（推し） */
+  .tickets{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+  .ticket{--c:#E5323B;position:relative;display:grid;grid-template-columns:86px 1fr;min-height:150px;background:var(--paper);filter:drop-shadow(0 2px 0 rgba(0,0,0,.06));
+    -webkit-mask:radial-gradient(circle at 86px 0,transparent 9px,#000 9.5px) top/100% 51% no-repeat,radial-gradient(circle at 86px 100%,transparent 9px,#000 9.5px) bottom/100% 51% no-repeat;
+    mask:radial-gradient(circle at 86px 0,transparent 9px,#000 9.5px) top/100% 51% no-repeat,radial-gradient(circle at 86px 100%,transparent 9px,#000 9.5px) bottom/100% 51% no-repeat;text-align:left;width:100%}
+  .ticket .stub{background:var(--c);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 6px;border-right:2px dashed rgba(255,255,255,.65);position:relative}
+  .ticket .stub.light{color:var(--ink)}
+  .ticket .ph{width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.35) center/cover no-repeat;border:2px solid rgba(255,255,255,.85);display:grid;place-items:center;font-family:var(--disp);font-size:22px}
+  .ticket .stub .no{font-family:var(--mono);font-size:10px;letter-spacing:.06em;opacity:.9}
+  .ticket .body{padding:12px 14px 10px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+  .ticket .nm{font-family:var(--disp);font-size:20px;line-height:1.25;overflow-wrap:anywhere}
+  .ticket .days{display:flex;align-items:baseline;gap:4px;font-size:12px;color:var(--ink-2)}
+  .ticket .days b{font-family:var(--disp);font-weight:400;font-size:30px;color:var(--ink);line-height:1}
+  .ticket .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;border-top:1px dashed var(--rule);padding-top:5px}
+  .ticket .facts b{display:block;font-family:var(--mono);font-size:14px;color:var(--ink);font-weight:700}
+  .ticket .badge{position:absolute;right:10px;top:10px;font-family:var(--disp);font-size:11px;background:var(--ink);color:var(--bg);padding:1px 7px;transform:rotate(4deg)}
+  .ticket.add{grid-template-columns:1fr;place-items:center;background:transparent;border:2px dashed var(--ink-3);-webkit-mask:none;mask:none;filter:none;color:var(--ink-2);min-height:150px}
+  .ticket.add b{font-family:var(--disp);font-weight:400;font-size:18px;color:var(--ink);display:block;text-align:center}
+
+  /* カレンダー */
+  .card{background:var(--paper);border:1.5px solid var(--ink);padding:12px}
+  .cal-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .cal-h b{font-family:var(--disp);font-weight:400;font-size:18px}
+  .navbtn{width:40px;height:40px;border:1.5px solid var(--ink);font-family:var(--disp)}
+  .navbtn:disabled{opacity:.3}
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+  .cal .wd{font-size:11px;text-align:center;color:var(--ink-2);padding:2px 0}
+  .cal .wd.sun{color:var(--hot)}
+  .cal button{aspect-ratio:1/1.05;border:1px solid var(--rule-2);background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:3px 1px;font-family:var(--mono);font-size:12px;position:relative;min-width:0}
+  .cal button.other{opacity:.35}
+  .cal button.today{border:2px solid var(--ink)}
+  .cal button.sel{background:var(--ink);color:var(--bg)}
+  .cal .dots{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-top:2px}
+  .cal .dots i{width:7px;height:7px;border-radius:50%;display:block}
+  .cal .amt{font-size:9px;color:var(--ink-2);margin-top:auto;white-space:nowrap;overflow:hidden;max-width:100%}
+  .cal button.sel .amt{color:var(--bg)}
+  .day-list{margin-top:10px;font-size:13.5px}
+  .day-list li{list-style:none}
+  .day-list ul{margin:0;padding:0}
+
+  /* 予定・現場 */
+  .events{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .ev{display:grid;grid-template-columns:72px 1fr auto;background:var(--paper);border:1.5px solid var(--ink);min-height:70px}
+  .ev .dd{border-right:2px dashed var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 2px;text-align:center}
+  .ev .dd b{font-family:var(--disp);font-weight:400;font-size:22px;line-height:1}
+  .ev .dd span{font-family:var(--mono);font-size:10.5px;color:var(--ink-2)}
+  .ev .main{padding:8px 10px;text-align:left;min-width:0}
+  .ev .main b{display:block;font-weight:700;overflow-wrap:anywhere}
+  .ev .main span{display:block;font-size:12px;color:var(--ink-2)}
+  .ev .side{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:4px;padding:6px 10px 6px 0}
+  .st{font-family:var(--disp);font-size:11px;padding:1px 7px;border:1.5px solid currentColor;white-space:nowrap}
+  .st.apply{color:var(--ink-2)} .st.win{color:var(--hot)} .st.lose{color:var(--ink-3)} .st.paid{color:var(--ok)} .st.went{color:var(--ink)}
+  .due{font-family:var(--mono);font-size:11px;color:var(--hot);white-space:nowrap}
+  .cnt{font-family:var(--mono);font-size:11px;color:var(--ink-2);white-space:nowrap}
+  .ev.past{opacity:.55}
+
+  /* レシート */
+  .receipt{background:var(--paper);font-family:var(--mono);padding:20px 18px 34px;max-width:420px;margin:0 auto;position:relative;filter:drop-shadow(0 2px 2px rgba(0,0,0,.08));
+    -webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - 10px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 10px repeat-x;
+    mask:linear-gradient(#000,#000) top/100% calc(100% - 10px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 10px repeat-x}
+  .receipt .rh{text-align:center;border-bottom:1px dashed var(--ink);padding-bottom:10px;margin-bottom:8px}
+  .receipt .rh b{font-family:var(--disp);font-weight:400;font-size:20px;display:block}
+  .receipt .rh span{font-size:12px;color:var(--ink-2)}
+  .rmonth{display:flex;justify-content:space-between;align-items:center;margin:6px 0}
+  .rlines{list-style:none;margin:0;padding:0;font-size:13px}
+  .rlines li{display:grid;grid-template-columns:3.2em 1fr auto auto;gap:6px;align-items:center;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .rlines li.ln{grid-template-columns:1fr auto;gap:2px}
+  .rlines li button.main{display:grid;grid-template-columns:3.2em 1fr auto;gap:6px;align-items:center;text-align:left;min-height:40px;min-width:0;font-family:var(--mono)}
+  .rlines .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rlines .t i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;vertical-align:1px}
+  .rlines .a{text-align:right;white-space:nowrap}
+  .rlines .x{font-size:11px;color:var(--ink-3);padding:4px}
+  .rsub{font-size:12.5px;border-top:1px dashed var(--ink);margin-top:8px;padding-top:6px}
+  .rsub div{display:flex;justify-content:space-between}
+  .rsub i,.rlines li > .t i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:1px}
+  .rtotal{display:flex;justify-content:space-between;font-size:20px;font-weight:700;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);margin-top:8px;padding:6px 0}
+  .barcode{height:38px;margin:14px auto 0;width:70%;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 12px)}
+  .rfoot{text-align:center;font-size:11px;color:var(--ink-2);margin-top:4px}
+  .rtools{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+
+  /* 貯金（パンチカード） */
+  .goals{display:grid;gap:12px}
+  .goal{background:var(--paper);border:1.5px solid var(--ink);padding:12px 14px}
+  .goal .gh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .goal .gh b{font-family:var(--disp);font-weight:400;font-size:17px}
+  .punch{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin:10px 0 6px}
+  .punch i{aspect-ratio:1;border-radius:50%;border:1.5px dashed var(--ink-3);display:block}
+  .punch i.on{border:0;background:var(--c,#18181B);box-shadow:inset 0 0 0 3px var(--paper),0 0 0 1.5px var(--c,#18181B)}
+  .goal .gm{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px}
+
+  /* 共通 */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border:1.5px solid var(--ink);background:var(--paper);font-weight:700;font-size:14px;white-space:nowrap}
+  .btn.ink{background:var(--ink);color:var(--bg)}
+  .btn.sm{min-height:36px;padding:0 10px;font-size:12.5px}
+  .btn:disabled{opacity:.4}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .note{font-size:12px;color:var(--ink-2)}
+  .note a{color:var(--ink-2)}
+  .empty{font-size:13px;color:var(--ink-2);padding:8px 0}
+  .msg{font-size:13px;color:var(--ink);min-height:1.3em;margin:8px 0 0}
+  .err{font-size:12.5px;color:var(--hot);min-height:1.2em;margin-top:6px}
+  .search{width:100%;font:inherit;font-size:16px;border:1.5px solid var(--ink);padding:8px 10px;background:var(--paper);margin-bottom:8px}
+  .locked{border:1.5px dashed var(--ink-3);padding:12px;font-size:13px;color:var(--ink-2)}
+  .locked button{text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
+  .bars{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;height:120px;border-bottom:1.5px solid var(--ink)}
+  .bars div{display:flex;flex-direction:column-reverse;min-height:1px}
+  .bars div i{display:block}
+  .bars-l{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;font-size:10px;color:var(--ink-2);text-align:center;font-family:var(--mono)}
+
+  /* 下のタブ */
+  nav.tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:var(--bg);display:grid;grid-template-columns:repeat(5,1fr);padding:4px 4px calc(4px + env(safe-area-inset-bottom));z-index:5}
+  nav.tabbar button{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0;font-size:11px;opacity:.6;min-height:50px}
+  nav.tabbar button b{font-family:var(--disp);font-weight:400;font-size:15px;line-height:1.1}
+  nav.tabbar button[aria-selected=true]{opacity:1}
+  nav.tabbar button[aria-selected=true] b{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+  .fab{position:fixed;right:16px;bottom:calc(76px + env(safe-area-inset-bottom));width:58px;height:58px;border-radius:50%;background:var(--hot);color:#fff;font-family:var(--disp);font-size:13px;line-height:1.1;display:grid;place-items:center;box-shadow:0 4px 0 var(--ink);border:2px solid var(--ink);z-index:4}
+
+  /* シート */
+  dialog{border:2px solid var(--ink);padding:0;background:var(--paper);color:var(--ink);width:min(480px,calc(100% - 20px));max-height:calc(100dvh - 24px)}
+  dialog::backdrop{background:rgba(24,24,27,.5)}
+  .sheet{padding:16px}
+  .sheet h3{font-family:var(--disp);font-weight:400;font-size:19px;margin:0 0 10px;padding-bottom:8px;border-bottom:2px dashed var(--ink)}
+  label,.lbl{display:block;font-size:12.5px;font-weight:700;margin:10px 0 4px}
+  .in{width:100%;font:inherit;font-size:16px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);padding:8px 10px;min-height:44px;border-radius:0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+  .yen-in{font-family:var(--mono);font-size:24px;text-align:right}
+  .quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .quick button{font-family:var(--mono);font-size:12px;border:1px solid var(--rule);padding:4px 8px;background:var(--bg)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chips button{font-size:13px;border:1.5px solid var(--ink-3);padding:4px 10px;display:inline-flex;align-items:center;gap:6px;min-height:36px}
+  .chips button i{width:10px;height:10px;border-radius:50%;display:block}
+  .chips button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+  .colors{display:flex;gap:8px;flex-wrap:wrap}
+  .colors button{width:34px;height:34px;border-radius:50%;border:2px solid rgba(0,0,0,.15)}
+  .colors button[aria-checked=true]{outline:3px solid var(--ink);outline-offset:2px}
+  .ph-pick{display:flex;align-items:center;gap:10px}
+  .ph-pick .ph{width:64px;height:64px;border-radius:50%;background:var(--rule-2) center/cover no-repeat;border:2px solid var(--ink)}
+  .acts{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .acts .r{display:flex;gap:8px;margin-left:auto}
+  .danger{color:var(--hot);font-size:13px;text-decoration:underline;text-underline-offset:3px}
+  .toast{position:fixed;left:50%;bottom:calc(140px + env(safe-area-inset-bottom));transform:translate(-50%,10px);opacity:0;background:var(--ink);color:var(--bg);padding:9px 14px;font-size:13px;max-width:calc(100% - 32px);transition:.2s;z-index:9;pointer-events:none}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .perks{list-style:none;padding:0;margin:0 0 8px;font-size:14px}
+  .perks li{padding:4px 0 4px 1.3em;position:relative;border-bottom:1px dotted var(--rule)}
+  .perks li::before{content:"★";position:absolute;left:0;color:var(--hot)}
+  .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+  .plan{border:2px solid var(--ink);padding:10px 4px;text-align:center;background:var(--paper)}
+  .plan b{display:block;font-family:var(--disp);font-weight:400;font-size:18px}
+  .plan span{font-size:11.5px;color:var(--ink-2)}
+  footer{text-align:center;font-size:12px;color:var(--ink-2);padding:28px 0 10px}
+  footer a{color:var(--ink-2)}
+  @media (max-width:520px){
+    .wrap{padding:0 12px}
+    .tickets{grid-template-columns:1fr}
+    .plans{grid-template-columns:1fr}
+    .cal button{font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo"><i aria-hidden="true">推</i><div><small>推しのための家計簿</small><b>推し活レシート</b></div></div>
+    <div class="today" id="today"></div>
+  </header>
+
+  <!-- ホーム -->
+  <section id="sec-home" data-sec="home">
+    <p class="promise" id="promise">広告なし。無料で推し3人まで、ずっと使えます。今ある無料の機能を、あとから有料にすることはしません。</p>
+    <h2 class="sec">推しのチケット <small id="oshi-count"></small></h2>
+    <div class="tickets" id="oshis"></div>
+    <h2 class="sec">次の予定 <small>当落と入金期限も</small></h2>
+    <ul class="events" id="upcoming"></ul>
+    <p class="empty hide" id="upcoming-empty">予定はまだありません。「現場」から入れてみましょう。</p>
+    <h2 class="sec">カレンダー</h2>
+    <div class="card">
+      <div class="cal-h"><button class="navbtn" type="button" id="cal-prev" aria-label="前の月">‹</button><b id="cal-label"></b><button class="navbtn" type="button" id="cal-next" aria-label="次の月">›</button></div>
+      <div class="cal" id="cal"></div>
+      <div class="day-list" id="day-list"></div>
+    </div>
+  </section>
+
+  <!-- レシート -->
+  <section id="sec-spend" data-sec="spend" class="hide">
+    <h2 class="sec">推し活レシート <small>押すと直せます</small></h2>
+    <input class="search" id="q" type="search" placeholder="さがす（タイトル・メモ・推し）" aria-label="出費をさがす" autocomplete="off">
+    <div class="receipt" id="receipt">
+      <div class="rh"><b>推し活レシート</b><span id="r-sub"></span></div>
+      <div class="rmonth"><button class="navbtn" type="button" id="m-prev" aria-label="前の月">‹</button><b class="disp" id="m-label"></b><button class="navbtn" type="button" id="m-next" aria-label="次の月">›</button></div>
+      <ul class="rlines" id="lines"></ul>
+      <p class="empty" id="lines-empty">この月の出費はまだありません。</p>
+      <div class="rsub" id="by-oshi"></div>
+      <div class="rsub" id="by-cat"></div>
+      <div class="rtotal"><span>合計</span><span id="total">¥0</span></div>
+      <div class="barcode" aria-hidden="true"></div>
+      <div class="rfoot">ご利用ありがとうございました</div>
+    </div>
+    <div class="rtools">
+      <button class="btn ink" type="button" id="btn-add-spend">＋ 出費を書く</button>
+      <button class="btn" type="button" id="btn-image">レシート画像にする</button>
+      <button class="btn" type="button" id="btn-csv">CSV</button>
+    </div>
+    <h2 class="sec">毎月・毎年の支払い <small>FC会費など。自動で書きます</small></h2>
+    <ul class="rlines card" id="recurs" style="padding:6px 12px"></ul>
+    <h2 class="sec">年間のふりかえり <small>12か月×推し</small></h2>
+    <div class="card"><div id="year"></div><div class="locked hide" id="year-lock">年間のふりかえりは、プレミアムの機能です。 <button type="button" id="year-unlock">プランを見る</button></div></div>
+  </section>
+
+  <!-- 現場 -->
+  <section id="sec-events" data-sec="events" class="hide">
+    <h2 class="sec">現場・当落 <small>申込中 → 当選 → 入金済み → 参戦済み</small></h2>
+    <div class="row" style="margin-bottom:10px"><button class="btn ink" type="button" id="btn-add-event">＋ 現場を入れる</button><button class="btn" type="button" id="btn-ics">カレンダーに入れる</button></div>
+    <ul class="events" id="events"></ul>
+    <p class="empty" id="events-empty">まだありません。ライブ・イベント・配信の予定を入れましょう。</p>
+    <p class="note">「カレンダーに入れる」は、現場の日（開演の1時間前）と入金期限（当日の朝9時）にお知らせが出るファイルを作ります。iPhone・Android・Google カレンダーで開けます。</p>
+  </section>
+
+  <!-- 貯金 -->
+  <section id="sec-save" data-sec="save" class="hide">
+    <h2 class="sec">推し貯金 <small>遠征やグッズのために</small></h2>
+    <div class="goals" id="goals"></div>
+    <div class="row" style="margin-top:10px"><button class="btn ink" type="button" id="btn-add-goal">＋ 貯金の目標をつくる</button></div>
+  </section>
+
+  <!-- その他 -->
+  <section id="sec-more" data-sec="more" class="hide">
+    <h2 class="sec" id="pr-h">プレミアム <small>いずれも税込・広告なし</small></h2>
+    <div class="card" id="premium">
+      <div id="pr-free">
+        <ul class="perks">
+          <li>推しの登録が<b>無制限</b>（無料は3人まで）</li>
+          <li>推し貯金の目標を<b>いくつでも</b>（無料は1つ）</li>
+          <li>年間のふりかえり（12か月×推し）と CSV 書き出し</li>
+        </ul>
+        <div class="plans">
+          <button class="plan" type="button" data-plan="monthly"><b>月280円</b><span>月額</span></button>
+          <button class="plan" type="button" data-plan="yearly"><b>年2,200円</b><span>年額（月約183円）</span></button>
+          <button class="plan" type="button" data-plan="lifetime"><b>1,480円</b><span>買い切り</span></button>
+        </div>
+        <p class="note">月額・年額は自動で更新されます。解約は「購入の管理」からいつでもでき、次の更新日まで使えます。やめても記録はそのまま残ります。お支払いは Stripe で処理され、カード情報はこのアプリに保存されません。<a href="tokushoho.html">特定商取引法に基づく表記</a></p>
+        <p class="note" id="pr-test" hidden>現在はテスト中のため、実際の請求は発生しません。</p>
+        <details style="margin-top:8px"><summary class="note" style="cursor:pointer">購入済みの方（別の端末で使う）</summary>
+          <label for="restore-code">引き継ぎコード</label><input class="in" id="restore-code" type="text" autocomplete="off" spellcheck="false" placeholder="購入した端末に表示されるコード">
+          <button class="btn sm" type="button" id="btn-restore" style="margin-top:8px">引き継ぐ</button>
+        </details>
+      </div>
+      <div id="pr-on" class="hide">
+        <p style="margin:0"><b id="pr-plan">プレミアムをご利用中</b></p>
+        <p class="note" id="pr-period"></p>
+        <div class="row"><button class="btn sm" type="button" id="btn-portal">購入の管理</button><button class="btn sm" type="button" id="btn-show-code">別の端末で使う</button></div>
+        <div id="code-box" class="hide" style="margin-top:8px"><p class="note">使いたい端末の「購入済みの方」に貼り付けてください。他の人には見せないでください。</p><textarea id="my-code" readonly rows="3" style="width:100%;font-size:12px;word-break:break-all"></textarea><button class="btn sm" type="button" id="btn-copy">コピー</button></div>
+      </div>
+      <p class="msg" id="pr-msg" aria-live="polite"></p>
+    </div>
+    <h2 class="sec">記録の保管 <small>記録はこの端末の中だけにあります</small></h2>
+    <div class="card">
+      <p class="note" style="margin:0 0 8px">機種変更やブラウザのデータ削除に備えて、ときどきバックアップを書き出しておくと安心です（無料・推しの写真も入ります）。ホーム画面に追加すると、アプリのように開けます（iPhone は共有ボタンから「ホーム画面に追加」）。</p>
+      <div class="row"><button class="btn sm" type="button" id="btn-export">バックアップを書き出す</button><button class="btn sm" type="button" id="btn-import">バックアップから戻す</button><button class="btn sm" type="button" id="btn-clear">すべて消す</button><input type="file" id="import-file" accept="application/json,.json" class="hide"></div>
+      <p class="msg" id="keep-msg" aria-live="polite"></p>
+    </div>
+    <footer>推し活レシート ・ 運営 HRlab ・ 広告なし<br><a href="privacy.html">プライバシー</a> ・ <a href="tokushoho.html">特定商取引法に基づく表記</a></footer>
+  </section>
+</div>
+
+<button class="fab" type="button" id="fab" aria-label="出費を書く">出費<br>書く</button>
+<nav class="tabbar" role="tablist" aria-label="画面">
+  <button type="button" role="tab" data-tab="home" aria-selected="true"><b>ホーム</b>推し</button>
+  <button type="button" role="tab" data-tab="spend" aria-selected="false"><b>レシート</b>出費</button>
+  <button type="button" role="tab" data-tab="events" aria-selected="false"><b>現場</b>当落</button>
+  <button type="button" role="tab" data-tab="save" aria-selected="false"><b>貯金</b>目標</button>
+  <button type="button" role="tab" data-tab="more" aria-selected="false"><b>その他</b>設定</button>
+</nav>
+
+<!-- 推し -->
+<dialog id="oshi-sheet" aria-labelledby="oshi-h"><form class="sheet" id="oshi-form" method="dialog" novalidate>
+  <h3 id="oshi-h">推しを登録</h3>
+  <div class="ph-pick"><div class="ph" id="o-ph" aria-hidden="true"></div><div class="row"><button type="button" class="btn sm" id="o-ph-btn">写真をえらぶ</button><button type="button" class="btn sm hide" id="o-ph-del">写真を外す</button></div><input type="file" id="o-ph-file" accept="image/*" class="hide"></div>
+  <label for="o-name">推しの名前</label><input class="in" id="o-name" type="text" maxlength="30" autocomplete="off" placeholder="例：みお">
+  <span class="lbl" id="o-color-l">メンバーカラー</span><div class="colors" id="o-colors" role="radiogroup" aria-labelledby="o-color-l"></div>
+  <div class="two">
+    <div><label for="o-since">推しはじめた日</label><input class="in" id="o-since" type="date"></div>
+    <div><label for="o-bday">誕生日（月日）</label><input class="in" id="o-bday" type="text" inputmode="numeric" placeholder="例：0415" maxlength="5"></div>
+  </div>
+  <div class="err" id="o-err" role="alert"></div>
+  <div class="acts"><button type="button" class="danger hide" id="o-del">この推しを外す</button><span class="r"><button type="button" class="btn" id="o-cancel">やめる</button><button type="submit" class="btn ink" id="o-ok">登録する</button></span></div>
+</form></dialog>
+
+<!-- 出費 -->
+<dialog id="spend-sheet" aria-labelledby="spend-h"><form class="sheet" id="spend-form" method="dialog" novalidate>
+  <h3 id="spend-h">出費を書く</h3>
+  <label for="s-amount">金額（円）</label><input class="in yen-in" id="s-amount" type="number" inputmode="numeric" min="1" step="1" placeholder="0">
+  <div class="quick" id="s-quick"><button type="button" data-q="500">+500</button><button type="button" data-q="1000">+1,000</button><button type="button" data-q="5000">+5,000</button><button type="button" data-q="10000">+10,000</button><button type="button" data-q="0">0にする</button></div>
+  <label for="s-title">なにに</label><input class="in" id="s-title" type="text" maxlength="60" autocomplete="off" placeholder="例：ツアー初日 S席">
+  <div class="two">
+    <div><label for="s-cat">種類</label><select class="in" id="s-cat"></select></div>
+    <div><label for="s-date">日付</label><input class="in" id="s-date" type="date"></div>
+  </div>
+  <span class="lbl" id="s-oshi-l">どの推し？（いくつでも・共演も）</span><div class="chips" id="s-oshi" role="group" aria-labelledby="s-oshi-l"></div>
+  <div class="two">
+    <div><label for="s-recur">くり返し</label><select class="in" id="s-recur"><option value="none">なし</option><option value="month">毎月（FC会費など）</option><option value="year">毎年</option></select></div>
+    <div><label for="s-memo">メモ</label><input class="in" id="s-memo" type="text" maxlength="60" autocomplete="off"></div>
+  </div>
+  <div class="err" id="s-err" role="alert"></div>
+  <div class="acts"><span class="row"><button type="button" class="danger hide" id="s-del">消す</button><button type="button" class="danger hide" id="s-dup" style="color:var(--ink)">複製</button></span><span class="r"><button type="button" class="btn" id="s-cancel">やめる</button><button type="submit" class="btn ink" id="s-ok">書く</button></span></div>
+</form></dialog>
+
+<!-- 現場 -->
+<dialog id="event-sheet" aria-labelledby="event-h"><form class="sheet" id="event-form" method="dialog" novalidate>
+  <h3 id="event-h">現場を入れる</h3>
+  <label for="e-title">名前</label><input class="in" id="e-title" type="text" maxlength="60" autocomplete="off" placeholder="例：冬ツアー 東京2日目">
+  <div class="two">
+    <div><label for="e-date">日付</label><input class="in" id="e-date" type="date"></div>
+    <div><label for="e-place">場所</label><input class="in" id="e-place" type="text" maxlength="40" autocomplete="off" placeholder="例：武道館"></div>
+    <div><label for="e-open">開場</label><input class="in" id="e-open" type="time"></div>
+    <div><label for="e-start">開演</label><input class="in" id="e-start" type="time"></div>
+  </div>
+  <span class="lbl" id="e-oshi-l">推し</span><div class="chips" id="e-oshi" role="group" aria-labelledby="e-oshi-l"></div>
+  <span class="lbl" id="e-st-l">当落</span><div class="chips" id="e-status" role="radiogroup" aria-labelledby="e-st-l"></div>
+  <div class="two">
+    <div><label for="e-payby">入金期限</label><input class="in" id="e-payby" type="date"></div>
+    <div><label for="e-price">チケット代（円）</label><input class="in" id="e-price" type="number" inputmode="numeric" min="0" step="1"></div>
+  </div>
+  <p class="note" id="e-hint">「入金済み」にすると、チケット代を出費に書きます。</p>
+  <div class="err" id="e-err" role="alert"></div>
+  <div class="acts"><span class="row"><button type="button" class="danger hide" id="e-del">消す</button><button type="button" class="danger hide" id="e-dup" style="color:var(--ink)">複製</button></span><span class="r"><button type="button" class="btn" id="e-cancel">やめる</button><button type="submit" class="btn ink" id="e-ok">入れる</button></span></div>
+</form></dialog>
+
+<!-- 貯金 -->
+<dialog id="goal-sheet" aria-labelledby="goal-h"><form class="sheet" id="goal-form" method="dialog" novalidate>
+  <h3 id="goal-h">貯金の目標</h3>
+  <label for="g-title">なんのため？</label><input class="in" id="g-title" type="text" maxlength="40" autocomplete="off" placeholder="例：福岡遠征">
+  <label for="g-target">目標の金額（円）</label><input class="in yen-in" id="g-target" type="number" inputmode="numeric" min="1" step="1">
+  <span class="lbl" id="g-oshi-l">推し（色に使います）</span><div class="chips" id="g-oshi" role="radiogroup" aria-labelledby="g-oshi-l"></div>
+  <div class="err" id="g-err" role="alert"></div>
+  <div class="acts"><button type="button" class="danger hide" id="g-del">この目標を消す</button><span class="r"><button type="button" class="btn" id="g-cancel">やめる</button><button type="submit" class="btn ink" id="g-ok">つくる</button></span></div>
+</form></dialog>
+<dialog id="dep-sheet" aria-labelledby="dep-h"><form class="sheet" id="dep-form" method="dialog" novalidate>
+  <h3 id="dep-h">貯金する</h3>
+  <label for="d-amount">金額（円）</label><input class="in yen-in" id="d-amount" type="number" inputmode="numeric" step="1">
+  <p class="note">引き出す時は、マイナス（例：-3000）で入れます。</p>
+  <div class="err" id="d-err" role="alert"></div>
+  <div class="acts"><span></span><span class="r"><button type="button" class="btn" id="d-cancel">やめる</button><button type="submit" class="btn ink">入れる</button></span></div>
+</form></dialog>
+
+<dialog id="limit" aria-labelledby="limit-h"><div class="sheet">
+  <h3 id="limit-h">無料はここまでです</h3>
+  <p id="limit-msg" style="margin:0"></p>
+  <div class="acts"><span></span><span class="r"><button type="button" class="btn" id="limit-close">閉じる</button><button type="button" class="btn ink" id="limit-plans">プランを見る</button></span></div>
+</div></dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+  const KEY = 'oshi_v1', PKEY = 'oshi_premium_v1';
+  const FREE_OSHI = 3, FREE_GOALS = 1;
+  const PAY_API = 'https://kotei-premium.h-c-hrlab.workers.dev';
+  const LINKS = {
+    monthly: 'https://buy.stripe.com/test_bJedR95RL2bV8ZOc28fjG09',
+    yearly: 'https://buy.stripe.com/test_28E6oHdkdcQz7VKeagfjG0a',
+    lifetime: 'https://buy.stripe.com/test_6oU6oH2Fz5o70tiaY4fjG0b'
+  };
+  const PRICE = { monthly: 280, yearly: 2200, lifetime: 1480 };
+  const PLAN_NAME = { oshi_monthly: '月額プラン', oshi_yearly: '年額プラン', oshi_lifetime: '買い切り' };
+  const GRACE = 7 * 24 * 3600 * 1000;
+  const COLORS = ['#E5323B', '#F06AA6', '#F08A24', '#F2C230', '#2FA25B', '#33B6D9', '#2F6FDB', '#8A4FD8', '#F4F4F4', '#222222'];
+  const CATS = { ticket: 'チケット', goods: 'グッズ', trip: '遠征（交通・宿）', stream: '配信・課金', fc: 'FC会費', cd: 'CD・円盤', mag: '雑誌・本', gift: '投げ銭・プレゼント', other: 'その他' };
+  const ST = { apply: '申込中', win: '当選', lose: '落選', paid: '入金済み', went: '参戦済み' };
+  const WD = '日月火水木金土';
+
+  const $ = (id) => document.getElementById(id);
+  const track = (n, p) => { try { if (typeof gtag === 'function') gtag('event', n, p || {}); } catch (e) {} };
+  const pad = (n) => String(n).padStart(2, '0');
+  const keyOf = (d) => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  const todayKey = () => keyOf(new Date());
+  const parse = (k) => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); };
+  const diffDays = (a, b) => Math.round((parse(b) - parse(a)) / 86400000);
+  const isDay = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
+  const yen = (n) => '¥' + Math.round(n).toLocaleString('ja-JP');
+  const newId = () => (Date.now().toString(36) + Math.random().toString(36).slice(2, 7)).slice(0, 16);
+  const ym = (k) => k.slice(0, 7);
+  const shiftMonth = (m, n) => { const d = new Date(+m.slice(0, 4), +m.slice(5) - 1 + n, 1); return d.getFullYear() + '-' + pad(d.getMonth() + 1); };
+  const light = (hex) => { const v = parseInt(hex.slice(1), 16); const r = v >> 16, g = (v >> 8) & 255, b = v & 255; return (r * 299 + g * 587 + b * 114) / 1000 > 170; };
+
+  // データ（この端末の中だけ）
+  let db = { oshis: [], spends: [], recurs: [], events: [], goals: [], ui: {} };
+  try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && typeof v === 'object') db = Object.assign(db, v); } catch (e) {}
+  ['oshis', 'spends', 'recurs', 'events', 'goals'].forEach((k) => { if (!Array.isArray(db[k])) db[k] = []; });
+  if (!db.ui || typeof db.ui !== 'object') db.ui = {};
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(db)); return true; } catch (e) { toast('保存できませんでした。端末の空きを確かめるか、写真を外してください。'); return false; } }
+
+  // 計算
+  const oshiById = (id) => db.oshis.find((o) => o.id === id);
+  function perOshi(s) { const ids = (s.oshi || []).filter(oshiById); return ids.length ? ids.map((id) => [id, s.amount / ids.length]) : [['', s.amount]]; }
+  function spendOf(oid, month) { let t = 0; db.spends.forEach((s) => { if (month && ym(s.date) !== month) return; perOshi(s).forEach(([id, v]) => { if (id === oid) t += v; }); }); return t; }
+  function nextBirthday(md, today) {
+    if (!/^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(md || '')) return null; today = today || todayKey();
+    if (md !== '02-29' && new Date(2001, +md.slice(0, 2) - 1, +md.slice(3)).getDate() !== +md.slice(3)) return null;
+    const y = +today.slice(0, 4); let k = y + '-' + md; if (!isDay(k) || isNaN(parse(k))) return null;
+    if (k < today) k = (y + 1) + '-' + md;
+    if (md === '02-29') { let yy = +k.slice(0, 4); while (!(yy % 4 === 0 && (yy % 100 !== 0 || yy % 400 === 0))) yy++; k = yy + '-02-29'; }
+    return { date: k, days: diffDays(today, k) };
+  }
+  function daysSince(since, today) { return isDay(since) ? diffDays(since, today || todayKey()) : null; }
+  function milestone(n) { if (n === null || n <= 0) return ''; if (n % 365 === 0) return (n / 365) + '周年'; if (n % 100 === 0) return n + '日記念'; return ''; }
+  function nextEvent(oid) { const t = todayKey(); return db.events.filter((e) => e.date >= t && e.status !== 'lose' && (!oid || (e.oshi || []).includes(oid))).sort((a, b) => (a.date + (a.start || '')) < (b.date + (b.start || '')) ? -1 : 1)[0] || null; }
+  // 毎月・毎年の支払いを、まだ書いていない月の分だけ書く
+  function applyRecurs() {
+    const now = ym(todayKey()); let added = 0;
+    db.recurs.forEach((r) => {
+      let m = r.last ? shiftMonth(r.last, 1) : ym(r.start || todayKey()); let n = 0;
+      while (m <= now && n < 24) {
+        const due = r.cycle === 'month' || +m.slice(5) === r.month;
+        const last = new Date(+m.slice(0, 4), +m.slice(5), 0).getDate();
+        const date = m + '-' + pad(Math.min(r.day, last));
+        const id = 'r' + r.id + m.replace('-', '');
+        if (due && date <= todayKey() && !db.spends.some((s) => s.id === id)) { db.spends.push({ id, date, amount: r.amount, title: r.title, cat: r.cat, oshi: r.oshi.slice(), memo: '', rid: r.id }); added++; }
+        if (date <= todayKey() || !due) r.last = m;
+        m = shiftMonth(m, 1); n++;
+      }
+    });
+    if (added) save();
+    return added;
+  }
+  window.__oshi = { perOshi, spendOf, nextBirthday, daysSince, milestone, applyRecurs, db: () => db };
+
+  // プレミアム
+  let prem = null; try { prem = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) { prem = null; }
+  const savePrem = () => { try { if (prem) localStorage.setItem(PKEY, JSON.stringify(prem)); else localStorage.removeItem(PKEY); } catch (e) {} };
+  const isPremium = () => !!(prem && prem.premium && Date.now() - (prem.checkedAt || 0) < GRACE);
+
+  let tt = null;
+  function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('on'), 2800); }
+
+  // タブ
+  function setTab(t) {
+    db.ui.tab = t; save();
+    document.querySelectorAll('[data-sec]').forEach((s) => s.classList.toggle('hide', s.dataset.sec !== t));
+    document.querySelectorAll('nav.tabbar button').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === t ? 'true' : 'false'));
+    $('fab').classList.toggle('hide', t === 'more');
+    window.scrollTo(0, 0); track('tab', { to: t });
+  }
+  document.querySelectorAll('nav.tabbar button').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
+
+  // 描画
+  let calMonth = ym(todayKey()), selDay = todayKey(), recMonth = ym(todayKey());
+  function render() {
+    const t = todayKey(); const d = new Date();
+    $('today').textContent = d.getFullYear() + '.' + pad(d.getMonth() + 1) + '.' + pad(d.getDate()) + ' (' + WD[d.getDay()] + ')';
+    $('promise').classList.toggle('hide', db.oshis.length > 0 || db.spends.length > 0);
+    renderOshis(t); renderUpcoming(t); renderCal(t); renderReceipt(); renderRecurs(); renderYear(); renderEvents(t); renderGoals(); renderPremium();
+  }
+  function oshiChip(o) { const i = document.createElement('i'); i.style.background = o.color; if (o.color === '#F4F4F4') i.style.boxShadow = 'inset 0 0 0 1px #999'; return i; }
+
+  function renderOshis(t) {
+    const box = $('oshis'); box.innerHTML = '';
+    $('oshi-count').textContent = db.oshis.length ? db.oshis.length + '人' + (isPremium() ? '' : ' / 無料は' + FREE_OSHI + '人まで') : '';
+    db.oshis.forEach((o, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'ticket'; b.style.setProperty('--c', o.color); b.dataset.id = o.id;
+      const ds = daysSince(o.since, t);
+      const stub = document.createElement('span'); stub.className = 'stub' + (light(o.color) ? ' light' : '');
+      const ph = document.createElement('span'); ph.className = 'ph'; if (o.photo) ph.style.backgroundImage = 'url(' + o.photo + ')'; else ph.textContent = [...o.name][0] || '推';
+      const no = document.createElement('span'); no.className = 'no'; no.textContent = 'No.' + String(i + 1).padStart(3, '0');
+      stub.append(ph, no);
+      const body = document.createElement('span'); body.className = 'body';
+      const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = o.name;
+      const days = document.createElement('span'); days.className = 'days';
+      if (ds === null) days.textContent = '推しはじめた日を入れると「推して◯日」が出ます';
+      else if (ds < 0) days.textContent = 'あと' + (-ds) + '日で推しはじめ';
+      else { days.append('推して'); const bb = document.createElement('b'); bb.textContent = ds; days.append(bb, '日'); }
+      const facts = document.createElement('span'); facts.className = 'facts';
+      const f = (label, val) => { const s = document.createElement('span'); s.append(label); const v = document.createElement('b'); v.textContent = val; s.append(v); facts.append(s); };
+      f('今月', yen(spendOf(o.id, ym(t)))); f('これまで', yen(spendOf(o.id)));
+      const nb = nextBirthday(o.bday, t); if (nb) f('誕生日まで', nb.days === 0 ? 'きょう！' : 'あと' + nb.days + '日');
+      const ne = nextEvent(o.id); if (ne) f('次の現場', diffDays(t, ne.date) === 0 ? 'きょう！' : 'あと' + diffDays(t, ne.date) + '日');
+      body.append(nm, days, facts);
+      b.append(stub, body);
+      const ms = milestone(ds); if (ms) { const bd = document.createElement('span'); bd.className = 'badge'; bd.textContent = ms; b.append(bd); }
+      b.setAttribute('aria-label', o.name + (ds !== null && ds >= 0 ? '、推して' + ds + '日' : '') + '。押すと直せます');
+      b.addEventListener('click', () => openOshi(o));
+      box.append(b);
+    });
+    const add = document.createElement('button'); add.type = 'button'; add.className = 'ticket add'; add.id = 'btn-add-oshi';
+    add.innerHTML = '<span><b>＋ 推しを登録</b><span class="note">メンバーカラーと推しはじめた日で、チケットができます</span></span>';
+    add.addEventListener('click', () => openOshi(null)); box.append(add);
+  }
+
+  function evItem(e, t, withActions) {
+    const li = document.createElement('li'); li.className = 'ev' + (e.date < t ? ' past' : ''); li.dataset.id = e.id;
+    const dd = document.createElement('div'); dd.className = 'dd'; const dt = parse(e.date);
+    dd.innerHTML = '<span>' + (dt.getMonth() + 1) + '月</span><b>' + dt.getDate() + '</b><span>' + WD[dt.getDay()] + (e.start ? ' ' + e.start : '') + '</span>';
+    const main = document.createElement('button'); main.type = 'button'; main.className = 'main';
+    const tt2 = document.createElement('b'); tt2.textContent = e.title;
+    const sub = document.createElement('span'); const os = (e.oshi || []).map(oshiById).filter(Boolean).map((o) => o.name).join('・');
+    sub.textContent = [e.place, e.open ? '開場' + e.open : '', e.start ? '開演' + e.start : '', os].filter(Boolean).join(' ／ ');
+    main.append(tt2, sub); main.addEventListener('click', () => openEvent(e));
+    const side = document.createElement('div'); side.className = 'side';
+    const st = document.createElement('span'); st.className = 'st ' + e.status; st.textContent = ST[e.status]; side.append(st);
+    const dl = diffDays(t, e.date);
+    if (e.date >= t) { const c = document.createElement('span'); c.className = 'cnt'; c.textContent = dl === 0 ? 'きょう！' : 'あと' + dl + '日'; side.append(c); }
+    if (e.status === 'win' && isDay(e.payBy)) { const p = document.createElement('span'); p.className = 'due'; const pd = diffDays(t, e.payBy); p.textContent = pd < 0 ? '入金期限すぎ' : pd === 0 ? '入金はきょうまで' : '入金まであと' + pd + '日'; side.append(p); }
+    li.append(dd, main, side); void withActions; return li;
+  }
+  function renderUpcoming(t) {
+    const ul = $('upcoming'); ul.innerHTML = '';
+    const list = db.events.filter((e) => (e.date >= t && e.status !== 'lose') || (e.status === 'win' && isDay(e.payBy) && e.payBy >= t)).sort((a, b) => (a.date < b.date ? -1 : 1)).slice(0, 4);
+    list.forEach((e) => ul.append(evItem(e, t)));
+    $('upcoming-empty').classList.toggle('hide', list.length > 0);
+  }
+  function renderEvents(t) {
+    const ul = $('events'); ul.innerHTML = '';
+    const up = db.events.filter((e) => e.date >= t).sort((a, b) => (a.date + (a.start || '') < b.date + (b.start || '') ? -1 : 1));
+    const past = db.events.filter((e) => e.date < t).sort((a, b) => (a.date > b.date ? -1 : 1));
+    up.concat(past).forEach((e) => ul.append(evItem(e, t)));
+    $('events-empty').classList.toggle('hide', db.events.length > 0);
+  }
+
+  function renderCal(t) {
+    const g = $('cal'); g.innerHTML = '';
+    $('cal-label').textContent = calMonth.slice(0, 4) + '年' + (+calMonth.slice(5)) + '月';
+    WD.split('').forEach((w, i) => { const s = document.createElement('span'); s.className = 'wd' + (i === 0 ? ' sun' : ''); s.textContent = w; g.append(s); });
+    const first = new Date(+calMonth.slice(0, 4), +calMonth.slice(5) - 1, 1); const start = new Date(first); start.setDate(1 - first.getDay());
+    for (let i = 0; i < 42; i++) {
+      const d = new Date(start); d.setDate(start.getDate() + i); const k = keyOf(d);
+      if (i >= 35 && ym(k) !== calMonth) break;
+      const b = document.createElement('button'); b.type = 'button'; b.dataset.day = k;
+      b.className = (ym(k) !== calMonth ? 'other ' : '') + (k === t ? 'today ' : '') + (k === selDay ? 'sel' : '');
+      const n = document.createElement('span'); n.textContent = d.getDate(); b.append(n);
+      const evs = db.events.filter((e) => e.date === k && e.status !== 'lose');
+      const dots = document.createElement('span'); dots.className = 'dots';
+      evs.slice(0, 3).forEach((e) => { const o = oshiById((e.oshi || [])[0]); const i2 = document.createElement('i'); i2.style.background = o ? o.color : '#18181B'; dots.append(i2); });
+      db.oshis.forEach((o) => { if (o.bday && k.slice(5) === o.bday) { const i2 = document.createElement('i'); i2.style.background = o.color; i2.style.outline = '1px solid #18181B'; dots.append(i2); } });
+      b.append(dots);
+      const sp = db.spends.filter((s) => s.date === k).reduce((a, s) => a + s.amount, 0);
+      if (sp) { const a = document.createElement('span'); a.className = 'amt'; a.textContent = sp >= 10000 ? Math.round(sp / 1000) + 'k' : sp.toLocaleString('ja-JP'); b.append(a); }
+      b.setAttribute('aria-label', (d.getMonth() + 1) + '月' + d.getDate() + '日' + (evs.length ? '、現場' + evs.length + '件' : '') + (sp ? '、出費' + sp + '円' : ''));
+      b.addEventListener('click', () => { selDay = k; renderCal(todayKey()); });
+      g.append(b);
+    }
+    const dl = $('day-list'); dl.innerHTML = '';
+    const sd = parse(selDay); const h = document.createElement('div'); h.className = 'note'; h.textContent = (sd.getMonth() + 1) + '月' + sd.getDate() + '日（' + WD[sd.getDay()] + '）'; dl.append(h);
+    const ul = document.createElement('ul'); let n = 0;
+    db.oshis.forEach((o) => { if (o.bday && selDay.slice(5) === o.bday) { const li = document.createElement('li'); li.textContent = '🎂 ' + o.name + 'の誕生日'; ul.append(li); n++; } });
+    db.events.filter((e) => e.date === selDay).forEach((e) => { const li = document.createElement('li'); li.textContent = '● ' + e.title + '（' + ST[e.status] + (e.start ? '・開演' + e.start : '') + '）'; ul.append(li); n++; });
+    db.events.filter((e) => e.payBy === selDay && e.status === 'win').forEach((e) => { const li = document.createElement('li'); li.textContent = '¥ ' + e.title + 'の入金期限'; ul.append(li); n++; });
+    db.spends.filter((s) => s.date === selDay).forEach((s) => { const li = document.createElement('li'); li.textContent = '・' + (s.title || CATS[s.cat]) + ' ' + yen(s.amount); ul.append(li); n++; });
+    if (!n) { const li = document.createElement('li'); li.className = 'note'; li.textContent = 'この日の記録はありません。'; ul.append(li); }
+    dl.append(ul);
+  }
+
+  function renderReceipt() {
+    const q = $('q').value.trim();
+    $('m-label').textContent = recMonth.replace('-', '.'); $('m-next').disabled = recMonth >= ym(todayKey());
+    let list = q ? db.spends.filter((s) => (s.title || '').includes(q) || (s.memo || '').includes(q) || (s.oshi || []).some((id) => { const o = oshiById(id); return o && o.name.includes(q); }) || (CATS[s.cat] || '').includes(q))
+      : db.spends.filter((s) => ym(s.date) === recMonth);
+    list = list.slice().sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    $('r-sub').textContent = q ? '「' + q + '」でさがした結果（全期間）' : recMonth.slice(0, 4) + '年' + (+recMonth.slice(5)) + '月ぶん';
+    const ul = $('lines'); ul.innerHTML = '';
+    list.forEach((s) => {
+      const li = document.createElement('li'); li.className = 'ln';
+      const main = document.createElement('button'); main.type = 'button'; main.className = 'main';
+      const d = document.createElement('span'); d.textContent = (q ? s.date.slice(2, 4) + '/' : '') + (+s.date.slice(5, 7)) + '/' + (+s.date.slice(8));
+      const t = document.createElement('span'); t.className = 't';
+      (s.oshi || []).map(oshiById).filter(Boolean).forEach((o) => t.append(oshiChip(o)));
+      t.append((s.title || CATS[s.cat]) + (s.rid ? ' ↻' : ''));
+      const a = document.createElement('span'); a.className = 'a'; a.textContent = yen(s.amount);
+      main.append(d, t, a); main.setAttribute('aria-label', (s.title || CATS[s.cat]) + '、' + yen(s.amount) + '。押すと直せます'); main.addEventListener('click', () => openSpend(s));
+      const x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.textContent = '消す'; x.setAttribute('aria-label', (s.title || CATS[s.cat]) + 'を消す');
+      x.addEventListener('click', () => { if (!confirm((s.title || CATS[s.cat]) + '（' + yen(s.amount) + '）を消しますか？')) return; db.spends = db.spends.filter((y) => y.id !== s.id); save(); render(); track('spend_delete', {}); });
+      li.append(main, x); ul.append(li);
+    });
+    $('lines-empty').classList.toggle('hide', list.length > 0);
+    $('lines-empty').textContent = q ? '見つかりませんでした。' : 'この月の出費はまだありません。';
+    const byO = {}; const byC = {};
+    list.forEach((s) => { perOshi(s).forEach(([id, v]) => { byO[id] = (byO[id] || 0) + v; }); byC[s.cat] = (byC[s.cat] || 0) + s.amount; });
+    const bo = $('by-oshi'); bo.innerHTML = '';
+    Object.keys(byO).sort((a, b) => byO[b] - byO[a]).forEach((id) => { const o = oshiById(id); const r = document.createElement('div'); const n = document.createElement('span'); if (o) n.append(oshiChip(o), ' '); n.append(o ? o.name : '（推しなし）'); const v = document.createElement('span'); v.textContent = yen(byO[id]); r.append(n, v); bo.append(r); });
+    bo.classList.toggle('hide', !Object.keys(byO).length);
+    const bc = $('by-cat'); bc.innerHTML = '';
+    Object.keys(byC).sort((a, b) => byC[b] - byC[a]).forEach((k) => { const r = document.createElement('div'); const n = document.createElement('span'); n.textContent = CATS[k]; const v = document.createElement('span'); v.textContent = yen(byC[k]); r.append(n, v); bc.append(r); });
+    bc.classList.toggle('hide', !Object.keys(byC).length);
+    $('total').textContent = yen(list.reduce((a, s) => a + s.amount, 0));
+  }
+  $('q').addEventListener('input', renderReceipt);
+  $('m-prev').addEventListener('click', () => { recMonth = shiftMonth(recMonth, -1); renderReceipt(); });
+  $('m-next').addEventListener('click', () => { if (recMonth < ym(todayKey())) { recMonth = shiftMonth(recMonth, 1); renderReceipt(); } });
+  $('cal-prev').addEventListener('click', () => { calMonth = shiftMonth(calMonth, -1); renderCal(todayKey()); });
+  $('cal-next').addEventListener('click', () => { calMonth = shiftMonth(calMonth, 1); renderCal(todayKey()); });
+
+  function renderRecurs() {
+    const ul = $('recurs'); ul.innerHTML = '';
+    if (!db.recurs.length) { const li = document.createElement('li'); li.className = 'note'; li.style.display = 'block'; li.textContent = '出費を書く時に「くり返し」を選ぶと、ここに並び、毎月（毎年）自動で書きます。'; ul.append(li); return; }
+    db.recurs.forEach((r) => {
+      const li = document.createElement('li');
+      const d = document.createElement('span'); d.textContent = r.cycle === 'month' ? '毎月' + r.day + '日' : r.month + '/' + r.day;
+      const t = document.createElement('span'); t.className = 't'; (r.oshi || []).map(oshiById).filter(Boolean).forEach((o) => t.append(oshiChip(o))); t.append(r.title || CATS[r.cat]);
+      const a = document.createElement('span'); a.className = 'a'; a.textContent = yen(r.amount);
+      const x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.textContent = 'やめる'; x.setAttribute('aria-label', (r.title || CATS[r.cat]) + 'のくり返しをやめる');
+      x.addEventListener('click', () => { if (!confirm((r.title || CATS[r.cat]) + 'のくり返しをやめますか？ これまでの記録は残ります。')) return; db.recurs = db.recurs.filter((y) => y.id !== r.id); save(); render(); track('recur_stop', {}); });
+      li.append(d, t, a, x); ul.append(li);
+    });
+  }
+
+  function renderYear() {
+    const on = isPremium(); $('year-lock').classList.toggle('hide', on); const box = $('year'); box.innerHTML = '';
+    if (!on) return;
+    const end = ym(todayKey()); const months = []; for (let i = 11; i >= 0; i--) months.push(shiftMonth(end, -i));
+    const totals = months.map((m) => { const by = {}; db.spends.filter((s) => ym(s.date) === m).forEach((s) => perOshi(s).forEach(([id, v]) => { by[id] = (by[id] || 0) + v; })); return by; });
+    const max = Math.max(1, ...totals.map((b) => Object.values(b).reduce((a, v) => a + v, 0)));
+    const bars = document.createElement('div'); bars.className = 'bars'; const labs = document.createElement('div'); labs.className = 'bars-l';
+    totals.forEach((by, i) => { const col = document.createElement('div'); let sum = 0; Object.keys(by).forEach((id) => { const o = oshiById(id); const seg = document.createElement('i'); seg.style.height = (by[id] / max * 118) + 'px'; seg.style.background = o ? o.color : '#9A9AA3'; col.append(seg); sum += by[id]; }); col.setAttribute('aria-label', (+months[i].slice(5)) + '月 ' + yen(sum)); bars.append(col); const l = document.createElement('span'); l.textContent = +months[i].slice(5); labs.append(l); });
+    const ul = document.createElement('ul'); ul.className = 'rlines'; ul.style.marginTop = '8px';
+    const sumBy = {}; totals.forEach((by) => Object.keys(by).forEach((id) => { sumBy[id] = (sumBy[id] || 0) + by[id]; }));
+    Object.keys(sumBy).sort((a, b) => sumBy[b] - sumBy[a]).forEach((id) => { const o = oshiById(id); const li = document.createElement('li'); li.style.gridTemplateColumns = '1fr auto'; const n = document.createElement('span'); n.className = 't'; if (o) n.append(oshiChip(o)); n.append(o ? o.name : '（推しなし）'); const v = document.createElement('span'); v.className = 'a'; v.textContent = yen(sumBy[id]); li.append(n, v); ul.append(li); });
+    box.append(bars, labs, ul);
+  }
+
+  function renderGoals() {
+    const box = $('goals'); box.innerHTML = '';
+    if (!db.goals.length) { const p = document.createElement('p'); p.className = 'empty'; p.textContent = '遠征やグッズのための目標をつくると、パンチカードに穴があいていきます。'; box.append(p); }
+    db.goals.forEach((g) => {
+      const saved = (g.deps || []).reduce((a, d) => a + d.amount, 0); const pct = Math.max(0, Math.min(100, saved / g.target * 100)); const o = oshiById(g.oshi);
+      const el = document.createElement('div'); el.className = 'goal'; el.style.setProperty('--c', o ? o.color : '#18181B'); el.dataset.id = g.id;
+      const gh = document.createElement('div'); gh.className = 'gh'; const t = document.createElement('b'); t.textContent = g.title; const p = document.createElement('span'); p.className = 'mono'; p.textContent = Math.floor(pct) + '%'; gh.append(t, p);
+      const punch = document.createElement('div'); punch.className = 'punch'; punch.setAttribute('aria-hidden', 'true'); for (let i = 0; i < 10; i++) { const h = document.createElement('i'); if (pct >= (i + 1) * 10) h.className = 'on'; punch.append(h); }
+      const gm = document.createElement('div'); gm.className = 'gm'; const a = document.createElement('span'); a.textContent = yen(saved) + ' / ' + yen(g.target); const r = document.createElement('span'); r.textContent = saved >= g.target ? '達成！' : 'あと' + yen(g.target - saved); gm.append(a, r);
+      const row = document.createElement('div'); row.className = 'row'; row.style.marginTop = '8px';
+      const b1 = document.createElement('button'); b1.type = 'button'; b1.className = 'btn sm ink'; b1.textContent = '貯金する'; b1.addEventListener('click', () => openDep(g));
+      const b2 = document.createElement('button'); b2.type = 'button'; b2.className = 'btn sm'; b2.textContent = '目標を直す'; b2.addEventListener('click', () => openGoal(g));
+      row.append(b1, b2); el.append(gh, punch, gm, row); box.append(el);
+    });
+  }
+
+  function renderPremium() {
+    const on = isPremium();
+    $('pr-free').classList.toggle('hide', on); $('pr-on').classList.toggle('hide', !on);
+    $('pr-test').hidden = !Object.values(LINKS).some((u) => u.indexOf('/test_') > -1);
+    if (!on) return;
+    $('pr-plan').textContent = 'プレミアムをご利用中（' + (PLAN_NAME[prem.plan] || 'プレミアム') + '）';
+    let per = '';
+    if (prem.plan === 'oshi_lifetime') per = '買い切りのため、期限はありません。';
+    else if (prem.current_period_end) { const d = new Date(prem.current_period_end * 1000); const ds = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日'; per = prem.cancel_at_period_end ? '解約済みです。' + ds + 'まで使えます。' : '次の更新日：' + ds; }
+    $('pr-period').textContent = per; $('my-code').value = prem.token || '';
+  }
+
+  function limitShow(msg) { $('limit-msg').textContent = msg; track('limit_reached', {}); try { $('limit').showModal(); } catch (e) {} }
+  $('limit-close').addEventListener('click', () => $('limit').close());
+  $('limit-plans').addEventListener('click', () => { $('limit').close(); goPremium('limit'); });
+  function goPremium(from) { track('premium_interest', { plan: from }); setTab('more'); }
+
+  // 推しの登録
+  let editO = null, pickColor = COLORS[0], pickPhoto = null;
+  function drawColors() {
+    const box = $('o-colors'); box.innerHTML = '';
+    COLORS.forEach((c) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', c === pickColor ? 'true' : 'false'); b.setAttribute('aria-label', 'メンバーカラー ' + c); b.style.background = c; b.addEventListener('click', () => { pickColor = c; drawColors(); }); box.append(b); });
+    const ci = document.createElement('input'); ci.type = 'color'; ci.value = COLORS.includes(pickColor) ? '#ff8800' : pickColor; ci.setAttribute('aria-label', 'ほかの色'); ci.style.cssText = 'width:34px;height:34px;padding:0;border:0;background:none'; ci.addEventListener('input', () => { pickColor = ci.value.toUpperCase(); }); box.append(ci);
+  }
+  function drawPh() { $('o-ph').style.backgroundImage = pickPhoto ? 'url(' + pickPhoto + ')' : 'none'; $('o-ph-del').classList.toggle('hide', !pickPhoto); }
+  function openOshi(o) {
+    if (!o && db.oshis.length >= FREE_OSHI && !isPremium()) { limitShow('無料で登録できる推しは' + FREE_OSHI + '人までです。プレミアム（月280円から）にすると無制限になります。今の推しのチケットは、無料のままずっと使えます。'); return; }
+    editO = o; pickColor = o ? o.color : COLORS[db.oshis.length % COLORS.length]; pickPhoto = o ? o.photo || null : null;
+    $('oshi-h').textContent = o ? '推しを直す' : '推しを登録'; $('o-ok').textContent = o ? '保存する' : '登録する';
+    $('o-name').value = o ? o.name : ''; $('o-since').value = o && o.since ? o.since : ''; $('o-bday').value = o && o.bday ? o.bday.replace('-', '') : '';
+    $('o-del').classList.toggle('hide', !o); $('o-err').textContent = '';
+    drawColors(); drawPh(); try { $('oshi-sheet').showModal(); } catch (e) {}
+  }
+  $('o-ph-btn').addEventListener('click', () => $('o-ph-file').click());
+  $('o-ph-del').addEventListener('click', () => { pickPhoto = null; drawPh(); });
+  $('o-ph-file').addEventListener('change', (e) => {
+    const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    const fr = new FileReader(); fr.onload = () => { const img = new Image(); img.onload = () => {
+      const S = 240; const c = document.createElement('canvas'); c.width = S; c.height = S; const x = c.getContext('2d');
+      const s = Math.min(img.width, img.height); x.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, S, S);
+      pickPhoto = c.toDataURL('image/jpeg', 0.78); drawPh();
+    }; img.onerror = () => { $('o-err').textContent = 'この写真は読み込めませんでした。'; }; img.src = fr.result; }; fr.readAsDataURL(f);
+  });
+  $('o-cancel').addEventListener('click', () => $('oshi-sheet').close());
+  $('oshi-form').addEventListener('submit', (e) => {
+    e.preventDefault(); const err = $('o-err'); err.textContent = '';
+    const name = $('o-name').value.trim().slice(0, 30); if (!name) { err.textContent = '推しの名前を入れてください。'; $('o-name').focus(); return; }
+    const bd = $('o-bday').value.replace(/[^0-9]/g, '');
+    let bday = null; if (bd) { if (!/^(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/.test(bd)) { err.textContent = '誕生日は「0415」のように月日の4けたで入れてください。'; return; } bday = bd.slice(0, 2) + '-' + bd.slice(2); }
+    const since = $('o-since').value || null;
+    if (editO) { Object.assign(editO, { name, color: pickColor, since, bday, photo: pickPhoto }); if (!editO.photo) delete editO.photo; }
+    else { const o = { id: newId(), name, color: pickColor, since, bday }; if (pickPhoto) o.photo = pickPhoto; db.oshis.push(o); track('oshi_add', { count: db.oshis.length, photo: !!pickPhoto }); }
+    if (!save()) return; $('oshi-sheet').close(); render(); toast(editO ? '推しのチケットを直しました。' : name + 'のチケットができました。');
+  });
+  $('o-del').addEventListener('click', () => {
+    if (!editO || !confirm('「' + editO.name + '」を外しますか？ 出費や現場の記録は残り、推しなしになります。')) return;
+    const id = editO.id; db.oshis = db.oshis.filter((o) => o.id !== id);
+    db.spends.forEach((s) => { s.oshi = (s.oshi || []).filter((x) => x !== id); }); db.events.forEach((s) => { s.oshi = (s.oshi || []).filter((x) => x !== id); }); db.recurs.forEach((s) => { s.oshi = (s.oshi || []).filter((x) => x !== id); });
+    save(); $('oshi-sheet').close(); render(); track('oshi_delete', {});
+  });
+
+  // 推しを選ぶチップ
+  function drawOshiChips(box, selected, single) {
+    box.innerHTML = '';
+    if (!db.oshis.length) { const n = document.createElement('span'); n.className = 'note'; n.textContent = '（推しはまだ登録されていません）'; box.append(n); return; }
+    db.oshis.forEach((o) => { const b = document.createElement('button'); b.type = 'button'; b.dataset.id = o.id; b.setAttribute(single ? 'aria-checked' : 'aria-pressed', selected.includes(o.id) ? 'true' : 'false'); if (single) b.setAttribute('role', 'radio');
+      b.append(oshiChip(o), o.name); b.addEventListener('click', () => { if (single) { box.querySelectorAll('button').forEach((x) => { x.setAttribute('aria-checked', 'false'); x.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-checked', 'true'); b.setAttribute('aria-pressed', 'true'); } else b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); }); box.append(b); });
+    if (single) box.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', b.getAttribute('aria-checked')));
+  }
+  const pickedOshi = (box) => [...box.querySelectorAll('button[aria-pressed=true]')].map((b) => b.dataset.id);
+
+  // 出費
+  let editS = null;
+  $('s-cat').innerHTML = Object.entries(CATS).map(([k, v]) => '<option value="' + k + '">' + v + '</option>').join('');
+  function openSpend(s, preset) {
+    editS = s; const p = s || preset || {};
+    $('spend-h').textContent = s ? '出費を直す' : '出費を書く'; $('s-ok').textContent = s ? '直す' : '書く';
+    $('s-amount').value = p.amount || ''; $('s-title').value = p.title || ''; $('s-cat').value = p.cat || 'goods'; $('s-date').value = p.date || todayKey(); $('s-memo').value = p.memo || '';
+    $('s-recur').value = 'none'; $('s-recur').disabled = !!s;
+    drawOshiChips($('s-oshi'), p.oshi || (db.oshis.length === 1 ? [db.oshis[0].id] : []), false);
+    $('s-del').classList.toggle('hide', !s); $('s-dup').classList.toggle('hide', !s); $('s-err').textContent = '';
+    try { $('spend-sheet').showModal(); } catch (e) {}
+  }
+  $('s-quick').addEventListener('click', (e) => { const q = e.target.dataset && e.target.dataset.q; if (q === undefined) return; $('s-amount').value = q === '0' ? '' : String((Number($('s-amount').value) || 0) + Number(q)); });
+  $('s-cancel').addEventListener('click', () => $('spend-sheet').close());
+  $('spend-form').addEventListener('submit', (e) => {
+    e.preventDefault(); const err = $('s-err'); err.textContent = '';
+    const amount = Number($('s-amount').value);
+    if (!$('s-amount').value || !Number.isInteger(amount) || amount < 1 || amount > 10000000) { err.textContent = '金額を1円以上の整数で入れてください。'; $('s-amount').focus(); return; }
+    const date = $('s-date').value || todayKey(); if (!isDay(date)) { err.textContent = '日付を選んでください。'; return; }
+    const v = { amount, title: $('s-title').value.trim().slice(0, 60), cat: $('s-cat').value, date, oshi: pickedOshi($('s-oshi')), memo: $('s-memo').value.trim().slice(0, 60) };
+    if (editS) { Object.assign(editS, v); track('spend_edit', { cat: v.cat }); }
+    else {
+      const recur = $('s-recur').value;
+      if (recur !== 'none') { const r = { id: newId(), title: v.title, amount, cat: v.cat, oshi: v.oshi, day: +date.slice(8), cycle: recur, month: +date.slice(5, 7), start: ym(date), last: null }; db.recurs.push(r); applyRecurs(); track('recur_add', { cycle: recur }); }
+      else { db.spends.push(Object.assign({ id: newId() }, v)); }
+      track('spend_add', { cat: v.cat, oshi: v.oshi.length, amount_band: amount >= 10000 ? '10k+' : amount >= 3000 ? '3k+' : 'lt3k' });
+    }
+    if (!save()) return; recMonth = ym(date); $('spend-sheet').close(); render();
+    toast(editS ? '直しました。' : yen(amount) + ' を書きました。');
+  });
+  $('s-del').addEventListener('click', () => { if (!editS || !confirm('この出費を消しますか？')) return; db.spends = db.spends.filter((x) => x !== editS); save(); $('spend-sheet').close(); render(); track('spend_delete', {}); });
+  $('s-dup').addEventListener('click', () => { if (!editS) return; const c = Object.assign({}, editS, { id: newId(), date: todayKey() }); delete c.rid; db.spends.push(c); save(); $('spend-sheet').close(); render(); toast('複製しました（きょうの日付）。'); track('spend_dup', {}); });
+  $('btn-add-spend').addEventListener('click', () => openSpend(null));
+  $('fab').addEventListener('click', () => { if (db.ui.tab === 'events') openEvent(null); else if (db.ui.tab === 'save') { if (db.goals[0]) openDep(db.goals[0]); else openGoal(null); } else openSpend(null); });
+
+  // 現場
+  let editE = null, pickSt = 'apply';
+  function drawStatus() { const box = $('e-status'); box.innerHTML = ''; Object.entries(ST).forEach(([k, v]) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', k === pickSt ? 'true' : 'false'); b.setAttribute('aria-pressed', k === pickSt ? 'true' : 'false'); b.dataset.st = k; b.textContent = v; b.addEventListener('click', () => { pickSt = k; drawStatus(); }); box.append(b); }); }
+  function openEvent(ev) {
+    editE = ev; const p = ev || {};
+    $('event-h').textContent = ev ? '現場を直す' : '現場を入れる'; $('e-ok').textContent = ev ? '直す' : '入れる';
+    $('e-title').value = p.title || ''; $('e-date').value = p.date || ''; $('e-place').value = p.place || ''; $('e-open').value = p.open || ''; $('e-start').value = p.start || '';
+    $('e-payby').value = p.payBy || ''; $('e-price').value = p.price || ''; pickSt = p.status || 'apply';
+    drawOshiChips($('e-oshi'), p.oshi || (db.oshis.length === 1 ? [db.oshis[0].id] : []), false); drawStatus();
+    $('e-del').classList.toggle('hide', !ev); $('e-dup').classList.toggle('hide', !ev); $('e-err').textContent = '';
+    try { $('event-sheet').showModal(); } catch (e) {}
+  }
+  $('e-cancel').addEventListener('click', () => $('event-sheet').close());
+  $('event-form').addEventListener('submit', (e) => {
+    e.preventDefault(); const err = $('e-err'); err.textContent = '';
+    const title = $('e-title').value.trim().slice(0, 60); if (!title) { err.textContent = '名前を入れてください。'; $('e-title').focus(); return; }
+    const date = $('e-date').value; if (!isDay(date)) { err.textContent = '日付を選んでください。'; $('e-date').focus(); return; }
+    const price = $('e-price').value === '' ? null : Number($('e-price').value); if (price !== null && (!Number.isInteger(price) || price < 0)) { err.textContent = 'チケット代は0以上の整数で入れてください。'; return; }
+    const v = { title, date, place: $('e-place').value.trim().slice(0, 40), open: $('e-open').value, start: $('e-start').value, oshi: pickedOshi($('e-oshi')), status: pickSt, payBy: $('e-payby').value || null, price };
+    const wasPaid = editE && (editE.status === 'paid' || editE.status === 'went');
+    let ev = editE; if (ev) Object.assign(ev, v); else { ev = Object.assign({ id: newId() }, v); db.events.push(ev); }
+    let msg = editE ? '直しました。' : '入れました。';
+    if ((v.status === 'paid' || v.status === 'went') && !wasPaid && price) {
+      const sid = 'e' + ev.id;
+      if (!db.spends.some((s) => s.id === sid)) { db.spends.push({ id: sid, date: todayKey() < date ? todayKey() : date, amount: price, title: title, cat: 'ticket', oshi: v.oshi.slice(), memo: '' }); msg = 'チケット代 ' + yen(price) + ' をレシートに書きました。'; }
+    }
+    track(editE ? 'event_edit' : 'event_add', { status: v.status });
+    if (!save()) return; $('event-sheet').close(); render(); toast(msg);
+  });
+  $('e-del').addEventListener('click', () => { if (!editE || !confirm('この現場を消しますか？')) return; db.events = db.events.filter((x) => x !== editE); save(); $('event-sheet').close(); render(); track('event_delete', {}); });
+  $('e-dup').addEventListener('click', () => { if (!editE) return; const c = Object.assign({}, editE, { id: newId(), status: 'apply' }); db.events.push(c); save(); $('event-sheet').close(); render(); openEvent(c); track('event_dup', {}); });
+  $('btn-add-event').addEventListener('click', () => openEvent(null));
+
+  // カレンダー（.ics）
+  function toICS() {
+    const esc = (s) => String(s || '').replace(/\\/g, '\\\\').replace(/[,;]/g, (m) => '\\' + m).replace(/\n/g, '\\n');
+    const now = new Date(); const ts = now.getUTCFullYear() + pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + 'T' + pad(now.getUTCHours()) + pad(now.getUTCMinutes()) + '00Z';
+    const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//HRlab//oshi//JA', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:推し活の予定'];
+    const t = todayKey(); let n = 0;
+    db.events.filter((e) => e.date >= t && e.status !== 'lose').forEach((e) => {
+      const d = e.date.replace(/-/g, ''); const os = (e.oshi || []).map(oshiById).filter(Boolean).map((o) => o.name).join('・');
+      L.push('BEGIN:VEVENT', 'UID:oshi-' + e.id + '@h-c-hrlab.github.io', 'DTSTAMP:' + ts);
+      if (e.start) { const [h, m] = e.start.split(':'); L.push('DTSTART:' + d + 'T' + h + m + '00', 'DURATION:PT3H'); }
+      else { const nx = parse(e.date); nx.setDate(nx.getDate() + 1); L.push('DTSTART;VALUE=DATE:' + d, 'DTEND;VALUE=DATE:' + keyOf(nx).replace(/-/g, '')); }
+      L.push('SUMMARY:' + esc((os ? '【' + os + '】' : '') + e.title), 'LOCATION:' + esc(e.place), 'DESCRIPTION:' + esc(ST[e.status] + (e.open ? '・開場' + e.open : '') + (e.start ? '・開演' + e.start : '')),
+        'BEGIN:VALARM', 'TRIGGER:' + (e.start ? '-PT1H' : 'PT9H'), 'ACTION:DISPLAY', 'DESCRIPTION:' + esc(e.title), 'END:VALARM', 'END:VEVENT'); n++;
+      if (e.status === 'win' && isDay(e.payBy) && e.payBy >= t) {
+        const pd = e.payBy.replace(/-/g, ''); const nx = parse(e.payBy); nx.setDate(nx.getDate() + 1);
+        L.push('BEGIN:VEVENT', 'UID:oshi-pay-' + e.id + '@h-c-hrlab.github.io', 'DTSTAMP:' + ts, 'DTSTART;VALUE=DATE:' + pd, 'DTEND;VALUE=DATE:' + keyOf(nx).replace(/-/g, ''),
+          'SUMMARY:' + esc('入金期限：' + e.title + (e.price ? ' ' + yen(e.price) : '')), 'BEGIN:VALARM', 'TRIGGER:PT9H', 'ACTION:DISPLAY', 'DESCRIPTION:' + esc('きょうが入金期限：' + e.title), 'END:VALARM', 'END:VEVENT'); n++;
+      }
+    });
+    L.push('END:VCALENDAR'); return { text: L.join('\r\n') + '\r\n', count: n };
+  }
+  window.__oshi.toICS = toICS;
+  function download(name, data, type) { const blob = data instanceof Blob ? data : new Blob([data], { type }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1500); }
+  const stamp = () => { const d = new Date(); return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()); };
+  $('btn-ics').addEventListener('click', () => { const r = toICS(); if (!r.count) { toast('これからの現場がありません。'); return; } download('推し活の予定_' + stamp() + '.ics', r.text, 'text/calendar;charset=utf-8'); toast(r.count + '件をカレンダーのファイルにしました。'); track('calendar_export', { count: r.count }); });
+
+  // 貯金
+  let editG = null, depG = null;
+  function openGoal(g) {
+    if (!g && db.goals.length >= FREE_GOALS && !isPremium()) { limitShow('無料でつくれる貯金の目標は' + FREE_GOALS + 'つまでです。プレミアムにすると、いくつでもつくれます。今の目標は、無料のままずっと使えます。'); return; }
+    editG = g; $('goal-h').textContent = g ? '目標を直す' : '貯金の目標'; $('g-ok').textContent = g ? '保存する' : 'つくる';
+    $('g-title').value = g ? g.title : ''; $('g-target').value = g ? g.target : ''; drawOshiChips($('g-oshi'), g && g.oshi ? [g.oshi] : [], true);
+    $('g-del').classList.toggle('hide', !g); $('g-err').textContent = ''; try { $('goal-sheet').showModal(); } catch (e) {}
+  }
+  $('g-cancel').addEventListener('click', () => $('goal-sheet').close());
+  $('goal-form').addEventListener('submit', (e) => {
+    e.preventDefault(); const err = $('g-err'); err.textContent = '';
+    const title = $('g-title').value.trim().slice(0, 40); const target = Number($('g-target').value);
+    if (!title) { err.textContent = 'なんのための貯金か入れてください。'; return; }
+    if (!Number.isInteger(target) || target < 1 || target > 100000000) { err.textContent = '目標の金額を1円以上の整数で入れてください。'; return; }
+    const oshi = pickedOshi($('g-oshi'))[0] || null;
+    if (editG) Object.assign(editG, { title, target, oshi }); else { db.goals.push({ id: newId(), title, target, oshi, deps: [] }); track('goal_add', {}); }
+    save(); $('goal-sheet').close(); render();
+  });
+  $('g-del').addEventListener('click', () => { if (!editG || !confirm('この目標と貯金の記録を消しますか？')) return; db.goals = db.goals.filter((x) => x !== editG); save(); $('goal-sheet').close(); render(); });
+  $('btn-add-goal').addEventListener('click', () => openGoal(null));
+  function openDep(g) { depG = g; $('dep-h').textContent = g.title + 'に貯金する'; $('d-amount').value = ''; $('d-err').textContent = ''; try { $('dep-sheet').showModal(); } catch (e) {} }
+  $('d-cancel').addEventListener('click', () => $('dep-sheet').close());
+  $('dep-form').addEventListener('submit', (e) => {
+    e.preventDefault(); const v = Number($('d-amount').value);
+    if (!Number.isInteger(v) || v === 0 || Math.abs(v) > 100000000) { $('d-err').textContent = '金額を整数で入れてください（引き出す時はマイナス）。'; return; }
+    const before = (depG.deps || []).reduce((a, d) => a + d.amount, 0);
+    depG.deps = depG.deps || []; depG.deps.push({ id: newId(), date: todayKey(), amount: v }); save(); $('dep-sheet').close(); render();
+    const after = before + v; track('deposit', { up: v > 0 });
+    toast(after >= depG.target && before < depG.target ? '目標達成！ おめでとうございます。' : v > 0 ? yen(v) + ' 貯金しました。あと' + yen(Math.max(0, depG.target - after)) + '。' : yen(-v) + ' 引き出しました。');
+  });
+
+  // 今月のレシートを画像に
+  async function makeReceiptImage() {
+    try { if (document.fonts) await document.fonts.ready; } catch (e) {}
+    const list = db.spends.filter((s) => ym(s.date) === recMonth).sort((a, b) => (a.date < b.date ? -1 : 1));
+    const byO = {}; list.forEach((s) => perOshi(s).forEach(([id, v]) => { byO[id] = (byO[id] || 0) + v; }));
+    const oids = Object.keys(byO).sort((a, b) => byO[b] - byO[a]);
+    const shown = list.slice(-12);
+    const W = 720, lh = 40; const H = 330 + shown.length * lh + oids.length * lh + 200;
+    const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+    x.fillStyle = '#F2EFE8'; x.fillRect(0, 0, W, H);
+    x.fillStyle = '#FFFFFF'; x.beginPath(); x.moveTo(40, 30); x.lineTo(W - 40, 30); for (let i = W - 40; i > 40; i -= 20) { x.lineTo(i - 10, H - 30); x.lineTo(i - 20, H - 40); } x.lineTo(40, H - 40); x.closePath(); x.fill();
+    const mono = '"BIZ UDGothic", monospace', disp = '"Dela Gothic One", sans-serif';
+    x.fillStyle = '#18181B'; x.textAlign = 'center'; x.font = '44px ' + disp; x.fillText('推し活レシート', W / 2, 100);
+    x.font = '24px ' + mono; x.fillText(recMonth.slice(0, 4) + '年' + (+recMonth.slice(5)) + '月ぶん', W / 2, 140);
+    const dash = (y) => { x.save(); x.setLineDash([8, 6]); x.strokeStyle = '#18181B'; x.lineWidth = 2; x.beginPath(); x.moveTo(70, y); x.lineTo(W - 70, y); x.stroke(); x.restore(); };
+    dash(165); let y = 205; x.font = '24px ' + mono;
+    shown.forEach((s) => { x.textAlign = 'left'; x.fillStyle = '#55555E'; x.fillText((+s.date.slice(5, 7)) + '/' + (+s.date.slice(8)), 80, y); x.fillStyle = '#18181B';
+      let t = s.title || CATS[s.cat]; while (x.measureText(t).width > 360 && t.length > 1) t = t.slice(0, -1); if (t !== (s.title || CATS[s.cat])) t += '…'; x.fillText(t, 170, y);
+      x.textAlign = 'right'; x.fillText(yen(s.amount), W - 80, y); y += lh; });
+    if (list.length > shown.length) { x.textAlign = 'left'; x.fillStyle = '#55555E'; x.fillText('ほか ' + (list.length - shown.length) + '件', 170, y); y += lh; }
+    dash(y - 18); y += 18;
+    oids.forEach((id) => { const o = oshiById(id); x.textAlign = 'left'; if (o) { x.fillStyle = o.color; x.beginPath(); x.arc(92, y - 8, 10, 0, Math.PI * 2); x.fill(); if (o.color === '#F4F4F4') { x.strokeStyle = '#999'; x.stroke(); } }
+      x.fillStyle = '#18181B'; x.fillText((o ? o.name : '推しなし') + (o && daysSince(o.since) !== null && daysSince(o.since) >= 0 ? '（推して' + daysSince(o.since) + '日）' : ''), 115, y); x.textAlign = 'right'; x.fillText(yen(byO[id]), W - 80, y); y += lh; });
+    x.fillStyle = '#18181B'; x.fillRect(70, y - 14, W - 140, 3); y += 34; x.font = '40px ' + disp; x.textAlign = 'left'; x.fillText('合計', 80, y); x.textAlign = 'right'; x.fillText(yen(list.reduce((a, s) => a + s.amount, 0)), W - 80, y);
+    x.fillRect(70, y + 16, W - 140, 3); y += 60;
+    for (let i = 0, bx = 170; bx < W - 170; i++) { const w = [2, 1, 3, 1, 2, 4, 1][i % 7]; x.fillRect(bx, y, w * 2, 56); bx += w * 2 + [2, 3, 2, 4][i % 4] * 2; }
+    x.font = '20px ' + mono; x.textAlign = 'center'; x.fillStyle = '#55555E'; x.fillText('推し活レシート ・ h-c-hrlab.github.io/oshi', W / 2, y + 90);
+    return new Promise((res) => c.toBlob((b) => res(b), 'image/png'));
+  }
+  window.__oshi.makeReceiptImage = makeReceiptImage;
+  $('btn-image').addEventListener('click', async () => {
+    const blob = await makeReceiptImage(); if (!blob) { toast('画像を作れませんでした。'); return; }
+    const name = '推し活レシート_' + recMonth.replace('-', '') + '.png'; const file = new File([blob], name, { type: 'image/png' });
+    track('receipt_image', { month: recMonth === ym(todayKey()) ? 'this' : 'past' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { try { await navigator.share({ files: [file], text: '#推し活レシート' }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    download(name, blob); toast('レシート画像を保存しました。');
+  });
+
+  // CSV（プレミアム）
+  function toCSV() {
+    const q = (v) => { const t = v === undefined || v === null ? '' : String(v); return /[",\n\r]/.test(t) || /^[=+\-@]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t; };
+    const head = ['日付', '種類', 'なにに', '金額（円）', '推し', 'メモ'];
+    const rows = db.spends.slice().sort((a, b) => (a.date < b.date ? -1 : 1)).map((s) => [s.date, CATS[s.cat], s.title, s.amount, (s.oshi || []).map(oshiById).filter(Boolean).map((o) => o.name).join('・'), s.memo]);
+    return '﻿' + [head].concat(rows).map((r) => r.map(q).join(',')).join('\r\n') + '\r\n';
+  }
+  window.__oshi.toCSV = toCSV;
+  $('btn-csv').addEventListener('click', () => { if (!isPremium()) { toast('CSV書き出しはプレミアムの機能です。'); goPremium('csv'); return; } if (!db.spends.length) { toast('書き出す出費がありません。'); return; } download('推し活_' + stamp() + '.csv', toCSV(), 'text/csv;charset=utf-8'); track('csv_export', { count: db.spends.length }); });
+  $('year-unlock').addEventListener('click', () => goPremium('year'));
+
+  // バックアップ（無料）
+  const kmsg = (t) => { $('keep-msg').textContent = t || ''; };
+  $('btn-export').addEventListener('click', () => { const n = db.oshis.length + db.spends.length + db.events.length + db.goals.length; if (!n) { kmsg('書き出す記録がありません。'); return; } download('推し活レシート_' + stamp() + '.json', JSON.stringify({ app: 'oshi', v: 1, exported: new Date().toISOString(), data: db }), 'application/json'); kmsg('書き出しました。ファイルを大切に保管してください。'); track('backup_export', {}); });
+  $('btn-import').addEventListener('click', () => $('import-file').click());
+  $('import-file').addEventListener('change', async (e) => {
+    const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    try {
+      if (f.size > 8 * 1024 * 1024) throw new Error('size');
+      const j = JSON.parse(await f.text()); const d = j && j.app === 'oshi' && j.data;
+      const okArr = (a) => Array.isArray(a) && a.every((x) => x && typeof x.id === 'string');
+      if (!d || !okArr(d.oshis) || !okArr(d.spends) || !d.spends.every((s) => isDay(s.date) && Number.isInteger(s.amount)) || (d.events && !okArr(d.events))) throw new Error('format');
+      if (d.oshis.some((o) => o.photo && !/^data:image\/(jpeg|png|webp);base64,/.test(o.photo))) throw new Error('photo');
+      if (!confirm('バックアップの記録（推し' + d.oshis.length + '人・出費' + d.spends.length + '件）で、今の記録を置き換えますか？')) return;
+      db = { oshis: d.oshis, spends: d.spends, recurs: d.recurs || [], events: d.events || [], goals: d.goals || [], ui: db.ui };
+      save(); render(); kmsg('バックアップから戻しました。'); track('backup_import', {});
+    } catch (x) { kmsg('このファイルは読み込めませんでした。推し活レシートで書き出したファイルを選んでください。'); }
+  });
+  $('btn-clear').addEventListener('click', () => { if (!confirm('推し・出費・現場・貯金をすべて消しますか？ 元に戻せません。')) return; db = { oshis: [], spends: [], recurs: [], events: [], goals: [], ui: db.ui }; save(); render(); kmsg('すべて消しました。'); track('clear_all', {}); });
+
+  // プレミアム
+  const msg = (t) => { $('pr-msg').textContent = t || ''; };
+  async function api(path, body) { const opt = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {}; const r = await fetch(PAY_API + path, opt); let j = {}; try { j = await r.json(); } catch (e) {} return { ok: r.ok, status: r.status, data: j }; }
+  async function refreshStatus() {
+    if (!prem || !prem.token) return;
+    try { const r = await api('/status', { token: prem.token }); if (!r.ok) return;
+      if (r.data.reason === 'invalid_token') { prem = null; savePrem(); render(); return; }
+      prem.premium = !!r.data.premium; prem.checkedAt = Date.now(); if (r.data.plan) prem.plan = r.data.plan; prem.cancel_at_period_end = !!r.data.cancel_at_period_end; prem.current_period_end = r.data.current_period_end || null; savePrem(); render();
+    } catch (e) { /* 通信できない時は最後の確認から7日間そのまま */ }
+  }
+  async function verifyPurchase(sid) {
+    setTab('more'); msg('ご購入を確認しています…');
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    try { const r = await api('/verify?session_id=' + encodeURIComponent(sid));
+      if (r.ok && r.data.premium && r.data.token) { prem = { token: r.data.token, plan: r.data.plan, premium: true, checkedAt: Date.now() }; savePrem();
+        track('purchase', { transaction_id: sid, value: PRICE[String(r.data.plan).replace('oshi_', '')] || 0, currency: 'JPY', items: [{ item_id: r.data.plan, item_name: PLAN_NAME[r.data.plan] }] });
+        await refreshStatus(); render(); msg('ありがとうございます。プレミアムが使えるようになりました。');
+      } else { msg('ご購入を確認できませんでした。お支払いが完了している場合は、少し待ってからページを開き直してください。'); track('purchase_verify_failed', { reason: r.data.error || String(r.status) }); }
+    } catch (e) { try { history.replaceState(null, '', location.pathname + '?session_id=' + encodeURIComponent(sid)); } catch (x) {} msg('通信できませんでした。電波の良い所でページを開き直すと、もう一度確認します。'); }
+  }
+  document.querySelectorAll('.plan').forEach((b) => b.addEventListener('click', () => { const plan = b.dataset.plan; track('begin_checkout', { value: PRICE[plan], currency: 'JPY', items: [{ item_id: 'oshi_' + plan, item_name: PLAN_NAME['oshi_' + plan] }] }); location.href = LINKS[plan]; }));
+  $('btn-portal').addEventListener('click', async () => { const btn = $('btn-portal'); btn.disabled = true; msg('管理画面を開いています…');
+    try { const r = await api('/portal', { token: prem.token }); if (r.ok && r.data.url) { track('open_portal', { plan: prem.plan }); location.href = r.data.url; return; } msg(prem.plan === 'oshi_lifetime' ? '買い切りの領収書は、購入時のメールからご確認ください。' : '管理画面を開けませんでした。時間をおいてもう一度お試しください。'); }
+    catch (e) { msg('通信できませんでした。電波の良い所でもう一度お試しください。'); } btn.disabled = false; });
+  $('btn-show-code').addEventListener('click', () => $('code-box').classList.toggle('hide'));
+  $('btn-copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('my-code').value); msg('コピーしました。'); } catch (e) { $('my-code').select(); msg('コードを選びました。長押し（右クリック）でコピーしてください。'); } });
+  $('btn-restore').addEventListener('click', async () => {
+    const code = $('restore-code').value.trim();
+    if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(code)) { msg('コードの形が正しくありません。購入した端末の「別の端末で使う」に出るコードを、そのまま貼り付けてください。'); return; }
+    msg('確認しています…');
+    try { const r = await api('/status', { token: code });
+      if (r.ok && r.data.premium && String(r.data.plan).indexOf('oshi_') === 0) { prem = { token: code, plan: r.data.plan, premium: true, checkedAt: Date.now(), cancel_at_period_end: !!r.data.cancel_at_period_end, current_period_end: r.data.current_period_end || null }; savePrem(); render(); $('restore-code').value = ''; track('premium_restore', { plan: r.data.plan }); msg('引き継ぎました。この端末でもプレミアムが使えます。'); }
+      else if (r.ok && r.data.reason === 'no_active_subscription') msg('このコードのプランは終了しています。'); else msg('このコードは使えませんでした。');
+    } catch (e) { msg('通信できませんでした。電波の良い所でもう一度お試しください。'); }
+  });
+
+  // 起動
+  const added = applyRecurs();
+  setTab(['home', 'spend', 'events', 'save', 'more'].includes(db.ui.tab) ? db.ui.tab : 'home');
+  render();
+  if (added) toast('毎月・毎年の支払いを ' + added + '件書きました。');
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => render());
+  setInterval(() => { if (todayKey() !== render.day) { render.day = todayKey(); applyRecurs(); render(); } }, 60000); render.day = todayKey();
+  const sid = new URLSearchParams(location.search).get('session_id');
+  if (sid && /^cs_(test|live)_[A-Za-z0-9]+$/.test(sid)) verifyPurchase(sid); else refreshStatus();
+})();
+</script>
+</body>
+</html>
