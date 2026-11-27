@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YPSE6ZHVK1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YPSE6ZHVK1');
+</script>
+<title>固定費みなおし｜毎月の固定費から、年間いくら浮くかを診断</title>
+<meta name="description" content="スマホ代・サブスク・ジムなどの固定費を入れるだけで、見直し候補と年間で浮く金額を診断。登録不要、データはあなたの端末の中だけに保存。">
+<meta name="theme-color" content="#0F766E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230F766E'/%3E%3Cpath d='M18 40l10-10 8 8 12-14' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' transform='scale(1 -1) translate(0 -66)'/%3E%3C/svg%3E">
+<style>
+  :root{--ink:#0F172A;--text:#1E293B;--muted:#475569;--line:#E2E8F0;--bg:#F8FAFC;--card:#fff;--acc:#0F766E;--acc-soft:#ECFDF5;--warn:#B45309;--warn-soft:#FFFBEB;--err:#B91C1C}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-weight:800;font-size:19px;color:var(--ink);display:flex;align-items:center;gap:8px}
+  .logo i{width:28px;height:28px;border-radius:8px;background:var(--acc);display:inline-block;position:relative}
+  .logo i::after{content:"¥";color:#fff;font-style:normal;font-size:16px;font-weight:800;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .tag{font-size:12px;color:var(--muted)}
+  h1{font-size:clamp(22px,5vw,30px);color:var(--ink);margin:28px 0 6px;line-height:1.4}
+  .lead{color:var(--muted);margin:0 0 20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+  .card h2{font-size:18px;margin:0 0 14px;color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .full{grid-column:1/-1}
+  label{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
+  input,select{width:100%;font:inherit;font-size:16px;border:1px solid #CBD5E1;border-radius:10px;padding:10px 12px;min-height:46px;background:#fff;color:var(--text)}
+  input:focus,select:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px rgba(15,118,110,.18)}
+  .hint{font-size:13px;color:var(--muted);margin-top:4px}
+  .row{display:flex;gap:8px}
+  .row>*{flex:1}
+  button{font:inherit;cursor:pointer;border-radius:999px;min-height:46px;padding:0 20px;font-weight:700;border:0}
+  .primary{background:var(--acc);color:#fff;width:100%;font-size:16px}
+  .ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .small{min-height:36px;padding:0 12px;font-size:13px;font-weight:600}
+  .err{color:var(--err);font-size:13px;margin-top:6px;min-height:1em}
+  .sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .sum div{background:var(--bg);border-radius:12px;padding:12px;text-align:center}
+  .sum b{display:block;font-size:clamp(18px,4.5vw,24px);color:var(--ink)}
+  .sum span{font-size:12px;color:var(--muted)}
+  .sum .save{background:var(--acc-soft)}
+  .sum .save b{color:var(--acc)}
+  ul.items{list-style:none;padding:0;margin:0}
+  ul.items li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+  ul.items li:last-child{border-bottom:0}
+  .it-name{font-weight:600;color:var(--ink)}
+  .it-meta{font-size:13px;color:var(--muted)}
+  .it-amt{font-weight:700;white-space:nowrap}
+  .cand{border-left:4px solid var(--acc);background:var(--acc-soft);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .cand b{color:var(--ink)}
+  .cand .yen{color:var(--acc);font-weight:800}
+  .check{border-left:4px solid var(--warn);background:var(--warn-soft);border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:14px}
+  .empty{color:var(--muted);font-size:14px}
+  .premium{background:linear-gradient(0deg,#fff,#fff);border:2px solid var(--acc)}
+  .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+  .plan{border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;background:#fff;cursor:pointer;min-height:44px}
+  .plan b{display:block;font-size:17px;color:var(--ink)}
+  .plan span{font-size:12px;color:var(--muted)}
+  .note{font-size:12px;color:var(--muted)}
+  dialog{border:0;border-radius:16px;padding:20px;max-width:420px;width:calc(100% - 32px)}
+  dialog::backdrop{background:rgba(15,23,42,.45)}
+  footer{padding:24px 0 40px;font-size:12px;color:var(--muted);text-align:center}
+  .hide{display:none}
+  @media (max-width:520px){.grid{grid-template-columns:1fr}.plans{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="logo"><i aria-hidden="true"></i>固定費みなおし</div><div class="tag">登録不要・無料</div></div></header>
+
+<main class="wrap">
+  <h1>毎月の固定費から、<br>年間いくら浮くかを診断</h1>
+  <p class="lead">スマホ代やサブスクを入れるだけ。入力した内容はこの端末の中だけに保存され、外に送られません。</p>
+
+  <section class="card" aria-labelledby="add-h">
+    <h2 id="add-h">固定費を追加</h2>
+    <form id="add" novalidate>
+      <div class="grid">
+        <div>
+          <label for="cat">種類</label>
+          <select id="cat">
+            <option value="phone">スマホ</option>
+            <option value="sub">サブスク（動画・音楽など）</option>
+            <option value="gym">ジム・習い事</option>
+            <option value="net">ネット回線</option>
+            <option value="energy">電気・ガス</option>
+            <option value="ins">保険</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div>
+          <label for="name">名前</label>
+          <input id="name" type="text" placeholder="例：動画配信サービス" autocomplete="off">
+        </div>
+        <div>
+          <label for="amount">金額（円）</label>
+          <div class="row">
+            <input id="amount" type="number" inputmode="numeric" min="0" step="1" placeholder="例：1490">
+            <select id="cycle" aria-label="支払いの周期"><option value="month">毎月</option><option value="year">毎年</option></select>
+          </div>
+        </div>
+        <div id="f-gb">
+          <label for="gb">毎月のデータ使用量（GB）</label>
+          <input id="gb" type="number" inputmode="decimal" min="0" step="0.1" placeholder="例：5">
+          <div class="hint">スマホの設定画面や、契約会社のアプリで確認できます。</div>
+        </div>
+        <div id="f-kind" class="hide">
+          <label for="kind">サブスクの種類</label>
+          <select id="kind"><option value="video">動画</option><option value="music">音楽</option><option value="book">本・雑誌・マンガ</option><option value="game">ゲーム</option><option value="cloud">クラウド保存</option><option value="other">その他</option></select>
+        </div>
+        <div id="f-uses" class="hide">
+          <label for="uses">先月使った回数</label>
+          <input id="uses" type="number" inputmode="numeric" min="0" step="1" placeholder="例：4">
+          <div class="hint">1回も使っていなければ 0 を入れてください。</div>
+        </div>
+      </div>
+      <div class="err" id="add-err" role="alert"></div>
+      <button class="primary" type="submit">追加して診断する</button>
+    </form>
+  </section>
+
+  <section class="card" aria-labelledby="res-h">
+    <h2 id="res-h">診断結果</h2>
+    <div class="sum">
+      <div><span>毎月の固定費</span><b id="s-month">0円</b></div>
+      <div><span>1年間で</span><b id="s-year">0円</b></div>
+      <div class="save"><span>見直しで浮く可能性（年間）</span><b id="s-save">0円</b></div>
+    </div>
+    <div id="cands" style="margin-top:16px"></div>
+  </section>
+
+  <section class="card" aria-labelledby="list-h">
+    <h2 id="list-h">登録した固定費 <span class="note" id="count"></span></h2>
+    <ul class="items" id="items"></ul>
+    <p class="empty" id="empty">まだ登録がありません。上の欄から追加してください。</p>
+    <div class="row" style="margin-top:12px">
+      <button class="ghost small" type="button" id="btn-csv">CSVで書き出す</button>
+      <button class="ghost small" type="button" id="btn-clear">すべて消す</button>
+    </div>
+  </section>
+
+  <section class="card premium" aria-labelledby="pr-h">
+    <h2 id="pr-h">プレミアム（近日公開）</h2>
+    <p style="margin:0 0 6px">無料版は10件まで登録できます。プレミアムでは、件数無制限・CSV書き出し・家族で共有・更新日の通知が使えます。</p>
+    <div class="plans">
+      <button class="plan" type="button" data-plan="monthly"><b>月250円</b><span>月額</span></button>
+      <button class="plan" type="button" data-plan="yearly"><b>年1,980円</b><span>年額（月165円相当）</span></button>
+      <button class="plan" type="button" data-plan="lifetime"><b>3,980円</b><span>買い切り</span></button>
+    </div>
+    <p class="note" id="pr-msg" aria-live="polite">気になるプランを押してください。公開の参考にします。</p>
+  </section>
+
+  <p class="note">スマホ料金の目安は、2026年11月時点で各社が公表している通常料金（税込・割引やキャンペーンを含まない）です。料金は変わることがあります。契約を変える前に、各社の公式サイトで条件を確認してください。保険は保障の内容によって必要性が変わるため、このアプリでは削減額を計算しません。</p>
+</main>
+
+<dialog id="limit">
+  <h2 style="margin-top:0;font-size:18px">無料版は10件までです</h2>
+  <p>件数無制限はプレミアム（月250円から・近日公開）で使えるようになります。今は、使っていない項目を消して入れ替えてください。</p>
+  <button class="primary" type="button" id="limit-ok">わかりました</button>
+</dialog>
+
+<footer>固定費みなおし ・ 運営 HRlab</footer>
+
+<script>
+(function () {
+  'use strict';
+  const FREE_LIMIT = 10;
+  const KEY = 'koteihi_v1';
+  // 2026年11月時点・通常料金（税込）・オンライン専用プランの目安
+  const PHONE_BENCH = [
+    { upto: 3, price: 990, label: '3GBまで' },
+    { upto: 10, price: 2090, label: '10GBまで' },
+    { upto: 20, price: 2178, label: '20GBまで' },
+    { upto: Infinity, price: 3278, label: 'データ無制限' }
+  ];
+  const CAT = { phone: 'スマホ', sub: 'サブスク', gym: 'ジム・習い事', net: 'ネット回線', energy: '電気・ガス', ins: '保険', other: 'その他' };
+  const KIND = { video: '動画', music: '音楽', book: '本・雑誌・マンガ', game: 'ゲーム', cloud: 'クラウド保存', other: 'その他' };
+
+  const $ = (id) => document.getElementById(id);
+  const yen = (n) => Math.round(n).toLocaleString('ja-JP') + '円';
+  const track = (name, params) => { try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch (e) {} };
+
+  let items = [];
+  try { items = JSON.parse(localStorage.getItem(KEY) || '[]'); if (!Array.isArray(items)) items = []; } catch (e) { items = []; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} };
+
+  const monthly = (it) => it.cycle === 'year' ? it.amount / 12 : it.amount;
+  const bench = (gb) => PHONE_BENCH.find((b) => gb <= b.upto);
+
+  // 診断ロジック（項目ごとに最大の削減額を1つだけ数える）
+  function diagnose(list) {
+    const cands = []; const checks = [];
+    const subsByKind = {};
+    list.forEach((it) => {
+      const m = monthly(it);
+      if (it.cat === 'phone') {
+        if (typeof it.gb === 'number' && !isNaN(it.gb)) {
+          const b = bench(it.gb);
+          const diff = (m - b.price) * 12;
+          if (diff >= 1200) cands.push({ id: it.id, save: diff, title: it.name === 'スマホ' ? 'スマホ' : it.name + '（スマホ）', body: '毎月' + it.gb + 'GBの使い方なら、オンライン専用プランは' + b.label + 'で月' + yen(b.price) + 'からあります。今は月' + yen(m) + 'です。' });
+        } else {
+          checks.push(it.name + '：データ使用量を入れると、安いプランとの差額を計算できます。');
+        }
+      }
+      if (it.cat === 'sub' || it.cat === 'gym') {
+        if (typeof it.uses === 'number' && !isNaN(it.uses)) {
+          if (it.uses === 0) {
+            cands.push({ id: it.id, save: m * 12, title: it.name, body: '先月は1回も使っていません。解約すると年間' + yen(m * 12) + '浮きます。' });
+          } else {
+            const per = m / it.uses;
+            const th = it.cat === 'sub' ? 300 : 1000;
+            if (per >= th) cands.push({ id: it.id, save: m * 12, title: it.name, body: '1回あたり' + yen(per) + 'かかっています（先月' + it.uses + '回）。使う回数に見合っているか確かめましょう。解約した場合は年間' + yen(m * 12) + '浮きます。' });
+          }
+        }
+        if (it.cat === 'sub') { (subsByKind[it.kind || 'other'] = subsByKind[it.kind || 'other'] || []).push(it); }
+      }
+      if (it.cat === 'net' && m >= 5000) checks.push(it.name + '：スマホと同じ会社にそろえると「セット割」が使える場合があります。契約中の会社の条件を確認しましょう。');
+      if (it.cat === 'energy') checks.push(it.name + '：契約アンペア（電気）や料金プランが今の暮らしに合っているか、検針票で確認しましょう。');
+      if (it.cat === 'ins') checks.push(it.name + '：保障の内容が今の家族構成に合っているかを確認しましょう（削減額は計算しません）。');
+    });
+    Object.keys(subsByKind).forEach((k) => {
+      const arr = subsByKind[k];
+      if (k !== 'other' && arr.length >= 2) {
+        const cheapest = arr.reduce((a, b) => monthly(a) <= monthly(b) ? a : b);
+        cands.push({ id: cheapest.id, save: monthly(cheapest) * 12, title: KIND[k] + 'のサブスクが' + arr.length + '件', body: arr.map((x) => x.name).join('・') + 'に同時に入っています。1つにまとめると、一番安い「' + cheapest.name + '」をやめても年間' + yen(monthly(cheapest) * 12) + '浮きます。' });
+      }
+    });
+    // 同じ項目への重複を除き、項目ごとに最大の削減額だけを残す
+    const best = {};
+    cands.forEach((c) => { if (!best[c.id] || best[c.id].save < c.save) best[c.id] = c; });
+    const uniq = Object.values(best).sort((a, b) => b.save - a.save);
+    const total = uniq.reduce((s, c) => s + c.save, 0);
+    return { cands: uniq, checks, total };
+  }
+
+  function render() {
+    const mTotal = items.reduce((s, it) => s + monthly(it), 0);
+    $('s-month').textContent = yen(mTotal);
+    $('s-year').textContent = yen(mTotal * 12);
+    const d = diagnose(items);
+    $('s-save').textContent = yen(d.total);
+    const c = $('cands'); c.innerHTML = '';
+    if (!items.length) { c.innerHTML = '<p class="empty">固定費を追加すると、見直し候補がここに出ます。</p>'; }
+    else if (!d.cands.length && !d.checks.length) { c.innerHTML = '<p class="empty">今のところ、見直し候補は見つかりませんでした。</p>'; }
+    d.cands.forEach((x) => {
+      const el = document.createElement('div'); el.className = 'cand';
+      const t = document.createElement('b'); t.textContent = x.title;
+      const y = document.createElement('div'); y.className = 'yen'; y.textContent = '年間 ' + yen(x.save) + ' 浮く可能性';
+      const p = document.createElement('div'); p.textContent = x.body;
+      el.append(t, y, p); c.append(el);
+    });
+    d.checks.forEach((txt) => { const el = document.createElement('div'); el.className = 'check'; el.textContent = txt; c.append(el); });
+
+    const ul = $('items'); ul.innerHTML = '';
+    items.forEach((it) => {
+      const li = document.createElement('li');
+      const left = document.createElement('div');
+      const n = document.createElement('div'); n.className = 'it-name'; n.textContent = it.name;
+      const meta = document.createElement('div'); meta.className = 'it-meta';
+      let mt = CAT[it.cat] + (it.cat === 'sub' ? '・' + KIND[it.kind || 'other'] : '');
+      if (it.cat === 'phone' && typeof it.gb === 'number') mt += '・' + it.gb + 'GB';
+      if ((it.cat === 'sub' || it.cat === 'gym') && typeof it.uses === 'number') mt += '・先月' + it.uses + '回';
+      meta.textContent = mt; left.append(n, meta);
+      const right = document.createElement('div'); right.style.cssText = 'display:flex;align-items:center;gap:8px';
+      const a = document.createElement('span'); a.className = 'it-amt'; a.textContent = (it.cycle === 'year' ? '年' : '月') + yen(it.amount);
+      const del = document.createElement('button'); del.className = 'ghost small'; del.type = 'button'; del.textContent = '削除'; del.setAttribute('aria-label', it.name + 'を削除');
+      del.addEventListener('click', () => { items = items.filter((x) => x.id !== it.id); save(); render(); track('item_delete', { category: it.cat }); });
+      right.append(a, del); li.append(left, right); ul.append(li);
+    });
+    $('empty').classList.toggle('hide', items.length > 0);
+    $('count').textContent = '（' + items.length + ' / ' + FREE_LIMIT + '件）';
+  }
+
+  function syncFields() {
+    const cat = $('cat').value;
+    $('f-gb').classList.toggle('hide', cat !== 'phone');
+    $('f-kind').classList.toggle('hide', cat !== 'sub');
+    $('f-uses').classList.toggle('hide', !(cat === 'sub' || cat === 'gym'));
+    const ph = { phone: '例：スマホ', sub: '例：動画配信サービス', gym: '例：ジム', net: '例：光回線', energy: '例：電気', ins: '例：医療保険', other: '例：駐車場' };
+    $('name').placeholder = ph[cat];
+  }
+  $('cat').addEventListener('change', syncFields);
+
+  $('add').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const err = $('add-err'); err.textContent = '';
+    if (items.length >= FREE_LIMIT) { track('limit_reached', {}); try { $('limit').showModal(); } catch (x) { err.textContent = '無料版は10件までです。'; } return; }
+    const cat = $('cat').value;
+    const name = $('name').value.trim() || CAT[cat];
+    const amount = Number($('amount').value);
+    if (!$('amount').value || !isFinite(amount) || amount < 0) { err.textContent = '金額を0以上の数字で入れてください。'; $('amount').focus(); return; }
+    const it = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), cat, name, amount, cycle: $('cycle').value };
+    if (cat === 'phone' && $('gb').value !== '') { const g = Number($('gb').value); if (!isFinite(g) || g < 0) { err.textContent = 'データ使用量を0以上の数字で入れてください。'; return; } it.gb = g; }
+    if (cat === 'sub') it.kind = $('kind').value;
+    if ((cat === 'sub' || cat === 'gym') && $('uses').value !== '') { const u = Number($('uses').value); if (!Number.isInteger(u) || u < 0) { err.textContent = '使った回数を0以上の整数で入れてください。'; return; } it.uses = u; }
+    items.push(it); save(); render();
+    track('item_add', { category: cat, count: items.length });
+    $('name').value = ''; $('amount').value = ''; $('gb').value = ''; $('uses').value = '';
+    $('res-h').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  $('limit-ok').addEventListener('click', () => $('limit').close());
+  $('btn-clear').addEventListener('click', () => { if (!items.length) return; if (confirm('登録した固定費をすべて消しますか？')) { items = []; save(); render(); track('clear_all', {}); } });
+  $('btn-csv').addEventListener('click', () => {
+    track('premium_interest', { plan: 'csv_export' });
+    $('pr-msg').textContent = 'CSV書き出しはプレミアムの機能です（近日公開）。';
+    $('pr-h').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  document.querySelectorAll('.plan').forEach((b) => b.addEventListener('click', () => {
+    track('premium_interest', { plan: b.dataset.plan });
+    $('pr-msg').textContent = 'ありがとうございます。「' + b.querySelector('b').textContent + '」への関心を記録しました。公開までもうしばらくお待ちください。';
+  }));
+
+  syncFields(); render();
+  window.__kotei = { diagnose, bench, monthly };
+})();
+</script>
+</body>
+</html>
