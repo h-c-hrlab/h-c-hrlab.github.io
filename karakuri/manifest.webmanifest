@@ -1,7 +1,7 @@
 {
   "name": "からくりねじ",
   "short_name": "からくりねじ",
-  "description": "紋のねじを外して、からくり箱を開ける。広告なし・毎日1面。",
+  "description": "簡単なねじ外しに慣れた人へ、本気で難しいねじ外し。広告なし・毎日1面。",
   "lang": "ja",
   "start_url": "./?utm_source=homescreen",
   "scope": "./",

@@ -1,6 +1,6 @@
 // からくりねじ：電波がなくても遊べるように、アプリのファイルを保存する。
-const CACHE = 'karakuri-v1';
-const FILES = ['./', './index.html', './engine.js', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-180.png', './privacy.html', './tokushoho.html'];
+const CACHE = 'karakuri-v2';
+const FILES = ['./', './index.html', './engine.js', './hints.js', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-180.png', './privacy.html', './tokushoho.html'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', (e) => {

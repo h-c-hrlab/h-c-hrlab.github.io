@@ -24,15 +24,17 @@
   function hashStr(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
 
   // 面の大きさ：面の番号で少しずつ難しく
+  // 難しさ：簡単なねじ外しに慣れた人向け。1〜2面だけ練習、3面から本番。
+  // band は「先の箱を見て、予備の穴を節約する」賢い遊び方（smart）で解ける割合の幅。
   function paramsFor(n) {
     const k = Math.max(1, n);
-    if (k > 30) {
-      // 31面から先：面ごとに形を変える（板の数・錠・色・板の長さ）。10面ごとに少しやさしい「ひと息」の面
-      const h = hashStr('shape-' + k), rest = k % 10 === 0, long = (h >>> 9) % 3;
-      return { plates: rest ? 9 + (h % 3) : 10 + (h % 6), colors: 6 + ((h >>> 3) % 3), swaps: 0, win: 0, triple: 0.2 + ((h >>> 5) % 4) * 0.1, locks: rest ? 1 : 1 + ((h >>> 7) % 4),
-        lenMin: [90, 110, 140][long], lenSpan: [90, 130, 120][long], band: rest ? [0.45, 0.92] : [0.12, 0.75] };
-    }
-    return { plates: Math.min(4 + Math.floor((k - 1) / 3), 15), colors: Math.min(3 + Math.floor((k - 1) / 8), 8), swaps: Math.min(4 + k * 2, 120), win: Math.min(4 + Math.floor(k / 3), 20), triple: Math.min(0.15 + k * 0.01, 0.5), locks: k < 6 ? 0 : k < 16 ? 1 : k < 40 ? 2 : 3, band: k <= 5 ? [0, 1] : k <= 15 ? [0.3, 0.97] : k <= 30 ? [0.3, 0.88] : [0.12, 0.75] };
+    if (k <= 2) return { plates: 4 + k, colors: 3, triple: 0.2, locks: 0, band: [0, 1] };
+    if (k <= 10) return { plates: 7 + Math.floor((k - 3) / 2), colors: Math.min(4 + Math.floor((k - 3) / 3), 6), triple: 0.25, locks: k < 5 ? 1 : 2, band: k <= 5 ? [0.2, 0.75] : [0.08, 0.5] };
+    if (k <= 30) return { plates: Math.min(11 + Math.floor((k - 11) / 4), 15), colors: Math.min(6 + Math.floor((k - 11) / 8), 8), triple: 0.35, locks: k < 20 ? 2 : 3, band: [0.03, 0.3] };
+    // 31面から先：面ごとに形を変える（板の数・錠・色・板の長さ）。10面ごとに少しだけやさしい「ひと息」の面
+    const h = hashStr('shape-' + k), rest = k % 10 === 0, long = (h >>> 9) % 3;
+    return { plates: rest ? 11 + (h % 3) : 12 + (h % 4), colors: rest ? 6 : 6 + ((h >>> 3) % 3), triple: 0.3 + ((h >>> 5) % 3) * 0.1, locks: rest ? 2 : 2 + ((h >>> 7) % 3),
+      lenMin: [90, 110, 140][long], lenSpan: [90, 130, 120][long], band: rest ? [0.15, 0.45] : [0.01, 0.2] };
   }
 
   // 点が板（回った長方形）の上か
@@ -41,20 +43,22 @@
     return Math.abs(lx) <= p.len / 2 + pad && Math.abs(ly) <= p.th / 2 + pad;
   }
 
-  function generate(seed, n) {
+  // hint：前もって調べた「何番目の試しで作るか」。あれば1回で作れる（スマホで待たせない）
+  function generate(seed, n, hint) {
     const P = paramsFor(n);
-    for (let attempt = 0; attempt < 120; attempt++) {
-      const r = rng(seed + attempt * 7919), lv = tryGen(r, P);
-      if (lv) { lv.seed = seed; lv.n = n; return lv; }
+    if (Number.isInteger(hint) && hint >= 0) { const lv = tryGen(rng(seed + hint * 7919), P, true); if (lv) { lv.seed = seed; lv.n = n; lv.attempt = hint; return lv; } }
+    for (let attempt = 0; attempt < 900; attempt++) {
+      const loose = attempt >= 450, lv = tryGen(rng(seed + attempt * 7919), P, false, loose);
+      if (lv) { lv.seed = seed; lv.n = n; lv.attempt = attempt; return lv; }
     }
     return null;
   }
-  function tryGen(r, P) {
+  function tryGen(r, P, skipBand, loose) {
     const plates = [], screws = [], ROTS = [0, Math.PI / 2, Math.PI / 4, -Math.PI / 4, Math.PI / 6, -Math.PI / 6, Math.PI / 3, -Math.PI / 3];
     for (let i = 0; i < P.plates; i++) {
       let placed = false;
       for (let t = 0; t < 80 && !placed; t++) {
-        const len = (P.lenMin || 110) + Math.floor(r() * (P.lenSpan || 130)), th = 46, rot = ROTS[Math.floor(r() * ROTS.length)];
+        const len = (P.lenMin || 100) + Math.floor(r() * (P.lenSpan || 130)), th = 46, rot = ROTS[Math.floor(r() * ROTS.length)];
         const x = 50 + r() * (BW - 100), y = 50 + r() * (BH - 100);
         const three = r() < P.triple && len > 170, offs = three ? [-(len / 2 - 22), 0, len / 2 - 22] : [-(len / 2 - 22), len / 2 - 22];
         const pts = offs.map((o) => [x + Math.cos(rot) * o, y + Math.sin(rot) * o]);
@@ -103,8 +107,11 @@
       p.lock = opts[Math.floor(r() * opts.length)];
     } lv.order = order; lv.peak = peak; lv.total = screws.length;
     // 手ごたえ：同じ色の箱があればそこへ入れる、という素直な遊び方で何割解けるか
-    lv.ease = greedyRate(lv, 60, r);
-    const [lo, hi] = P.band; if (lv.ease < lo || lv.ease > hi) return null;
+    if (skipBand) return lv;
+    const [lo, hi0] = P.band, hi = loose ? Math.min(1, hi0 + 0.2) : hi0;
+    const quick = smartRate(lv, 10, r); if (quick > hi + 0.3 || (lo > 0.1 && quick === 0)) return null;
+    lv.smart = (quick * 10 + smartRate(lv, 30, r) * 30) / 40;
+    if (lv.smart < (loose ? 0 : lo) || lv.smart > hi) return null;
     return lv;
   }
   function covered(lv, st, sid) {
@@ -148,6 +155,25 @@
       for (let step = 0; step < 400; step++) {
         const can = lv.screws.filter((s) => canTake(lv, g, s.id)); if (!can.length) break;
         const m = can.filter((s) => g.boxes.some((b) => b && b.color === s.color && b.n < PER)); const pick = m.length ? m : can;
+        const ev = take(lv, g, pick[Math.floor(r() * pick.length)].id); if (ev.full || ev.stuck) break; if (ev.win) { ok = true; break; }
+      }
+      if (ok) win++;
+    }
+    return win / tries;
+  }
+  // 賢い遊び方：合う箱があればそこへ。なければ「次に来る箱の色」に近いねじを予備の穴へ（予備の穴が残り1なら、板を落とせるねじを優先）
+  function smartRate(lv, tries, r) {
+    let win = 0;
+    for (let t = 0; t < tries; t++) {
+      const g = newState(lv); let ok = false;
+      for (let step = 0; step < 400; step++) {
+        const can = lv.screws.filter((s) => canTake(lv, g, s.id)); if (!can.length) break;
+        const m = can.filter((s) => g.boxes.some((b) => b && b.color === s.color && b.n < PER)); let pick;
+        if (m.length) pick = m;
+        else {
+          const rank = (c) => { const i = g.queue.indexOf(c, g.next); return i < 0 ? 999 : i - g.next; };
+          const best = Math.min(...can.map((s) => rank(s.color))); pick = can.filter((s) => rank(s.color) === best);
+        }
         const ev = take(lv, g, pick[Math.floor(r() * pick.length)].id); if (ev.full || ev.stuck) break; if (ev.win) { ok = true; break; }
       }
       if (ok) win++;
@@ -199,8 +225,9 @@
   function snapshot(g) { return { removed: g.removed.slice(), fallen: g.fallen.slice(), next: g.next, boxes: g.boxes.map((b) => (b ? { color: b.color, n: b.n, qi: b.qi } : null)), tray: g.tray.slice(), moves: g.moves, done: Object.assign({}, g.done) }; }
   function restore(g, s) { g.removed = s.removed.slice(); g.fallen = s.fallen.slice(); g.next = s.next; g.boxes = s.boxes.map((b) => (b ? { color: b.color, n: b.n, qi: b.qi } : null)); g.tray = s.tray.slice(); g.moves = s.moves; g.done = Object.assign({}, s.done); }
 
-  function level(n) { return generate(hashStr('karakuri-v' + VERSION + '-' + n), n); }
-  function daily(dateKey) { const lv = generate(hashStr('karakuri-daily-v' + VERSION + '-' + dateKey), 18); return lv; }
+  const HINTS = (root.KarakuriHints && root.KarakuriHints.v === VERSION) ? root.KarakuriHints : { lv: [], daily: {} };
+  function level(n) { return generate(hashStr('karakuri-v' + VERSION + '-' + n), n, HINTS.lv[n]); }
+  function daily(dateKey) { return generate(hashStr('karakuri-daily-v' + VERSION + '-' + dateKey), 15, HINTS.daily[dateKey]); }
 
-  root.KarakuriEngine = { VERSION, BW, BH, SR, TRAY, SLOTS, PER, COLORS, MON, rng, hashStr, paramsFor, generate, level, daily, newState, solve, take, canTake, covered, locked, snapshot, restore, onPlate, simulate };
+  root.KarakuriEngine = { VERSION, BW, BH, SR, TRAY, SLOTS, PER, COLORS, MON, rng, hashStr, paramsFor, generate, level, daily, newState, solve, smartRate, greedyRate, take, canTake, covered, locked, snapshot, restore, onPlate, simulate };
 })(typeof window !== 'undefined' ? window : globalThis);
