@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YPSE6ZHVK1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  (function () { var sp = new URLSearchParams(location.search); sp.delete('session_id'); var q = sp.toString();
+    gtag('config', 'G-YPSE6ZHVK1', { page_location: location.origin + location.pathname + (q ? '?' + q : '') }); })();
+</script>
+<title>からくりねじ｜紋のねじを外して、からくり箱を開ける</title>
+<meta name="description" content="家紋のねじを同じ紋の箱へ。板を全部外すと、からくり箱が開きます。紋の錠は、その紋の箱を満たすと外れる。全部の面が道具なしで解けることを確かめてあります。広告なし・毎日1面。">
+<meta name="theme-color" content="#3A281D">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --kiri:#EEE4D2; --kiri-2:#E3D5BC; --urushi:#3A281D; --urushi-2:#563C2B; --kin:#B8924A; --ink:#2B221C; --ink-2:#6A5C4F; --shu:#B9432D; --line:#CDBB9C;
+    --mincho:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif; --gothic:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;color:var(--ink);font-family:var(--gothic);line-height:1.75;background:var(--kiri);-webkit-font-smoothing:antialiased;
+    background-image:repeating-linear-gradient(92deg,rgba(150,110,60,.05) 0 2px,transparent 2px 9px,rgba(150,110,60,.035) 9px 10px,transparent 10px 17px)}
+  body.big{font-size:118%}
+  button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+  :focus-visible{outline:2px solid var(--shu);outline-offset:3px}
+  .hide{display:none!important}
+  .wrap{max-width:760px;margin:0 auto;padding:0 14px}
+  /* 寄木の帯 */
+  .yosegi{height:16px;background:
+    linear-gradient(135deg,#C9A06A 25%,transparent 25%) -8px 0/16px 16px,linear-gradient(225deg,#8C5E3A 25%,transparent 25%) -8px 0/16px 16px,
+    linear-gradient(315deg,#E3C99A 25%,transparent 25%) 0 0/16px 16px,linear-gradient(45deg,#6E4529 25%,transparent 25%) 0 0/16px 16px,#B98A57}
+  header.top{background:var(--urushi);color:#F1E6D2}
+  header.top .wrap{padding-top:18px;padding-bottom:16px;display:flex;align-items:center;gap:14px}
+  .logo{width:56px;height:56px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F3D88E,#B8924A 55%,#7A5A26);display:grid;place-items:center;box-shadow:inset 0 -3px 6px rgba(0,0,0,.35)}
+  .logo i{width:30px;height:30px;border-radius:50%;background:var(--shu);display:block;position:relative}
+  .logo i{background:var(--urushi-2)!important;box-shadow:inset 0 2px 3px rgba(0,0,0,.5)}
+  .logo i::before{content:"";position:absolute;left:50%;top:50%;width:24px;height:5px;border-radius:2px;background:#E9D9A8;transform:translate(-50%,-50%) rotate(-30deg)}
+  .top h1{margin:0;font-family:var(--mincho);font-weight:800;font-size:clamp(28px,7.5vw,38px);letter-spacing:.14em;line-height:1.15}
+  .top p{margin:2px 0 0;font-size:12.5px;letter-spacing:.12em;opacity:.8}
+  h2{font-family:var(--mincho);font-weight:800;font-size:20px;letter-spacing:.08em;margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+  h2::before{content:"";width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F3D88E,#B8924A 60%,#7A5A26);flex:none}
+  .sub{font-size:13px;color:var(--ink-2);margin:-4px 0 10px}
+  .card{background:#F6EFE2;border:1px solid var(--line);padding:14px 16px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:0 20px;border:1.5px solid var(--urushi);background:#F6EFE2;font-weight:700;font-size:15px;white-space:nowrap}
+  .btn.dark{background:var(--urushi);color:#F1E6D2}
+  .btn.shu{background:var(--shu);border-color:var(--shu);color:#fff}
+  .btn.sm{min-height:36px;padding:0 12px;font-size:13px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .daily{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .daily b{font-family:var(--mincho);font-size:19px}
+  .daily .meta{font-size:13px;color:var(--ink-2)}
+  /* 面の一覧：小箱 */
+  .levels{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px}
+  .lv{min-width:0;overflow:hidden;padding-bottom:12px;font-size:clamp(13px,4.6vw,20px)!important;letter-spacing:-.04em}
+  .lv{aspect-ratio:1;position:relative;background:linear-gradient(160deg,#C79A63,#9C6B3F);border:1.5px solid #6E4529;display:grid;place-items:center;font-family:var(--mincho);font-weight:800;font-size:20px;color:#2B1A10;box-shadow:inset 0 2px 0 rgba(255,255,255,.25),0 3px 0 #6E4529}
+  .lv small{position:absolute;bottom:3px;left:0;right:0;font-family:var(--gothic);font-weight:500;font-size:10.5px;text-align:center;color:#3A2516}
+  .lv.locked{background:#D9CCB4;color:#9A8A74;box-shadow:none;border-color:#BFAE90}
+  .lv.done::after{content:"開";position:absolute;top:-7px;right:-7px;width:24px;height:24px;border-radius:50%;background:var(--shu);color:#fff;font-size:12px;display:grid;place-items:center;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .lv.paid{background:#E6DAC4;color:#7D6C56;box-shadow:none;border-style:dashed}
+  .menu dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:4px 16px;font-size:14px}
+  .menu dt{border-bottom:1px dotted var(--ink-2)}
+  .menu dd{margin:0;font-family:var(--mincho);font-weight:800}
+  .note{font-size:12px;color:var(--ink-2)}
+  .note a,.foot a{color:var(--ink-2)}
+  .msg{font-size:13.5px;color:#2F5D3B;min-height:1.3em;margin:8px 0 0}
+  .switch{display:flex;align-items:center;gap:10px;font-size:14px;min-height:44px}
+  .switch input{width:22px;height:22px;accent-color:var(--urushi)}
+  .foot{padding:22px 0 40px;font-size:12px;color:var(--ink-2);text-align:center}
+  /* 遊ぶ画面 */
+  #play{position:fixed;inset:0;background:#2E2018;display:flex;flex-direction:column;z-index:10;color:#F1E6D2}
+  .bar{display:flex;align-items:center;gap:6px;padding:8px 10px;padding-top:max(8px,env(safe-area-inset-top));background:#22170F}
+  .bar .ttl{flex:1;min-width:0;font-family:var(--mincho);font-weight:800;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar .mv{font-size:12.5px;opacity:.85;font-variant-numeric:tabular-nums}
+  .bar button{min-height:40px;min-width:40px;padding:0 10px;border:1.5px solid rgba(241,230,210,.55);font-size:13.5px}
+  .bar button:disabled{opacity:.35}
+  #stage{flex:1;position:relative;overflow:hidden;touch-action:manipulation}
+  #cv{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;touch-action:manipulation}
+  #toast{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(241,230,210,.95);color:var(--ink);font-size:13.5px;padding:6px 14px;pointer-events:none;opacity:0;transition:opacity .2s;max-width:92%;text-align:center}
+  #toast.on{opacity:1}
+  dialog{border:1.5px solid var(--urushi);padding:0;background:#F6EFE2;color:var(--ink);width:min(420px,calc(100% - 24px))}
+  dialog::backdrop{background:rgba(34,23,15,.6)}
+  .dlg{padding:20px;text-align:center}
+  .dlg h3{font-family:var(--mincho);font-weight:800;font-size:22px;margin:0 0 4px;letter-spacing:.1em}
+  .dlg p{margin:4px 0}
+  .dlg .row{justify-content:center;margin-top:14px}
+  @media (max-width:420px){.wrap{padding:0 10px}.levels{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><span class="logo" aria-hidden="true"><i></i></span><div><h1>からくりねじ</h1><p>紋のねじを外して、箱を開ける</p></div></div></header>
+<div class="yosegi" aria-hidden="true"></div>
+<main class="wrap" id="home">
+  <h2>きょうの箱</h2>
+  <div class="card daily"><div><b id="daily-ttl"></b><div class="meta" id="daily-meta"></div></div><button class="btn dark" type="button" id="btn-daily">開けてみる</button></div>
+
+  <h2>遊び方</h2>
+  <div class="card" style="font-size:14px">
+    <p style="margin:0">ねじを触ると、<b>同じ紋の箱</b>へ入ります。箱は3本で満杯になり、次の箱が来ます。合う箱がないねじは、<b>予備の穴（5つ）</b>へ。予備の穴がいっぱいになると、手詰まりです。</p>
+    <p style="margin:6px 0 0">上の板に隠れたねじは外せません。<b>紋の錠</b>がかかった板は、その紋の箱を1つ満たすと開きます。ねじが無くなった板は落ち、板が全部落ちると、からくり箱が開きます。</p>
+    <p class="note" style="margin:6px 0 0">どの面も、道具を使わずに解けることを確かめてあります。間違えても「もどす」（1面に3回）と「やり直し」は無料です。</p>
+  </div>
+
+  <h2>面を選ぶ</h2>
+  <p class="sub" id="lv-note">1面から順に開きます。</p>
+  <div class="levels" id="levels"></div>
+  <div class="row" style="margin-top:10px"><button class="btn sm hide" type="button" id="btn-more">次の30面を表示</button></div>
+
+  <h2 id="h-menu">お品書き</h2>
+  <div class="card menu" id="menu">
+    <dl><dt>1〜30面・毎日の1面</dt><dd>無料</dd><dt>広告</dt><dd>ありません</dd><dt>31面から先（面は続き、どれも解ける）</dt><dd>買い切り 480円</dd></dl>
+    <p class="note" style="margin:10px 0">月額ではありません。面は自動で作られ、どれも道具なしで解けることを確かめてあります。</p>
+    <div id="buy-box"><button class="btn shu" type="button" id="btn-buy">480円で買い切る</button>
+      <p class="note" id="pr-test" hidden style="margin-top:6px">テスト中のため、実際の請求は発生しません。</p>
+      <p class="note" style="margin-top:6px">お支払いは Stripe で処理され、カード情報はこのアプリに保存されません。<a href="tokushoho.html">特定商取引法に基づく表記</a></p>
+      <details style="margin-top:6px"><summary class="note" style="cursor:pointer">購入済みの方（別の端末で使う）</summary>
+        <input id="restore-code" type="text" autocomplete="off" spellcheck="false" placeholder="購入した端末に出るコード" style="width:100%;font-size:16px;padding:8px;border:1.5px solid var(--urushi);background:#fff;margin-top:6px">
+        <button class="btn sm" type="button" id="btn-restore" style="margin-top:6px">引き継ぐ</button>
+      </details>
+    </div>
+    <div id="owned" class="hide"><p style="margin:0;font-weight:700">買い切り済みです。31面から先も遊べます。</p>
+      <button class="btn sm" type="button" id="btn-show-code" style="margin-top:8px">別の端末で使う</button>
+      <div id="code-box" class="hide" style="margin-top:8px"><p class="note">使いたい端末の「購入済みの方」に貼り付けてください。</p><textarea id="my-code" readonly rows="3" style="width:100%;font-size:12px;word-break:break-all"></textarea><button class="btn sm" type="button" id="btn-copy">コピー</button></div>
+    </div>
+    <p class="msg" id="pr-msg" aria-live="polite"></p>
+  </div>
+
+  <h2>設定と保管</h2>
+  <div class="card">
+    <label class="switch"><input type="checkbox" id="opt-big"> 大きく表示する（紋と文字を大きく）</label>
+    <div class="row" style="margin-top:6px"><button class="btn sm" type="button" id="btn-export">記録を書き出す</button><button class="btn sm" type="button" id="btn-import">読み込む</button><input type="file" id="import-file" accept="application/json,.json" class="hide"></div>
+    <p class="note" style="margin:8px 0 0" id="a2hs">ホーム画面に追加すると、アプリのように開けて、電波がなくても遊べます。しばらく開かないとブラウザが記録を消すことがあるので、時々書き出してください。</p>
+    <p class="msg" id="keep-msg" aria-live="polite"></p>
+  </div>
+  <footer class="foot">からくりねじ ・ 運営 HRlab ・ 広告なし<br>紋は一般的な図形を自分で描いたもので、特定の家の紋ではありません。<br><a href="privacy.html">プライバシー</a> ・ <a href="tokushoho.html">特定商取引法に基づく表記</a></footer>
+</main>
+
+<section id="play" class="hide" aria-label="遊ぶ画面">
+  <div class="bar">
+    <button type="button" id="btn-back" aria-label="もどる（面の一覧へ）">←</button>
+    <span class="ttl" id="play-ttl"></span>
+    <span class="mv" id="play-mv"></span>
+    <button type="button" id="btn-undo">もどす</button>
+    <button type="button" id="btn-retry">やり直し</button>
+  </div>
+  <div id="stage"><canvas id="cv" aria-label="からくり箱。ねじを触って外します。"></canvas><div id="toast" role="status" aria-live="polite"></div></div>
+</section>
+
+<dialog id="win-dlg" aria-labelledby="win-h"><div class="dlg">
+  <h3 id="win-h">箱が開きました</h3>
+  <p id="win-sub"></p>
+  <div class="row"><button class="btn" type="button" id="btn-share">結果を送る</button><button class="btn dark" type="button" id="btn-next">次の面へ</button></div>
+  <p class="note" id="win-note" style="margin-top:8px"></p>
+</div></dialog>
+<dialog id="stuck-dlg" aria-labelledby="stuck-h"><div class="dlg">
+  <h3 id="stuck-h">手詰まりです</h3>
+  <p>予備の穴がいっぱいで、外せるねじが入る所がありません。</p>
+  <div class="row"><button class="btn" type="button" id="btn-stuck-undo">一手もどす</button><button class="btn dark" type="button" id="btn-stuck-retry">やり直す</button></div>
+</div></dialog>
+
+<script src="engine.js"></script>
+<script>
+(function () {
+  'use strict';
+  const K = window.KarakuriEngine;
+  const KEY = 'karakuri_v1', PKEY = 'karakuri_premium_v1', PLAN = 'karakuri_lifetime', PRICE = 480, FREE = 30, UNDO = 3;
+  const PAY_API = 'https://kotei-premium.h-c-hrlab.workers.dev';
+  const LINK = 'https://buy.stripe.com/test_fZuaEXeoh4k35NCeagfjG0e';
+  const $ = (id) => document.getElementById(id);
+  const track = (n, p) => { try { if (typeof gtag === 'function') gtag('event', n, p || {}); } catch (e) {} };
+  const KANJI = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+  const kan = (n) => { if (n < 10) return KANJI[n]; if (n < 20) return '十' + (n % 10 ? KANJI[n % 10] : ''); if (n < 100) return KANJI[Math.floor(n / 10)] + '十' + (n % 10 ? KANJI[n % 10] : ''); return String(n).split('').map((d) => KANJI[+d]).join(''); };
+  const pad = (n) => String(n).padStart(2, '0');
+  const today = () => { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+  const jpDate = (k) => kan(+k.slice(5, 7)) + '月' + kan(+k.slice(8)) + '日';
+
+  let db = { v: 1, cleared: {}, daily: {}, big: false, shown: 30 };
+  try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && typeof v === 'object') db = Object.assign(db, v); } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} };
+  let prem = null; try { prem = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) {}
+  const savePrem = () => { try { if (prem) localStorage.setItem(PKEY, JSON.stringify(prem)); else localStorage.removeItem(PKEY); } catch (e) {} };
+  const owned = () => !!(prem && prem.premium && prem.plan === PLAN);
+  const maxOpen = () => { let n = 1; while (db.cleared[n]) n++; return n; };
+  const canPlay = (n) => n <= maxOpen() && (n <= FREE || owned());
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+  if ('serviceWorker' in navigator && location.protocol === 'https:') { navigator.serviceWorker.register('sw.js').catch(() => {}); }
+  document.body.classList.toggle('big', !!db.big); $('opt-big').checked = !!db.big;
+  $('opt-big').addEventListener('change', () => { db.big = $('opt-big').checked; save(); document.body.classList.toggle('big', db.big); if (cur) { layout(); draw(); } });
+
+  function renderHome() {
+    const t = today(), dd = db.daily[t];
+    $('daily-ttl').textContent = jpDate(t) + 'の箱'; $('daily-meta').textContent = dd ? kan(dd) + '手で開きました' : 'だれでも同じ面。毎日かわります。';
+    $('btn-daily').textContent = dd ? 'もう一度' : '開けてみる';
+    const box = $('levels'); box.innerHTML = ''; const mo = maxOpen(), shown = Math.max(30, db.shown || 30);
+    for (let n = 1; n <= shown; n++) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'lv'; b.dataset.n = n; b.textContent = kan(n);
+      const sm = document.createElement('small');
+      if (db.cleared[n]) { b.classList.add('done'); sm.textContent = db.cleared[n] + '手'; }
+      else if (n > FREE && !owned()) { b.classList.add('paid'); sm.textContent = '買い切り'; }
+      else if (n > mo) { b.classList.add('locked'); sm.textContent = 'まだ'; }
+      b.append(sm); b.setAttribute('aria-label', '第' + n + '面' + (db.cleared[n] ? ' 開いた ' + db.cleared[n] + '手' : n > FREE && !owned() ? ' 買い切りで遊べます' : n > mo ? ' まだ開いていません' : ''));
+      b.addEventListener('click', () => startLevel(n)); box.append(b);
+    }
+    $('btn-more').classList.toggle('hide', !(owned() && mo > shown - 5));
+    $('lv-note').textContent = '1面から順に開きます。' + (owned() ? '面はいくらでも続きます。' : '31面から先は買い切りで。');
+    $('buy-box').classList.toggle('hide', owned()); $('owned').classList.toggle('hide', !owned());
+    $('pr-test').hidden = LINK.indexOf('/test_') < 0; if (owned()) $('my-code').value = prem.token || '';
+  }
+  $('btn-more').addEventListener('click', () => { db.shown = (db.shown || 30) + 30; save(); renderHome(); });
+  $('btn-daily').addEventListener('click', () => startDaily());
+
+  // ---- 遊ぶ ----
+  let cur = null, lv = null, g = null, hist = [], undoLeft = UNDO, anims = [], fallen = new Map(), busyUntil = 0;
+  const cv = $('cv'), ctx = cv.getContext('2d');
+  let L = null; // 画面の割り付け（論理座標）
+  function startLevel(n) {
+    if (n > FREE && !owned()) { track('premium_interest', { from: 'level', n }); $('h-menu').scrollIntoView({ behavior: 'smooth', block: 'start' }); $('pr-msg').textContent = '31面から先は、買い切りで遊べます。'; return; }
+    if (n > maxOpen()) { toastHome('前の面を開けると遊べます。'); return; }
+    open({ kind: 'level', n }, K.level(n));
+  }
+  function startDaily() { const t = today(); open({ kind: 'daily', date: t }, K.daily(t)); }
+  function toastHome(t) { $('pr-msg').textContent = ''; $('keep-msg').textContent = t; }
+  function open(info, level) {
+    cur = info; lv = level; g = K.newState(lv); hist = []; undoLeft = UNDO; anims = []; fallen = new Map();
+    $('home').classList.add('hide'); document.querySelector('header.top').classList.add('hide'); document.querySelector('.yosegi').classList.add('hide'); $('play').classList.remove('hide');
+    $('play-ttl').textContent = info.kind === 'daily' ? jpDate(info.date) + 'の箱' : '第' + kan(info.n) + '面';
+    try { history.pushState({ play: 1 }, ''); } catch (e) {}
+    track('level_start', info.kind === 'daily' ? { daily: 1 } : { n: info.n });
+    layout(); updateBar(); draw();
+  }
+  function updateBar() { $('play-mv').textContent = g.moves + '手'; $('btn-undo').textContent = 'もどす ' + undoLeft; $('btn-undo').disabled = !hist.length || undoLeft <= 0; }
+  function layout() {
+    const r = $('stage').getBoundingClientRect(), W = 360, top = 150, H = top + K.BH + 10;
+    const s = Math.min(r.width / W, r.height / H), dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    cv.style.width = W * s + 'px'; cv.style.height = H * s + 'px'; cv.width = Math.round(W * s * dpr); cv.height = Math.round(H * s * dpr);
+    L = { W, H, s, dpr, top, box: (i) => ({ x: 14 + i * 172, y: 10, w: 160, h: 66 }), tray: (i) => ({ x: 52 + i * 64, y: 108 }) };
+  }
+  window.addEventListener('resize', () => { if (cur) { layout(); draw(); } });
+
+  // 絵：紋
+  function mon(c, id, x, y, r, col) {
+    c.save(); c.translate(x, y); c.fillStyle = col; c.strokeStyle = col; c.lineWidth = Math.max(1.6, r * 0.2);
+    const big = db.big ? 1.12 : 1; r *= big;
+    if (id === 'maru') { c.beginPath(); c.arc(0, 0, r * 0.62, 0, 7); c.stroke(); }
+    else if (id === 'hishi') { c.beginPath(); c.moveTo(0, -r * 0.75); c.lineTo(r * 0.55, 0); c.lineTo(0, r * 0.75); c.lineTo(-r * 0.55, 0); c.closePath(); c.fill(); }
+    else if (id === 'uroko') { c.beginPath(); c.moveTo(0, -r * 0.7); c.lineTo(r * 0.68, r * 0.5); c.lineTo(-r * 0.68, r * 0.5); c.closePath(); c.fill(); }
+    else if (id === 'kikko') { c.beginPath(); for (let k = 0; k < 6; k++) { const a = Math.PI / 6 + k * Math.PI / 3; c.lineTo(Math.cos(a) * r * 0.7, Math.sin(a) * r * 0.7); } c.closePath(); c.stroke(); }
+    else if (id === 'igeta') { const a = r * 0.28, b = r * 0.72; c.beginPath(); c.moveTo(-a, -b); c.lineTo(-a, b); c.moveTo(a, -b); c.lineTo(a, b); c.moveTo(-b, -a); c.lineTo(b, -a); c.moveTo(-b, a); c.lineTo(b, a); c.stroke(); }
+    else if (id === 'sakura') { for (let k = 0; k < 5; k++) { const a = -Math.PI / 2 + k * Math.PI * 2 / 5; c.beginPath(); c.arc(Math.cos(a) * r * 0.38, Math.sin(a) * r * 0.38, r * 0.3, 0, 7); c.fill(); } }
+    else if (id === 'mitsuboshi') { [[0, -0.38], [-0.36, 0.26], [0.36, 0.26]].forEach(([a, b]) => { c.beginPath(); c.arc(a * r, b * r, r * 0.22, 0, 7); c.fill(); }); }
+    else if (id === 'kaku') { c.strokeRect(-r * 0.5, -r * 0.5, r, r); }
+    c.restore();
+  }
+  function lum(hex) { const n = parseInt(hex.slice(1), 16); return ((n >> 16) * 0.299 + ((n >> 8) & 255) * 0.587 + (n & 255) * 0.114) / 255; }
+  function screwAt(c, x, y, color, alpha, r) {
+    const C = K.COLORS[color]; r = r || K.SR; c.save(); c.globalAlpha = alpha == null ? 1 : alpha;
+    c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.arc(x + 1.2, y + 2, r, 0, 7); c.fill();
+    const gr = c.createRadialGradient(x - r * 0.35, y - r * 0.4, 1, x, y, r); gr.addColorStop(0, '#F6E2A6'); gr.addColorStop(0.55, '#C39A4E'); gr.addColorStop(1, '#7B5A25');
+    c.fillStyle = gr; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill();
+    c.fillStyle = C.hex; c.beginPath(); c.arc(x, y, r * 0.74, 0, 7); c.fill();
+    mon(c, C.mon, x, y, r * 0.72, lum(C.hex) > 0.6 ? '#3A2A1C' : '#FBF5E8');
+    c.restore();
+  }
+  const WOOD = [['#D9B07A', '#C39457'], ['#B97F4A', '#9E6738'], ['#E2C79A', '#CDAF7D'], ['#9A6440', '#7F4F30']];
+  function plateAt(c, p, alpha) {
+    c.save(); c.globalAlpha = alpha == null ? 1 : alpha; c.translate(p.x, p.y); c.rotate(p.rot);
+    const w = p.len, h = p.th, rr = h / 2, wd = WOOD[p.wood];
+    c.fillStyle = 'rgba(0,0,0,.35)'; rrect(c, -w / 2 + 2, -h / 2 + 4, w, h, rr); c.fill();
+    const gr = c.createLinearGradient(0, -h / 2, 0, h / 2); gr.addColorStop(0, wd[0]); gr.addColorStop(1, wd[1]); c.fillStyle = gr; rrect(c, -w / 2, -h / 2, w, h, rr); c.fill();
+    c.strokeStyle = 'rgba(80,45,20,.28)'; c.lineWidth = 1; for (let k = -2; k <= 2; k++) { c.beginPath(); c.moveTo(-w / 2 + rr * 0.6, k * 7); c.bezierCurveTo(-w / 6, k * 7 + 3, w / 6, k * 7 - 3, w / 2 - rr * 0.6, k * 7 + (p.id % 3) - 1); c.stroke(); }
+    c.strokeStyle = 'rgba(50,28,12,.55)'; c.lineWidth = 1.4; rrect(c, -w / 2, -h / 2, w, h, rr); c.stroke();
+    // 穴
+    lv.screws.forEach((s) => { if (s.plate !== p.id) return; const dx = s.x - p.x, dy = s.y - p.y, cs = Math.cos(-p.rot), sn = Math.sin(-p.rot); const lx = dx * cs - dy * sn, ly = dx * sn + dy * cs; c.fillStyle = '#20140C'; c.beginPath(); c.arc(lx, ly, K.SR * 0.62, 0, 7); c.fill(); });
+    c.restore();
+  }
+  function lockAt(c, p, color) {
+    const C = K.COLORS[color]; c.save();
+    const mid = lv.screws.some((s) => s.plate === p.id && Math.hypot(s.x - p.x, s.y - p.y) < 5), o = mid ? (p.len / 2 - 22) / 2 : 0; c.translate(p.x + Math.cos(p.rot) * o, p.y + Math.sin(p.rot) * o);
+    c.fillStyle = 'rgba(0,0,0,.35)'; rrect(c, -15, -13, 32, 30, 6); c.fill();
+    const gr = c.createLinearGradient(0, -15, 0, 15); gr.addColorStop(0, '#E8CB82'); gr.addColorStop(1, '#8E6B2C'); c.fillStyle = gr; rrect(c, -16, -15, 32, 30, 6); c.fill();
+    c.strokeStyle = '#5A4318'; c.lineWidth = 3; c.beginPath(); c.arc(0, -15, 8, Math.PI, 0); c.stroke();
+    c.fillStyle = C.hex; c.beginPath(); c.arc(0, 1, 10, 0, 7); c.fill(); mon(c, C.mon, 0, 1, 9.5, lum(C.hex) > 0.6 ? '#3A2A1C' : '#FBF5E8');
+    c.restore();
+  }
+  function rrect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+
+  // 動き
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  function pending(kind, key, now) { return anims.filter((a) => a.type === 'fly' && a.kind === kind && a.key === key && now < a.t0 + a.dur).length; }
+  function draw() { requestAnimationFrame(render); }
+  function render() {
+    if (!cur) return; const now = performance.now(), c = ctx, s = L.s * L.dpr;
+    c.setTransform(s, 0, 0, s, 0, 0); c.clearRect(0, 0, L.W, L.H);
+    // 箱（上）
+    for (let i = 0; i < K.SLOTS; i++) {
+      const bx = L.box(i), b = g.boxes[i];
+      const leaving = anims.find((a) => a.type === 'boxout' && a.slot === i && now < a.t0 + a.dur);
+      drawBoxFrame(c, bx, null, 0, 0.25);
+      if (leaving) { const t = Math.max(0, (now - leaving.t0) / leaving.dur); const off = now < leaving.t0 ? 0 : -ease(t) * 90; drawBox(c, { x: bx.x, y: bx.y + off, w: bx.w, h: bx.h }, leaving.color, PERfill(leaving.qi, 3, now), 1 - Math.max(0, t)); }
+      if (b) { const enter = anims.find((a) => a.type === 'boxin' && a.qi === b.qi && now < a.t0 + a.dur); let off = 0; if (enter) { const t = Math.max(0, (now - enter.t0) / enter.dur); off = (1 - ease(t)) * 200 * (i === 0 ? -1 : 1); if (now < enter.t0) off = 400; } drawBox(c, { x: bx.x + off, y: bx.y, w: bx.w, h: bx.h }, b.color, PERfill(b.qi, b.n, now), 1); }
+    }
+    // 予備の穴
+    c.fillStyle = 'rgba(255,255,255,.06)'; rrect(c, 24, 88, 312, 42, 21); c.fill();
+    const hideT = pending('tray', 0, now), shown = g.tray.length - hideT;
+    for (let i = 0; i < K.TRAY; i++) { const t = L.tray(i); c.fillStyle = '#140C07'; c.beginPath(); c.arc(t.x, t.y, 12, 0, 7); c.fill(); c.strokeStyle = 'rgba(241,230,210,.25)'; c.lineWidth = 1; c.stroke(); if (i < shown) screwAt(c, t.x, t.y, g.tray[i], 1, 13); }
+    if (g.tray.length >= K.TRAY - 1) { c.fillStyle = g.tray.length >= K.TRAY ? '#E6735C' : '#E8C07A'; c.font = '600 11px "Zen Kaku Gothic New", sans-serif'; c.textAlign = 'center'; c.fillText(g.tray.length >= K.TRAY ? '予備の穴がいっぱい' : '予備の穴 のこり1', 180, 145); }
+    // 箱の中（板とねじ）
+    c.save(); c.translate(0, L.top);
+    const gr = c.createLinearGradient(0, 0, 0, K.BH); gr.addColorStop(0, '#4A3224'); gr.addColorStop(1, '#2C1D14'); c.fillStyle = gr; rrect(c, 4, 0, K.BW - 8, K.BH, 10); c.fill();
+    c.strokeStyle = '#8C5E3A'; c.lineWidth = 5; rrect(c, 4, 0, K.BW - 8, K.BH, 10); c.stroke();
+    lv.plates.forEach((p) => {
+      if (g.fallen[p.id]) { const f = fallen.get(p.id); if (!f || now > f.t0 + 700) return; const t = (now - f.t0) / 700; c.save(); c.translate(0, t * t * 380); c.translate(p.x, p.y); c.rotate(f.dir * t * 0.6); c.translate(-p.x, -p.y); plateAt(c, p, 1 - t); c.restore(); return; }
+      plateAt(c, p, 1);
+      if (p.lock !== undefined && !g.done[p.lock]) lockAt(c, p, p.lock);
+      lv.screws.forEach((sc) => { if (sc.plate === p.id && !g.removed[sc.id]) screwAt(c, sc.x, sc.y, sc.color, 1); });
+    });
+    c.restore();
+    // 飛んでいるねじ
+    anims.forEach((a) => { if (a.type !== 'fly' || now < a.t0 || now > a.t0 + a.dur) return; const t = ease((now - a.t0) / a.dur); const x = a.fx + (a.tx - a.fx) * t, y = a.fy + (a.ty - a.fy) * t - Math.sin(t * Math.PI) * 40; screwAt(c, x, y, a.color, 1, K.SR * (1 - 0.15 * t)); });
+    // 揺れ（外せないねじ）
+    anims.forEach((a) => { if (a.type !== 'shake' || now > a.t0 + a.dur) return; const t = (now - a.t0) / a.dur; c.save(); c.strokeStyle = 'rgba(232,192,122,' + (1 - t) + ')'; c.lineWidth = 3; c.beginPath(); c.arc(a.x, a.y + L.top, K.SR + 4 + t * 6, 0, 7); c.stroke(); c.restore(); });
+    anims = anims.filter((a) => now < a.t0 + a.dur + 50);
+    if (anims.length || [...fallen.values()].some((f) => now < f.t0 + 700)) draw();
+  }
+  function PERfill(qi, n, now) { return Math.max(0, n - pending('box', qi, now)); }
+  function drawBoxFrame(c, bx) { c.fillStyle = 'rgba(255,255,255,.05)'; rrect(c, bx.x, bx.y, bx.w, bx.h, 8); c.fill(); }
+  function drawBox(c, bx, color, n, alpha) {
+    const C = K.COLORS[color]; c.save(); c.globalAlpha = Math.max(0, alpha);
+    const gr = c.createLinearGradient(0, bx.y, 0, bx.y + bx.h); gr.addColorStop(0, '#C79A63'); gr.addColorStop(1, '#8C5E3A'); c.fillStyle = gr; rrect(c, bx.x, bx.y, bx.w, bx.h, 8); c.fill();
+    c.fillStyle = C.hex; rrect(c, bx.x, bx.y, 34, bx.h, 8); c.fill(); c.fillRect(bx.x + 20, bx.y, 14, bx.h);
+    mon(c, C.mon, bx.x + 17, bx.y + bx.h / 2, 13, lum(C.hex) > 0.6 ? '#3A2A1C' : '#FBF5E8');
+    for (let k = 0; k < K.PER; k++) { const hx = bx.x + 62 + k * 36, hy = bx.y + bx.h / 2; c.fillStyle = '#2A1A10'; c.beginPath(); c.arc(hx, hy, 13, 0, 7); c.fill(); if (k < n) screwAt(c, hx, hy, color, 1, 13); }
+    c.restore();
+  }
+
+  // 触る
+  function toLogic(e) { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) / L.s, (e.clientY - r.top) / L.s]; }
+  function screwUnder(x, y) {
+    const by = y - L.top; let best = null;
+    for (const s of lv.screws) {
+      if (g.removed[s.id]) continue; const d = Math.hypot(s.x - x, s.y - by); if (d > K.SR + 9) continue;
+      // 上の板に隠れていれば、その板を触ったことにする
+      if (!best || s.plate > best.s.plate || (s.plate === best.s.plate && d < best.d)) best = { s, d };
+    }
+    if (best) { const topPlate = lv.plates.slice().reverse().find((p) => !g.fallen[p.id] && K.onPlate(x, by, p, 0)); if (topPlate && topPlate.id > best.s.plate && Math.hypot(best.s.x - x, best.s.y - by) > K.SR * 0.6) return { coveredBy: topPlate, s: best.s }; }
+    return best ? { s: best.s } : null;
+  }
+  let toastT = 0; function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 1700); }
+  cv.addEventListener('pointerup', (e) => {
+    if (!cur || !lv) return; const [x, y] = toLogic(e); const hit = screwUnder(x, y); if (!hit) return;
+    const s = hit.s, now = performance.now();
+    if (hit.coveredBy || K.covered(lv, g, s.id)) { anims.push({ type: 'shake', x: s.x, y: s.y, t0: now, dur: 380 }); toast('上の板に隠れていて、外せません'); draw(); return; }
+    if (K.locked(lv, g, s.id)) { const c = K.COLORS[lv.plates[s.plate].lock]; anims.push({ type: 'shake', x: s.x, y: s.y, t0: now, dur: 380 }); toast('紋の錠：' + c.name + '（' + K.MON[c.mon] + '）の箱を1つ満たすと開きます'); draw(); return; }
+    const snap = K.snapshot(g), preTray = g.tray.slice();
+    const ev = K.take(lv, g, s.id);
+    if (ev.full) { toast('予備の穴がいっぱいです'); return; }
+    if (ev.blocked) return;
+    hist.push(snap); track('screw_take', {});
+    // 動き
+    let t = now; const from = { x: s.x, y: s.y + L.top };
+    if (ev.to.box !== undefined) { const bx = L.box(ev.to.box); const k = Math.min(2, (snap.boxes[ev.to.box] ? snap.boxes[ev.to.box].n : 0)); anims.push({ type: 'fly', kind: 'box', key: ev.to.qi, color: s.color, fx: from.x, fy: from.y, tx: bx.x + 62 + k * 36, ty: bx.y + bx.h / 2, t0: t, dur: 260 }); }
+    else { const tt = L.tray(ev.to.tray); anims.push({ type: 'fly', kind: 'tray', key: 0, color: s.color, fx: from.x, fy: from.y, tx: tt.x, ty: tt.y, t0: t, dur: 260 }); }
+    let delay = 260;
+    ev.filled.forEach((f) => { anims.push({ type: 'boxout', slot: f.slot, qi: f.qi, color: f.color, t0: t + delay, dur: 320 }); const nb = g.boxes[f.slot]; if (nb) anims.push({ type: 'boxin', qi: nb.qi, t0: t + delay + 120, dur: 300 }); });
+    if (ev.filled.length) delay += 420;
+    const used = new Set();
+    ev.moved.forEach((m, i) => { let idx = preTray.findIndex((c, j) => c === m.color && !used.has(j)); if (idx < 0) idx = 0; used.add(idx); const tt = L.tray(idx), bx = L.box(m.slot); anims.push({ type: 'fly', kind: 'box', key: m.qi, color: m.color, fx: tt.x, fy: tt.y, tx: bx.x + 62 + Math.min(2, i) * 36, ty: bx.y + bx.h / 2, t0: t + delay + i * 90, dur: 260 }); });
+    ev.dropped.forEach((pid) => fallen.set(pid, { t0: t + 120, dir: Math.random() < 0.5 ? -1 : 1 }));
+    if (ev.filled.some((f) => lv.plates.some((p) => p.lock === f.color && !snap.done[f.color]))) setTimeout(() => toast('紋の錠が外れました'), delay);
+    updateBar(); draw();
+    if (ev.win) setTimeout(win, delay + 500);
+    else if (ev.stuck) setTimeout(() => { try { $('stuck-dlg').showModal(); } catch (x) {} track('level_stuck', {}); }, delay + 200);
+  });
+  function undo() { if (!hist.length || undoLeft <= 0) return; K.restore(g, hist.pop()); undoLeft--; anims = []; fallen = new Map(); updateBar(); draw(); track('undo', {}); }
+  function retry() { g = K.newState(lv); hist = []; undoLeft = UNDO; anims = []; fallen = new Map(); updateBar(); draw(); track('retry', {}); }
+  $('btn-undo').addEventListener('click', undo); $('btn-retry').addEventListener('click', retry);
+  $('btn-stuck-undo').addEventListener('click', () => { $('stuck-dlg').close(); if (undoLeft > 0 && hist.length) undo(); else { toast('もどすは使い切りました。やり直します'); retry(); } });
+  $('btn-stuck-retry').addEventListener('click', () => { $('stuck-dlg').close(); retry(); });
+  function closePlay() { cur = null; lv = null; $('play').classList.add('hide'); $('home').classList.remove('hide'); document.querySelector('header.top').classList.remove('hide'); document.querySelector('.yosegi').classList.remove('hide'); renderHome(); }
+  $('btn-back').addEventListener('click', () => { try { if (history.state && history.state.play) { history.back(); return; } } catch (e) {} closePlay(); });
+  window.addEventListener('popstate', () => { if (!$('play').classList.contains('hide')) closePlay(); });
+
+  function win() {
+    const mv = g.moves;
+    if (cur.kind === 'level') { if (!db.cleared[cur.n] || mv < db.cleared[cur.n]) db.cleared[cur.n] = mv; track('level_clear', { n: cur.n, moves: mv }); }
+    else { if (!db.daily[cur.date] || mv < db.daily[cur.date]) db.daily[cur.date] = mv; track('daily_clear', { moves: mv }); }
+    save();
+    $('win-sub').textContent = (cur.kind === 'daily' ? jpDate(cur.date) + 'の箱を、' : '第' + kan(cur.n) + '面を、') + kan(mv) + '手で開けました。';
+    const nextN = cur.kind === 'level' ? cur.n + 1 : maxOpen();
+    $('btn-next').textContent = nextN > FREE && !owned() ? 'お品書きへ' : '第' + kan(nextN) + '面へ';
+    $('btn-share').classList.toggle('hide', cur.kind !== 'daily');
+    $('win-note').textContent = cur.kind === 'daily' ? '結果を送っても、面の中身は分かりません。' : '';
+    try { $('win-dlg').showModal(); } catch (e) {}
+  }
+  $('btn-next').addEventListener('click', () => { $('win-dlg').close(); const nextN = cur.kind === 'level' ? cur.n + 1 : maxOpen(); if (nextN > FREE && !owned()) { closePlay(); $('h-menu').scrollIntoView({ behavior: 'smooth' }); track('premium_interest', { from: 'next' }); return; } open({ kind: 'level', n: nextN }, K.level(nextN)); });
+  $('win-dlg').addEventListener('cancel', () => { setTimeout(closePlay, 0); });
+  $('btn-share').addEventListener('click', async () => {
+    const text = 'からくりねじ　' + jpDate(cur.date) + 'の箱を ' + kan(g.moves) + '手で開けました';
+    const url = location.origin + location.pathname + '?utm_source=share';
+    track('share', { kind: 'daily' });
+    try { if (navigator.share) { await navigator.share({ text, url }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+    try { await navigator.clipboard.writeText(text + '\n' + url); $('win-note').textContent = 'コピーしました。LINE や SNS に貼り付けて送れます。'; } catch (e) { $('win-note').textContent = text + ' ' + url; }
+  });
+
+  // 購入
+  const msg = (t) => { $('pr-msg').textContent = t || ''; };
+  async function api(path, body) { const opt = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {}; const r = await fetch(PAY_API + path, opt); let j = {}; try { j = await r.json(); } catch (e) {} return { ok: r.ok, status: r.status, data: j }; }
+  $('btn-buy').addEventListener('click', () => { track('begin_checkout', { value: PRICE, currency: 'JPY', items: [{ item_id: PLAN, item_name: 'からくりねじ 買い切り' }] }); location.href = LINK; });
+  async function verifyPurchase(sid) {
+    msg('ご購入を確認しています…'); $('h-menu').scrollIntoView({ block: 'start' }); try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    try { const r = await api('/verify?session_id=' + encodeURIComponent(sid));
+      if (r.ok && r.data.premium && r.data.plan === PLAN) { prem = { token: r.data.token, plan: r.data.plan, premium: true, checkedAt: Date.now() }; savePrem(); track('purchase', { transaction_id: sid, value: PRICE, currency: 'JPY', items: [{ item_id: PLAN, item_name: 'からくりねじ 買い切り' }] }); renderHome(); msg('ありがとうございます。31面から先も遊べるようになりました。'); }
+      else { msg('ご購入を確認できませんでした。お支払いが完了している場合は、少し待ってからページを開き直してください。'); track('purchase_verify_failed', { reason: r.data.error || String(r.status) }); }
+    } catch (e) { try { history.replaceState(null, '', location.pathname + '?session_id=' + encodeURIComponent(sid)); } catch (x) {} msg('通信できませんでした。電波の良い所でページを開き直すと、もう一度確認します。'); }
+  }
+  $('btn-show-code').addEventListener('click', () => $('code-box').classList.toggle('hide'));
+  $('btn-copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('my-code').value); msg('コピーしました。'); } catch (e) { $('my-code').select(); msg('コードを選びました。長押し（右クリック）でコピーしてください。'); } });
+  $('btn-restore').addEventListener('click', async () => {
+    const code = $('restore-code').value.trim();
+    if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(code)) { msg('コードの形が正しくありません。購入した端末に出るコードを、そのまま貼り付けてください。'); return; }
+    msg('確認しています…');
+    try { const r = await api('/status', { token: code });
+      if (r.ok && r.data.premium && r.data.plan === PLAN) { prem = { token: code, plan: r.data.plan, premium: true, checkedAt: Date.now() }; savePrem(); $('restore-code').value = ''; renderHome(); track('premium_restore', {}); msg('引き継ぎました。この端末でも31面から先を遊べます。'); }
+      else msg('このコードは使えませんでした。');
+    } catch (e) { msg('通信できませんでした。電波の良い所でもう一度お試しください。'); }
+  });
+  // 保管
+  const kmsg = (t) => { $('keep-msg').textContent = t || ''; };
+  $('btn-export').addEventListener('click', () => { const blob = new Blob([JSON.stringify({ app: 'karakuri', v: 1, exported: new Date().toISOString(), data: db })], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'からくりねじ_' + today().replace(/-/g, '') + '.json'; document.body.append(a); a.click(); a.remove(); kmsg('書き出しました。'); track('backup_export', {}); });
+  $('btn-import').addEventListener('click', () => $('import-file').click());
+  $('import-file').addEventListener('change', async (e) => {
+    const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    try { if (f.size > 1024 * 1024) throw 0; const j = JSON.parse(await f.text()); const d = j && j.app === 'karakuri' && j.data;
+      if (!d || typeof d.cleared !== 'object' || typeof d.daily !== 'object') throw 0;
+      const okNum = (o, kre) => Object.entries(o).every(([k, v]) => kre.test(k) && Number.isInteger(v) && v > 0 && v < 10000);
+      if (!okNum(d.cleared, /^[1-9][0-9]{0,4}$/) || !okNum(d.daily, /^\d{4}-\d{2}-\d{2}$/)) throw 0;
+      if (!confirm('読み込んだ内容で、今の記録を置き換えますか？')) return;
+      db = { v: 1, cleared: d.cleared, daily: d.daily, big: !!d.big, shown: Math.max(30, Math.min(100000, +d.shown || 30)) }; save(); document.body.classList.toggle('big', db.big); $('opt-big').checked = db.big; renderHome(); kmsg('読み込みました。');
+    } catch (x) { kmsg('このファイルは読み込めませんでした。からくりねじで書き出したファイルを選んでください。'); }
+  });
+
+  window.__karakuri = { K, get lv() { return lv; }, get g() { return g; }, get L() { return L; }, startLevel, startDaily, maxOpen, canPlay,
+    tapScrew: (id) => { const s = lv.screws[id], r = cv.getBoundingClientRect(); cv.dispatchEvent(new PointerEvent('pointerup', { clientX: r.left + s.x * L.s, clientY: r.top + (s.y + L.top) * L.s, bubbles: true })); } };
+  renderHome();
+  const sid = new URLSearchParams(location.search).get('session_id');
+  if (sid && /^cs_(test|live)_[A-Za-z0-9]+$/.test(sid)) verifyPurchase(sid);
+  else if (prem && prem.token) api('/status', { token: prem.token }).then((r) => { if (r.ok && r.data.reason === 'invalid_token') { prem = null; savePrem(); renderHome(); } }).catch(() => {});
+})();
+</script>
+</body>
+</html>
