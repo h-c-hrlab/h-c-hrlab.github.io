@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YPSE6ZHVK1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  (function () { var sp = new URLSearchParams(location.search); sp.delete('session_id'); var q = sp.toString();
+    gtag('config', 'G-YPSE6ZHVK1', { page_location: location.origin + location.pathname + (q ? '?' + q : '') }); })();
+</script>
+<title>実家のてがみ｜親のスマホ代・固定費を、いっしょに見直す</title>
+<meta name="description" content="帰省や電話で親に聞きながら、スマホ代や使っていない有料サービスを見直し、親に渡す「手紙」をつくります。家族割や通話も考えて、言い切らない目安で。登録不要・広告なし・記録は端末の中だけ。">
+<meta name="theme-color" content="#FBF7EE">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&family=Klee+One:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --desk:#EFE7DA; --paper:#FBF7EE; --line:#E6CFBF; --ink:#2B3A55; --ink-2:#5D6678; --ink-3:#98A0AE; --shu:#B8452E; --leaf:#4C7A5E; --warn:#9A6A12; --warn-soft:#FBF1DC;
+    --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    --pen:"Klee One","Hiragino Maru Gothic ProN",cursive;
+    --body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--body);line-height:1.8;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(rgba(120,90,60,.07) 1px,transparent 1.3px);background-size:10px 10px}
+  button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+  :focus-visible{outline:2px solid var(--shu);outline-offset:3px}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px}
+  .hide{display:none!important}
+
+  header.top{padding:24px 0 6px;display:flex;align-items:center;gap:14px}
+  .env{width:56px;height:40px;background:var(--paper);border:1.5px solid var(--ink);position:relative;flex:none;transform:rotate(-4deg)}
+  .env::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:22px;background:linear-gradient(to bottom right,transparent 49%,var(--ink) 49.5%,var(--ink) 51%,transparent 51.5%) left/50% 100% no-repeat,linear-gradient(to bottom left,transparent 49%,var(--ink) 49.5%,var(--ink) 51%,transparent 51.5%) right/50% 100% no-repeat}
+  .env::after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:var(--shu);left:50%;top:14px;transform:translateX(-50%)}
+  .brand b{display:block;font-family:var(--mincho);font-weight:900;font-size:clamp(26px,7vw,34px);letter-spacing:.08em;line-height:1.2}
+  .brand small{font-size:12.5px;color:var(--ink-2);letter-spacing:.1em}
+  .intro{margin:10px 0 0}
+  .intro p{margin:0 0 6px;font-size:14.5px}
+  .steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}
+  .steps3 div{background:var(--paper);border:1px solid var(--line);padding:8px 10px;font-size:12.5px}
+  .steps3 b{display:block;font-family:var(--mincho);font-size:16px}
+  .promise{font-size:12px;color:var(--ink-2);border-left:3px solid var(--shu);padding:1px 0 1px 10px;margin:10px 0 0}
+
+  /* 紙 */
+  .sheet{background:var(--paper);margin:22px 0;padding:22px 20px 20px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.04),0 10px 24px -14px rgba(60,40,20,.35)}
+  .sheet::before{content:"";position:absolute;top:-7px;left:50%;width:84px;height:20px;transform:translateX(-50%) rotate(-2deg);background:rgba(232,212,170,.75);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .sheet h2{font-family:var(--mincho);font-weight:900;font-size:21px;margin:0 0 4px;letter-spacing:.06em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .sheet h2 .n{font-family:var(--pen);font-weight:600;color:var(--shu);font-size:16px}
+  .sheet .sub{font-size:13px;color:var(--ink-2);margin:0 0 14px}
+
+  /* 入力 */
+  label,.lbl{display:block;font-size:13px;font-weight:700;margin:12px 0 4px}
+  .ask{display:block;font-family:var(--pen);font-size:13.5px;color:var(--shu);margin:-2px 0 4px}
+  .in{width:100%;font:inherit;font-size:16px;color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--ink);padding:7px 2px;min-height:44px;border-radius:0}
+  select.in{border:1.5px solid var(--ink);background:var(--paper);padding:6px 8px}
+  .in:focus{outline:none;border-color:var(--shu)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  .full{grid-column:1/-1}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chips button{border:1.5px solid var(--ink-3);padding:5px 12px;min-height:40px;font-size:14px;background:var(--paper)}
+  .chips button[aria-checked=true]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+  .yen{font-size:20px;text-align:right}
+  .hint{font-size:12px;color:var(--ink-2);margin-top:3px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:0 18px;border:1.5px solid var(--ink);background:var(--paper);font-weight:700;font-size:14.5px;white-space:nowrap}
+  .btn.ink{background:var(--ink);color:var(--paper)}
+  .btn.shu{background:var(--shu);border-color:var(--shu);color:#fff}
+  .btn.sm{min-height:36px;padding:0 12px;font-size:13px}
+  .btn:disabled{opacity:.4}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .err{color:var(--shu);font-size:13px;min-height:1.2em;margin-top:6px}
+  .note{font-size:12px;color:var(--ink-2)}
+  .note a,.foot a{color:var(--ink-2)}
+  .link{text-decoration:underline;text-underline-offset:3px;font-size:13px;color:var(--ink-2)}
+
+  /* 聞き取りのカード */
+  .cards{display:grid;gap:12px}
+  .card{border:1.5px solid var(--ink);background:#FFFDF8;padding:12px 14px;position:relative}
+  .card .ch{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .card .ch b{font-family:var(--mincho);font-size:17px}
+  .card .meta{font-size:12.5px;color:var(--ink-2)}
+  .card .acts{display:flex;gap:12px;margin-top:6px}
+
+  /* 見立て */
+  .verdict{border-left:4px solid var(--leaf);background:linear-gradient(90deg,#EEF4EE,transparent 75%);padding:10px 12px;margin:0 0 10px}
+  .verdict.check{border-color:var(--warn);background:linear-gradient(90deg,var(--warn-soft),transparent 75%)}
+  .verdict.ok{border-color:var(--ink-3);background:linear-gradient(90deg,#F1F1EE,transparent 75%)}
+  .verdict b{font-size:15px}
+  .verdict .big{font-family:var(--pen);font-weight:600;color:var(--leaf);font-size:22px;margin-left:4px}
+  .verdict p{margin:2px 0 0;font-size:13.5px}
+  .verdict ul{margin:4px 0 0;padding-left:1.2em;font-size:13.5px}
+  .total{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--ink);padding-top:8px;margin-top:8px}
+  .total b{font-family:var(--pen);font-weight:600;font-size:clamp(20px,5.6vw,26px);color:var(--leaf);white-space:nowrap}
+  .stale{border:1.5px solid var(--warn);background:var(--warn-soft);padding:8px 12px;font-size:13px;margin:0 0 10px}
+
+  /* 手紙（便せん） */
+  .letter{background:#FFFDF6;border:1px solid var(--line);padding:30px 26px 22px 34px;font-family:var(--pen);color:#2C2A28;font-size:clamp(17px,4.4vw,20px);line-height:2.1;position:relative;
+    background-image:linear-gradient(90deg,transparent 22px,rgba(184,69,46,.35) 22px,rgba(184,69,46,.35) 23px,transparent 23px),repeating-linear-gradient(transparent 0,transparent calc(2.1em - 1px),var(--line) calc(2.1em - 1px),var(--line) 2.1em);background-position:0 0,0 30px}
+  .letter .fine{background:#FFFDF6}
+  .letter p{margin:0}
+  .letter .to{font-weight:600}
+  .letter .yen{font-weight:600;color:var(--shu);font-size:1em;text-align:left}
+  .letter ol{margin:0;padding-left:1.4em}
+  .letter .from{text-align:right;margin-top:.4em}
+  .letter .fine{font-family:var(--body);font-size:11.5px;line-height:1.6;color:var(--ink-2);margin-top:1.2em;border-top:1px dashed var(--ink-3);padding-top:6px}
+  .stamp{position:absolute;right:16px;top:14px;width:58px;height:66px;background:var(--leaf);color:#fff;display:grid;place-items:center;font-family:var(--mincho);font-weight:700;font-size:13px;line-height:1.3;text-align:center;transform:rotate(5deg);
+    outline:3px dotted #FFFDF6;outline-offset:-3px;box-shadow:0 0 0 1px var(--leaf)}
+
+  /* 勧誘への備え */
+  .shield{border:3px double var(--ink);background:#fff;padding:18px 18px 14px;font-size:clamp(17px,4.4vw,20px);line-height:1.8}
+  .shield h3{font-family:var(--mincho);font-weight:900;font-size:1.3em;margin:0 0 6px;text-align:center;letter-spacing:.08em}
+  .shield ol{margin:0;padding-left:1.4em}
+  .shield li{margin:4px 0}
+  .shield .tel{font-family:var(--mincho);font-weight:900;font-size:1.6em;color:var(--shu);text-align:center;margin:8px 0 0}
+  .shield .src{font-family:var(--body);font-size:11px;color:var(--ink-2);text-align:center}
+
+  /* 台本 */
+  .script{counter-reset:s;list-style:none;margin:0;padding:0}
+  .script>li{counter-increment:s;position:relative;padding:10px 0 10px 44px;border-bottom:1px dashed var(--line)}
+  .script>li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-family:var(--mincho);font-weight:900}
+  .script>li>b{display:block;font-size:15px}
+  .script>li>p,.script>li>ul{margin:3px 0 0;font-size:13.5px}
+  .script>li>ul{padding-left:1.2em}.script>li>ul>li{margin:2px 0}
+  .script>li.lock{filter:blur(3.5px);user-select:none;pointer-events:none}
+  .paywall{border:2px solid var(--shu);background:#FFF8F4;padding:14px;margin-top:10px;text-align:center}
+  .paywall b{font-family:var(--mincho);font-size:19px}
+
+  .msg{font-size:13.5px;color:var(--leaf);min-height:1.3em;margin:8px 0 0}
+  .foot{padding:18px 0 40px;font-size:12px;color:var(--ink-2);text-align:center}
+  dialog{border:1.5px solid var(--ink);padding:0;background:var(--paper);color:var(--ink);width:min(520px,calc(100% - 20px));max-height:calc(100dvh - 24px)}
+  dialog::backdrop{background:rgba(43,58,85,.45)}
+  .dlg{padding:18px}
+  .dlg h3{font-family:var(--mincho);font-weight:900;font-size:19px;margin:0 0 6px;padding-bottom:6px;border-bottom:1px solid var(--ink)}
+  .dlg .acts2{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;flex-wrap:wrap}
+  .danger{color:var(--shu);font-size:13px;text-decoration:underline;text-underline-offset:3px}
+
+  @media (max-width:540px){.wrap{padding:0 10px}.grid{grid-template-columns:1fr}.steps3{grid-template-columns:1fr}.sheet{padding:20px 14px 16px}.letter{padding:28px 14px 18px 30px}.stamp{width:46px;height:54px;font-size:11px}}
+  /* 印刷：選んだ紙だけ */
+  @media print{
+    body{background:#fff}
+    body > *:not(#print-area){display:none!important}
+    #print-area{display:block!important}
+    #print-area .letter,#print-area .shield,#print-area .script-print{font-size:18pt;border:0;box-shadow:none}
+    @page{size:A4;margin:14mm}
+  }
+  #print-area{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="env" aria-hidden="true"></span>
+    <div class="brand"><b>実家のてがみ</b><small>親の固定費、いっしょに見直す</small></div>
+  </header>
+  <div class="intro" id="intro">
+    <p>帰省や電話のついでに、親のスマホ代や、使っていない有料サービスを見直して、<b>親に渡す手紙</b>をつくります。子どもが説明しなくても、手紙が説明してくれます。</p>
+    <div class="steps3"><div><b>一　聞く</b>聞き方つきの質問に、親の答えを入れる</div><div><b>二　見る</b>家族割や通話も考えて、目安を出す</div><div><b>三　渡す</b>手紙を印刷するか、LINEで送る</div></div>
+    <p class="promise">広告なし・登録なし。入れた内容はこの端末の中だけに保存し、どこにも送りません。親の情報なので、<b>親に話してから</b>使ってください。</p>
+  </div>
+
+  <!-- 一　宛名 -->
+  <section class="sheet" aria-labelledby="h-to">
+    <h2 id="h-to"><span class="n">一</span>だれに書く？</h2>
+    <div class="grid">
+      <div><label for="to">親の呼び方</label><input class="in" id="to" type="text" maxlength="12" list="to-list" placeholder="例：お母さん" autocomplete="off"><datalist id="to-list"><option value="お母さん"><option value="お父さん"><option value="父さん母さん"><option value="おふくろ"><option value="親父"></datalist></div>
+      <div><label for="from">あなたの名前（手紙の最後に）</label><input class="in" id="from" type="text" maxlength="12" placeholder="例：ひろし" autocomplete="off"></div>
+    </div>
+  </section>
+
+  <!-- 二　聞き取り -->
+  <section class="sheet" aria-labelledby="h-ask">
+    <h2 id="h-ask"><span class="n">二</span>聞き取りメモ</h2>
+    <p class="sub">赤い字は、親への聞き方の例です。わからない所は「わからない」で大丈夫です。</p>
+    <div class="cards" id="phones"></div>
+    <div class="row" style="margin-top:10px"><button class="btn ink" type="button" id="btn-add-phone">＋ スマホを書く</button><button class="btn" type="button" id="btn-add-extra">＋ ほかの支払いを書く</button></div>
+    <div class="cards" id="extras" style="margin-top:12px"></div>
+  </section>
+
+  <!-- 三　見立て -->
+  <section class="sheet" aria-labelledby="h-see">
+    <h2 id="h-see"><span class="n">三</span>見立て</h2>
+    <div class="stale hide" id="stale"></div>
+    <div id="verdicts"></div>
+    <div class="total hide" id="total-row"><span>見直しで浮くかもしれない額（1年）</span><b id="total">0円</b></div>
+    <p class="note" id="basis"></p>
+  </section>
+
+  <!-- 四　手紙 -->
+  <section class="sheet" aria-labelledby="h-letter">
+    <h2 id="h-letter"><span class="n">四</span>手紙</h2>
+    <label for="note">ひとこと（なくてもOK）</label><input class="in" id="note" type="text" maxlength="60" placeholder="例：寒くなったね。体に気をつけて。" autocomplete="off">
+    <div style="margin-top:14px" id="letter-wrap"><div class="letter" id="letter"></div></div>
+    <div class="row" style="margin-top:12px"><button class="btn ink" type="button" id="btn-print-letter">印刷する</button><button class="btn" type="button" id="btn-image-letter">画像にして送る（LINEなど）</button></div>
+    <p class="msg" id="letter-msg" aria-live="polite"></p>
+  </section>
+
+  <!-- 五　勧誘への備え -->
+  <section class="sheet" aria-labelledby="h-shield">
+    <h2 id="h-shield"><span class="n">五</span>電話の横に貼る紙<small class="note">（無料・だれでも）</small></h2>
+    <p class="sub">「料金が安くなります」という電話の勧誘に、その場で返事をしないための紙です。</p>
+    <div class="shield" id="shield">
+      <h3>電話で「安くなります」と言われたら</h3>
+      <ol>
+        <li>その場で「はい」と言わない。<b>「家族と相談します」</b>と言って切る。</li>
+        <li>「今の会社です」と名乗っても、<b>折り返しは自分で</b>明細や公式の番号にかける。</li>
+        <li>書面（説明の紙）を受け取ってから考える。</li>
+        <li>困ったら、子どもか、消費者ホットラインへ。</li>
+      </ol>
+      <p class="tel">消費者ホットライン　１８８</p>
+      <p class="src">国民生活センター・消費者庁の案内をもとに作成</p>
+    </div>
+    <div class="row" style="margin-top:12px"><button class="btn ink" type="button" id="btn-print-shield">印刷する</button><button class="btn" type="button" id="btn-image-shield">画像にして送る</button></div>
+  </section>
+
+  <!-- 六　手続きの台本 -->
+  <section class="sheet" aria-labelledby="h-script" id="script-sec">
+    <h2 id="h-script"><span class="n">六</span>手続きの台本</h2>
+    <p class="sub">見直す日に、何を持って、どこで、何を言えばいいか。聞き取りの答えに合わせて並べます。</p>
+    <div id="script-box"></div>
+    <div class="paywall" id="paywall">
+      <b>続きは「手続きの台本」（買い切り 980円）</b>
+      <p class="note" style="margin:6px 0 10px">キャリアメールの持ち運び（会社ごとの料金と期限）、電話番号をそのまま使う手続き、LINE の引き継ぎ準備、端末の残りの支払い、持ち物、お店で言うこと、親に渡す当日の紙まで。1回のお支払いで、ずっと使えます。</p>
+      <button class="btn shu" type="button" id="btn-buy">980円で台本を開く</button>
+      <p class="note" id="pr-test" hidden style="margin-top:6px">テスト中のため、実際の請求は発生しません。</p>
+      <p class="note" style="margin-top:6px">台本の料金・手続きの情報は、各社の公式ページで確かめた日を書いています。更新を終える場合は、この画面と特定商取引法の表記でお知らせし、古い情報には「確かめた日」と注意書きを出したまま、買った方はそのまま読めます（返金はありません）。</p>
+      <p class="note" style="margin-top:6px">お支払いは Stripe で処理され、カード情報はこのアプリに保存されません。<a href="tokushoho.html">特定商取引法に基づく表記</a></p>
+      <details style="margin-top:8px;text-align:left"><summary class="note" style="cursor:pointer">購入済みの方（別の端末で使う）</summary>
+        <label for="restore-code">引き継ぎコード</label><input class="in" id="restore-code" type="text" autocomplete="off" spellcheck="false" placeholder="購入した端末に表示されるコード">
+        <button class="btn sm" type="button" id="btn-restore" style="margin-top:8px">引き継ぐ</button>
+      </details>
+    </div>
+    <div id="owned" class="hide" style="margin-top:12px">
+      <div class="row"><button class="btn ink" type="button" id="btn-print-script">当日の紙を印刷する</button><button class="btn sm" type="button" id="btn-show-code">別の端末で使う</button></div>
+      <div id="code-box" class="hide" style="margin-top:8px"><p class="note">使いたい端末の「購入済みの方」に貼り付けてください。</p><textarea id="my-code" readonly rows="3" style="width:100%;font-size:12px;word-break:break-all"></textarea><button class="btn sm" type="button" id="btn-copy">コピー</button></div>
+    </div>
+    <p class="msg" id="pr-msg" aria-live="polite"></p>
+  </section>
+
+  <section class="sheet" aria-labelledby="h-keep">
+    <h2 id="h-keep">記録の保管</h2>
+    <p class="sub">入れた内容は、この端末の中だけにあります。</p>
+    <div class="row"><button class="btn sm" type="button" id="btn-export">書き出す</button><button class="btn sm" type="button" id="btn-import">読み込む</button><button class="btn sm" type="button" id="btn-clear">すべて消す</button><input type="file" id="import-file" accept="application/json,.json" class="hide"></div>
+    <p class="msg" id="keep-msg" aria-live="polite"></p>
+  </section>
+  <footer class="foot">実家のてがみ ・ 運営 HRlab ・ 広告なし・紹介料なし<br><a href="privacy.html">プライバシー</a> ・ <a href="tokushoho.html">特定商取引法に基づく表記</a></footer>
+</div>
+<div id="print-area"></div>
+
+<!-- スマホの聞き取り -->
+<dialog id="phone-dlg" aria-labelledby="ph-h"><form class="dlg" id="phone-form" method="dialog" novalidate>
+  <h3 id="ph-h">スマホを書く</h3>
+  <label for="p-who">だれのスマホ？</label><input class="in" id="p-who" type="text" maxlength="12" placeholder="例：お母さん" autocomplete="off">
+  <label for="p-co">いまの会社</label><span class="ask">「スマホの会社、どこだっけ？ 明細を見せてくれる？」</span>
+  <select class="in" id="p-co"><option value="docomo">ドコモ</option><option value="au">au</option><option value="softbank">ソフトバンク</option><option value="ymobile">ワイモバイル</option><option value="uq">UQ mobile</option><option value="rakuten">楽天モバイル</option><option value="other">そのほか（格安SIMなど）</option><option value="unknown">わからない</option></select>
+  <div class="grid">
+    <div><label for="p-fee">通信料（月・円）</label><input class="in yen" id="p-fee" type="number" inputmode="numeric" min="0" step="1" placeholder="例：7480"><div class="hint">明細の「基本料・通話料・データ」の合計。端末の分割は入れない</div></div>
+    <div><label for="p-other">それ以外（月・円）</label><input class="in yen" id="p-other" type="number" inputmode="numeric" min="0" step="1" placeholder="例：3300"><div class="hint">端末の分割・補償など。比べる時は使いません</div></div>
+  </div>
+  <span class="lbl" id="l-data">データの使い方</span><span class="ask">「動画は見る？ 外でもよく使う？」</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-data" data-k="data"><button type="button" data-v="3">LINEや調べものくらい（3GBまで）</button><button type="button" data-v="10">動画も少し（10GBまで）</button><button type="button" data-v="30">動画をよく見る（30GBまで）</button><button type="button" data-v="unknown">わからない</button></div>
+  <span class="lbl" id="l-call">電話のかけ方</span><span class="ask">「電話はよくかける？ 長くなる？」</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-call" data-k="call"><button type="button" data-v="rare">ほとんどかけない</button><button type="button" data-v="short">短い電話（5分以内）が多い</button><button type="button" data-v="long">長電話が多い</button></div>
+  <span class="lbl" id="l-family">家族と同じ会社で、家族割に入っている？</span><span class="ask">「家族で同じ会社にしてたっけ？」</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-family" data-k="family"><button type="button" data-v="yes">入っている</button><button type="button" data-v="no">入っていない</button><button type="button" data-v="unknown">わからない</button></div>
+  <span class="lbl" id="l-set">光回線や電気と、セットで割引になっている？</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-set" data-k="set"><button type="button" data-v="yes">なっている</button><button type="button" data-v="no">なっていない</button><button type="button" data-v="unknown">わからない</button></div>
+  <span class="lbl" id="l-shop">手続きは、お店で手伝ってほしい？</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-shop" data-k="shop"><button type="button" data-v="yes">お店がいい</button><button type="button" data-v="no">家で一緒にやれる</button></div>
+  <span class="lbl" id="l-mail">キャリアメール（@docomo.ne.jp など）を使っている？</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-mail" data-k="mail"><button type="button" data-v="yes">使っている</button><button type="button" data-v="no">使っていない</button><button type="button" data-v="unknown">わからない</button></div>
+  <span class="lbl" id="l-loan">スマホ本体の支払いが残っている？</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-loan" data-k="loan"><button type="button" data-v="yes">残っている</button><button type="button" data-v="no">残っていない</button><button type="button" data-v="unknown">わからない</button></div>
+  <div class="err" id="p-err" role="alert"></div>
+  <div class="acts2"><button type="button" class="danger hide" id="p-del">このスマホを消す</button><span class="row" style="margin-left:auto"><button type="button" class="btn" id="p-cancel">やめる</button><button type="submit" class="btn ink" id="p-ok">書く</button></span></div>
+</form></dialog>
+
+<!-- ほかの支払い -->
+<dialog id="extra-dlg" aria-labelledby="ex-h"><form class="dlg" id="extra-form" method="dialog" novalidate>
+  <h3 id="ex-h">ほかの支払いを書く</h3>
+  <span class="lbl" id="l-kind">種類</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-kind" data-k="kind"><button type="button" data-v="opt">スマホの有料オプション・サブスク</button><button type="button" data-v="net">光回線・固定電話</button><button type="button" data-v="ins">保険</button><button type="button" data-v="other">そのほか</button></div>
+  <label for="x-name">名前</label><input class="in" id="x-name" type="text" maxlength="30" placeholder="例：動画の見放題" autocomplete="off">
+  <label for="x-amount">金額（月・円）</label><input class="in yen" id="x-amount" type="number" inputmode="numeric" min="0" step="1">
+  <div id="x-used-box"><span class="lbl" id="l-used">使っている？</span><span class="ask">「これ、最近使ってる？」</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-used" data-k="used"><button type="button" data-v="yes">使っている</button><button type="button" data-v="no">使っていない</button><button type="button" data-v="unknown">わからない</button></div></div>
+  <div id="x-call-box" class="hide"><span class="lbl" id="l-callin">電話の勧誘で、会社やプランを変えたことがある？</span>
+  <div class="chips" role="radiogroup" aria-labelledby="l-callin" data-k="callin"><button type="button" data-v="yes">ある</button><button type="button" data-v="no">ない</button><button type="button" data-v="unknown">わからない</button></div></div>
+  <div class="err" id="x-err" role="alert"></div>
+  <div class="acts2"><button type="button" class="danger hide" id="x-del">消す</button><span class="row" style="margin-left:auto"><button type="button" class="btn" id="x-cancel">やめる</button><button type="submit" class="btn ink" id="x-ok">書く</button></span></div>
+</form></dialog>
+
+<script>
+(function () {
+  'use strict';
+  // 料金の目安（各社の公式ページで確認した日。期間限定の割引は入れない）
+  const CHECKED = '2026-11-28';
+  const STALE_DAYS = 90;
+  const BENCH = { best3: 990, best10: 2090, bestV30: 2970, callShort: 550, callLong: 1650, callLongV: 1100, shopYm: 3278 };
+  const KEY = 'jikka_v1', PKEY = 'jikka_premium_v1';
+  const PAY_API = 'https://kotei-premium.h-c-hrlab.workers.dev';
+  const LINK = 'https://buy.stripe.com/test_aFa8wP2FzbMvfocfekfjG0c';
+  const PRICE = 980;
+  const CO = { docomo: 'ドコモ', au: 'au', softbank: 'ソフトバンク', ymobile: 'ワイモバイル', uq: 'UQ mobile', rakuten: '楽天モバイル', other: '今の会社', unknown: '今の会社' };
+  const MYPAGE = { docomo: 'My docomo', au: 'My au', softbank: 'My SoftBank', ymobile: 'My Y!mobile', uq: 'My UQ mobile', rakuten: 'my 楽天モバイル' };
+  const MAILP = {
+    docomo: { name: 'ドコモメール持ち運び', fee: '月330円', limit: 'ドコモの回線を解約した日から31日以内に申し込み（初回は31日間無料）', url: 'https://www.docomo.ne.jp/service/docomo_mail_portability/' },
+    au: { name: 'auメール持ち運び', fee: '月330円', limit: 'au を解約してから31日以内に申し込み', url: 'https://www.au.com/mobile/service/aumail_portability/' },
+    softbank: { name: 'メールアドレス持ち運び', fee: '月330円（年3,300円もあり）', limit: '解約から31日以内に、ウェブか全国のソフトバンク・ワイモバイルの取扱店で申し込み', url: 'https://www.softbank.jp/mobile/service/mail-address-portability/' },
+    ymobile: { name: 'メールアドレス持ち運び', fee: '月330円（年3,300円もあり）', limit: '解約から31日以内に、ウェブか全国のソフトバンク・ワイモバイルの取扱店で申し込み', url: 'https://www.softbank.jp/mobile/service/mail-address-portability/' }
+  };
+  const URLS = { linemoPlan: 'https://www.linemo.jp/plan/', linemoOpt: 'https://www.linemo.jp/plan/option/', ymPlan: 'https://www.ymobile.jp/plan/', mnp: 'https://www.soumu.go.jp/menu_seisaku/ictseisaku/keitai_portal/gimonkaiketsu/q_1.html', line: 'https://help.line.me/line/?lang=ja', caa188: 'https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/', kokusen: 'https://www.kokusen.go.jp/news/data/n-20260701_1.html' };
+
+  const $ = (id) => document.getElementById(id);
+  const track = (n, p) => { try { if (typeof gtag === 'function') gtag('event', n, p || {}); } catch (e) {} };
+  const yen = (n) => Math.round(n).toLocaleString('ja-JP') + '円';
+  const pad = (n) => String(n).padStart(2, '0');
+  const todayKey = () => { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+  const diffDays = (a, b) => Math.round((new Date(b) - new Date(a)) / 86400000);
+  const newId = () => (Date.now().toString(36) + Math.random().toString(36).slice(2, 6));
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+  const jpDate = (k) => +k.slice(0, 4) + '年' + (+k.slice(5, 7)) + '月' + (+k.slice(8)) + '日';
+
+  let db = { to: '', from: '', note: '', phones: [], extras: [] };
+  try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && typeof v === 'object') db = Object.assign(db, v); } catch (e) {}
+  if (!Array.isArray(db.phones)) db.phones = []; if (!Array.isArray(db.extras)) db.extras = [];
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} };
+  let prem = null; try { prem = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) {}
+  const savePrem = () => { try { if (prem) localStorage.setItem(PKEY, JSON.stringify(prem)); else localStorage.removeItem(PKEY); } catch (e) {} };
+  const owned = () => !!(prem && prem.premium && prem.plan === 'jikka_lifetime');
+
+  // 見立て：スマホ1台
+  function benchFor(data, call) {
+    const opts = [];
+    if (data === '3' || data === '10') opts.push({ fee: (data === '3' ? BENCH.best3 : BENCH.best10) + (call === 'short' ? BENCH.callShort : call === 'long' ? BENCH.callLong : 0), label: (data === '3' ? '3GB' : '10GB') + 'までのプラン' + (call === 'short' ? '＋5分以内の通話が無料のオプション' : call === 'long' ? '＋通話かけ放題のオプション' : '') });
+    if (data === '3' || data === '10' || data === '30') opts.push({ fee: BENCH.bestV30 + (call === 'long' ? BENCH.callLongV : 0), label: '30GB（5分以内の通話つき）のプラン' + (call === 'long' ? '＋通話かけ放題のオプション' : '') });
+    return opts.sort((a, b) => a.fee - b.fee)[0] || null;
+  }
+  const isStale = () => diffDays(CHECKED, todayKey()) > STALE_DAYS;
+  function judgePhone(p) {
+    if (typeof p.fee !== 'number' || isNaN(p.fee)) return { status: 'input', reasons: ['fee'] };
+    const reasons = [];
+    if (p.family !== 'no') reasons.push('family');
+    if (p.set !== 'no') reasons.push('set');
+    if (p.shop === 'yes') reasons.push('shop');
+    if (!p.data || p.data === 'unknown') reasons.push('data');
+    if (!p.call) reasons.push('call');
+    if (isStale()) reasons.push('stale');
+    if (reasons.length) return { status: 'check', reasons };
+    const b = benchFor(p.data, p.call);
+    if (!b) return { status: 'check', reasons: ['data'] };
+    const monthly = p.fee - b.fee;
+    if (monthly * 12 >= 1200) return { status: 'save', bench: b, monthly, yearly: monthly * 12 };
+    return { status: 'ok', bench: b };
+  }
+  function judgeExtra(x) {
+    if (x.kind === 'opt' || x.kind === 'other') {
+      if (x.used === 'no' && x.amount > 0) return { status: 'save', yearly: x.amount * 12 };
+      if (x.used === 'unknown') return { status: 'check', reasons: ['used'] };
+      return { status: 'ok' };
+    }
+    if (x.kind === 'net') return x.callin === 'no' ? { status: 'ok' } : { status: 'check', reasons: ['callin'] };
+    return { status: 'check', reasons: ['ins'] };
+  }
+  function summary() {
+    let yearly = 0; const items = [];
+    db.phones.forEach((p) => { const j = judgePhone(p); items.push({ type: 'phone', p, j }); if (j.status === 'save') yearly += j.yearly; });
+    db.extras.forEach((x) => { const j = judgeExtra(x); items.push({ type: 'extra', x, j }); if (j.status === 'save') yearly += j.yearly; });
+    return { yearly, items };
+  }
+  window.__jikka = { benchFor, judgePhone, judgeExtra, summary, BENCH, CHECKED };
+
+  const REASON = {
+    family: '家族割に入っている（かもしれない）ので、この1台だけを変えると、家族の割引が減ることがあります。家族全体の明細で確かめてから決めましょう。',
+    set: '光回線や電気とのセット割がある（かもしれない）ので、乗り換えると割引が消えることがあります。セット割の金額を明細で確かめましょう。',
+    shop: 'お店で手伝ってほしい場合は、店のある会社の料金で考えます（例：ワイモバイル シンプル3 S（5GB）月3,278円、通話料は別）。通話の料金も合わせて、お店で確かめましょう。',
+    data: 'データをどれくらい使っているか、明細かスマホの設定で確かめると、目安を出せます。',
+    call: '電話をどれくらいかけるかを選ぶと、目安を出せます。',
+    stale: '料金の目安が古くなっているので、浮く額は出していません。今の会社と乗り換え先の公式ページで、通信料と通話の料金を確かめてください。',
+    fee: '明細の「通信料」（基本料・通話料・データ）を入れると、目安を出せます。',
+    used: '使っているかどうか、親に聞いてみましょう。使っていなければ、やめると浮きます。',
+    callin: '電話の勧誘で変えた契約は、思っていたより高いことがあります。契約の書面と明細を見て、困ったら消費者ホットライン（188）へ。',
+    ins: '保険は、保障の内容が今の暮らしに合っているかを確かめましょう（金額は計算しません）。'
+  };
+
+  // 描画
+  function render() {
+    $('to').value = db.to || ''; $('from').value = db.from || ''; $('note').value = db.note || '';
+    $('intro').classList.toggle('hide', db.phones.length + db.extras.length > 0);
+    renderCards(); renderVerdicts(); renderLetter(); renderScript();
+  }
+  function renderCards() {
+    const box = $('phones'); box.innerHTML = '';
+    db.phones.forEach((p) => {
+      const c = document.createElement('div'); c.className = 'card'; c.dataset.id = p.id;
+      const ch = document.createElement('div'); ch.className = 'ch'; const b = document.createElement('b'); b.textContent = (p.who || '親') + 'のスマホ'; const m = document.createElement('span'); m.className = 'meta'; m.textContent = CO[p.co] + (typeof p.fee === 'number' ? '・通信料 月' + yen(p.fee) : ''); ch.append(b, m);
+      const a = document.createElement('div'); a.className = 'acts'; const e = document.createElement('button'); e.type = 'button'; e.className = 'link'; e.textContent = '直す'; e.setAttribute('aria-label', (p.who || '親') + 'のスマホを直す'); e.addEventListener('click', () => openPhone(p)); a.append(e);
+      c.append(ch, a); box.append(c);
+    });
+    const xb = $('extras'); xb.innerHTML = '';
+    const KN = { opt: '有料オプション・サブスク', net: '光回線・固定電話', ins: '保険', other: 'そのほか' };
+    db.extras.forEach((x) => {
+      const c = document.createElement('div'); c.className = 'card'; c.dataset.id = x.id;
+      const ch = document.createElement('div'); ch.className = 'ch'; const b = document.createElement('b'); b.textContent = x.name || KN[x.kind]; const m = document.createElement('span'); m.className = 'meta'; m.textContent = KN[x.kind] + (x.amount ? '・月' + yen(x.amount) : ''); ch.append(b, m);
+      const a = document.createElement('div'); a.className = 'acts'; const e = document.createElement('button'); e.type = 'button'; e.className = 'link'; e.textContent = '直す'; e.setAttribute('aria-label', (x.name || KN[x.kind]) + 'を直す'); e.addEventListener('click', () => openExtra(x)); a.append(e);
+      c.append(ch, a); xb.append(c);
+    });
+  }
+  function renderVerdicts() {
+    const s = summary(); const box = $('verdicts'); box.innerHTML = '';
+    const age = diffDays(CHECKED, todayKey());
+    $('stale').classList.toggle('hide', age <= STALE_DAYS);
+    $('stale').textContent = '料金の目安を確かめたのは' + jpDate(CHECKED) + 'で、' + age + '日たっています。料金が変わっている可能性があるため、スマホの浮く額は出さず、確かめる手順だけを出しています。';
+    if (!s.items.length) { box.innerHTML = '<p class="note">聞き取りメモを書くと、ここに見立てが出ます。</p>'; }
+    s.items.forEach(({ type, p, x, j }) => {
+      const d = document.createElement('div'); d.className = 'verdict' + (j.status === 'check' || j.status === 'input' ? ' check' : j.status === 'ok' ? ' ok' : '');
+      const t = document.createElement('b'); t.textContent = type === 'phone' ? (p.who || '親') + 'のスマホ（' + CO[p.co] + '）' : (x.name || '支払い');
+      d.append(t);
+      if (j.status === 'save') {
+        const big = document.createElement('span'); big.className = 'big'; big.textContent = '1年で約' + yen(j.yearly) + ' 浮くかも'; d.append(big);
+        const pp = document.createElement('p');
+        pp.textContent = type === 'phone' ? '今の通信料 月' + yen(p.fee) + ' → 目安 月' + yen(j.bench.fee) + '（' + j.bench.label + '。お店に行かず自分で設定する、オンライン専用のプランの例：LINEMO の公式料金）。' : '使っていないので、やめると月' + yen(x.amount) + '浮きます。';
+        d.append(pp);
+      } else if (j.status === 'ok') {
+        const pp = document.createElement('p'); pp.textContent = type === 'phone' ? '今の使い方に、だいたい合っていそうです（目安 月' + yen(j.bench.fee) + '）。' : '今のところ、見直しは要らなそうです。'; d.append(pp);
+      } else {
+        const ul = document.createElement('ul'); (j.reasons || []).forEach((r) => { const li = document.createElement('li'); li.textContent = REASON[r]; ul.append(li); }); d.append(ul);
+      }
+      box.append(d);
+    });
+    $('total-row').classList.toggle('hide', s.yearly <= 0); $('total').textContent = '約' + yen(s.yearly);
+    $('basis').textContent = '目安は ' + jpDate(CHECKED) + ' に各社の公式ページで確かめた料金です（期間限定の割引は入れていません）。違約金・手数料・端末の残りの支払いは含みません。契約の内容は、本人が各社で確かめてください。家族割やセット割がある場合・お店が必要な場合は、言い切らないために金額を出していません。';
+  }
+  function letterParts() {
+    const s = summary(); const to = db.to || 'お母さん'; const lines = [];
+    const saves = s.items.filter((i) => i.j.status === 'save'); const checks = s.items.filter((i) => i.j.status === 'check');
+    lines.push({ t: 'p', h: '<span class="to">' + esc(to) + 'へ</span>' });
+    if (db.note) lines.push({ t: 'p', h: esc(db.note) });
+    lines.push({ t: 'p', h: 'この前話したスマホ代のこと、少し調べてみました。' });
+    saves.forEach(({ type, p, x, j }) => {
+      if (type === 'phone') lines.push({ t: 'p', h: '【' + esc(p.who || 'スマホ') + 'のスマホ】今は通信料が毎月 約' + yen(p.fee) + '。使い方に合う大きさのプランにすると、月 約<span class="yen">' + yen(j.monthly) + '</span>、1年で 約<span class="yen">' + yen(j.yearly) + '</span> 安くなるかもしれません。' });
+      else lines.push({ t: 'p', h: '【' + esc(x.name || '有料サービス') + '】使っていないなら、やめると1年で 約<span class="yen">' + yen(j.yearly) + '</span> 浮きます。' });
+    });
+    if (!saves.length && s.items.length) lines.push({ t: 'p', h: '今の契約は、だいたい使い方に合っていそうです。安心してね。' });
+    if (checks.some((i) => i.j.reasons && (i.j.reasons.includes('family') || i.j.reasons.includes('set')))) lines.push({ t: 'p', h: '家族の割引やセット割があるかもしれないので、決める前に、家族みんなの明細でいっしょに確かめよう。' });
+    if (checks.some((i) => i.j.reasons && i.j.reasons.includes('callin'))) lines.push({ t: 'p', h: '電話の勧誘で変えた契約は、書面をいっしょに見せてね。' });
+    if (saves.length || checks.length) {
+      lines.push({ t: 'p', h: 'やってみることは、この3つです。' });
+      lines.push({ t: 'ol', h: '<li>明細をいっしょに見る</li><li>使っていないものを止める</li><li>使い方に合うプランを相談する（お店でも、わたしが手伝ってもいい）</li>' });
+    }
+    lines.push({ t: 'p', h: '急がなくて大丈夫。今度、いっしょに見よう。' });
+    lines.push({ t: 'p', c: 'from', h: esc(db.from || '') + (db.from ? 'より' : '') });
+    const fine = '※金額は目安です（' + jpDate(CHECKED) + ' に各社の公式ページで確かめた料金。お店に行かず自分で設定するオンライン専用のプランの例です）。違約金・手数料・端末の残りの支払いは含みません。契約の内容は、本人が各社で確かめてください。作成：実家のてがみ';
+    return { lines, fine, saves, total: s.yearly };
+  }
+  function renderLetter() {
+    const L = letterParts(); const el = $('letter'); el.innerHTML = '';
+    const st = document.createElement('span'); st.className = 'stamp'; st.setAttribute('aria-hidden', 'true'); st.innerHTML = '実家<br>てがみ'; el.append(st);
+    L.lines.forEach((l) => { const n = document.createElement(l.t === 'ol' ? 'ol' : 'p'); if (l.c) n.className = l.c; n.innerHTML = l.h; el.append(n); });
+    const f = document.createElement('p'); f.className = 'fine'; f.textContent = L.fine; el.append(f);
+  }
+
+  // 手続きの台本（1段目は無料）
+  function scriptSteps() {
+    const steps = []; const ps = db.phones.length ? db.phones : [{ co: 'unknown', who: '親' }];
+    const s1 = { b: '今の契約を確かめる', items: [] };
+    ps.forEach((p) => { s1.items.push((p.who || '親') + '（' + CO[p.co] + '）：' + (MYPAGE[p.co] ? '「' + MYPAGE[p.co] + '」（会員ページ）か紙の明細で' : '明細で') + '、通信料・端末の分割の残り・有料オプション・家族割・セット割を見る'); });
+    s1.items.push('明細は写真に撮っておくと、あとで見返せます（ログインのパスワードは親本人が入れる）');
+    steps.push(s1);
+    const s2 = { b: '行き先を決める', items: [] };
+    ps.forEach((p) => {
+      const j = typeof p.fee === 'number' ? judgePhone(p) : { status: 'check', reasons: [] };
+      if (p.shop === 'yes') s2.items.push((p.who || '親') + '：お店で手伝ってほしい → 今の会社でのプラン変更か、店のある会社（例：ワイモバイル）で、通話も含めた料金をお店で確かめる');
+      else if (j.status === 'save') s2.items.push((p.who || '親') + '：家で一緒にやれる → ' + j.bench.label + '（目安 月' + yen(j.bench.fee) + '）。今の会社のまま小さいプランにする方法もある');
+      else s2.items.push((p.who || '親') + '：まず「今の会社のまま、使い方に合うプランがあるか」を確かめる');
+      if (p.family !== 'no' || p.set !== 'no') s2.items.push('家族割・セット割：変える前に、割引がいくら減るかを家族全体で計算する');
+    });
+    steps.push(s2);
+    const s3 = { b: 'キャリアメールの準備', items: [] };
+    ps.forEach((p) => {
+      if (p.mail === 'no') { s3.items.push((p.who || '親') + '：キャリアメールは使っていないので、準備は要りません'); return; }
+      const m = MAILP[p.co];
+      if (m) s3.items.push((p.who || '親') + '：乗り換えても今のアドレスを使いたいなら「' + m.name + '」（' + m.fee + '）。' + m.limit + '。<a href="' + m.url + '" target="_blank" rel="noopener">公式ページ</a>');
+      else s3.items.push((p.who || '親') + '：今のアドレスを使い続けられるかは、' + CO[p.co] + 'の公式ページで確かめる。使い続けない場合は、銀行や通販などに登録しているアドレスを先に変えておく');
+    });
+    s3.items.push('メールアドレスを変える場合は、病院・銀行・通販・友だちへの連絡を、乗り換えの前に済ませる');
+    steps.push(s3);
+    steps.push({ b: '電話番号をそのまま使う（番号ポータビリティ）', items: ['乗り換え先の申し込みだけで済む「ワンストップ方式」に対応している会社もあります。対応しているかは、総務省の案内と各社で確かめる。<a href="' + URLS.mnp + '" target="_blank" rel="noopener">総務省の案内</a>', '今の会社と乗り換え先で、手数料がかかるかを確かめる'] });
+    steps.push({ b: 'LINE の引き継ぎ準備', items: ['LINE に登録している電話番号・メールアドレス・パスワードを確かめる（親本人が）', 'トークの履歴を残したいなら、乗り換え前にバックアップする。<a href="' + URLS.line + '" target="_blank" rel="noopener">LINE ヘルプ</a>'] });
+    const loan = ps.some((p) => p.loan !== 'no');
+    steps.push({ b: '端末の残りの支払い', items: [loan ? '本体の支払いが残っている（かもしれない）ので、残りの回数と金額を明細で確かめる。乗り換えても、残りの支払いは続くのが基本' : '本体の支払いは残っていない、と聞いています（念のため明細で確かめる）', '本体を返すプログラムに入っている場合は、返す時期と条件を確かめる'] });
+    steps.push({ b: '持ち物', items: ['本人確認書類（運転免許証・マイナンバーカードなど）', '今のスマホ（充電しておく）', '支払いに使うキャッシュカードかクレジットカード', '暗証番号・パスワード（親本人が覚えているか、本人が管理するメモ）'] });
+    steps.push({ b: 'お店で言うこと', items: ['「毎月どれくらいデータを使って、電話はこう使っています。今の料金より安いプランはありますか」', '「その料金に、期間限定の割引は入っていますか。終わったあといくらですか」', '「解約金や手数料はかかりますか」', '「説明を紙でもらえますか」', '決めきれなければ「家族と相談します」で持ち帰る'] });
+    steps.push({ b: '親に渡す当日の紙', items: ['「当日の紙を印刷する」で、持ち物とお店で言うことを、大きな字の1枚にします'] });
+    return steps;
+  }
+  window.__jikka.scriptSteps = scriptSteps;
+  function renderScript() {
+    const own = owned(); const box = $('script-box'); box.innerHTML = '';
+    const ol = document.createElement('ol'); ol.className = 'script';
+    scriptSteps().forEach((s, i) => {
+      const li = document.createElement('li'); if (!own && i > 0) { li.className = 'lock'; li.setAttribute('aria-hidden', 'true'); }
+      const b = document.createElement('b'); b.textContent = s.b; li.append(b);
+      if (own || i === 0) { const ul = document.createElement('ul'); s.items.forEach((t) => { const x = document.createElement('li'); x.innerHTML = t.indexOf('<a ') >= 0 ? t : esc(t); ul.append(x); }); li.append(ul); }
+      else { const p = document.createElement('p'); p.textContent = '（買い切りで開きます）'; li.append(p); }
+      ol.append(li);
+    });
+    const cd = document.createElement('p'); cd.className = 'note'; cd.textContent = '各社の決まりは ' + jpDate(CHECKED) + ' に公式ページで確かめた内容です。' + (isStale() ? '確かめた日から' + STALE_DAYS + '日を過ぎているので、リンク先の公式ページで最新の内容を確かめてください。' : '');
+    box.append(ol, cd);
+    $('paywall').classList.toggle('hide', own); $('owned').classList.toggle('hide', !own);
+    $('pr-test').hidden = LINK.indexOf('/test_') < 0;
+    if (own) $('my-code').value = prem.token || '';
+  }
+
+  // 入力（宛名・ひとこと）
+  ['to', 'from', 'note'].forEach((k) => $(k).addEventListener('input', () => { db[k] = $(k).value.trim().slice(0, k === 'note' ? 60 : 12); save(); renderLetter(); }));
+
+  // 選ぶボタン（チップ）
+  function chipGroup(form, key) { return form.querySelector('.chips[data-k="' + key + '"]'); }
+  function setChip(form, key, v) { const g = chipGroup(form, key); if (!g) return; g.querySelectorAll('button').forEach((b) => { b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', b.dataset.v === v ? 'true' : 'false'); }); }
+  function getChip(form, key) { const g = chipGroup(form, key); const b = g && g.querySelector('button[aria-checked=true]'); return b ? b.dataset.v : null; }
+  document.querySelectorAll('.chips[data-k]').forEach((g) => g.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; g.querySelectorAll('button').forEach((x) => x.setAttribute('aria-checked', x === b ? 'true' : 'false')); if (g.dataset.k === 'kind') syncKind(); }));
+
+  // スマホ
+  let editP = null; const PF = $('phone-form');
+  function openPhone(p) {
+    editP = p; const v = p || { who: db.to || '', co: 'docomo' };
+    $('ph-h').textContent = p ? 'スマホを直す' : 'スマホを書く'; $('p-ok').textContent = p ? '直す' : '書く';
+    $('p-who').value = v.who || ''; $('p-co').value = v.co || 'docomo'; $('p-fee').value = typeof v.fee === 'number' ? v.fee : ''; $('p-other').value = typeof v.other === 'number' ? v.other : '';
+    ['data', 'call', 'family', 'set', 'shop', 'mail', 'loan'].forEach((k) => setChip(PF, k, v[k] || null));
+    $('p-del').classList.toggle('hide', !p); $('p-err').textContent = ''; try { $('phone-dlg').showModal(); } catch (e) {}
+  }
+  $('btn-add-phone').addEventListener('click', () => openPhone(null));
+  $('p-cancel').addEventListener('click', () => $('phone-dlg').close());
+  PF.addEventListener('submit', (e) => {
+    e.preventDefault(); const err = $('p-err'); err.textContent = '';
+    const num = (id) => { const s = $(id).value; if (s === '') return undefined; const n = Number(s); return Number.isInteger(n) && n >= 0 && n <= 1000000 ? n : NaN; };
+    const fee = num('p-fee'), other = num('p-other');
+    if (Number.isNaN(fee) || Number.isNaN(other)) { err.textContent = '金額は0以上の整数で入れてください。'; return; }
+    const v = { who: $('p-who').value.trim().slice(0, 12), co: $('p-co').value, fee, other };
+    ['data', 'call', 'family', 'set', 'shop', 'mail', 'loan'].forEach((k) => { v[k] = getChip(PF, k); });
+    if (editP) Object.assign(editP, v); else { db.phones.push(Object.assign({ id: newId() }, v)); track('phone_add', { co: v.co, family: v.family, shop: v.shop }); }
+    save(); $('phone-dlg').close(); render(); track('diagnose', { status: judgePhone(v).status });
+  });
+  $('p-del').addEventListener('click', () => { if (!editP || !confirm('このスマホのメモを消しますか？')) return; db.phones = db.phones.filter((x) => x !== editP); save(); $('phone-dlg').close(); render(); });
+
+  // ほかの支払い
+  let editX = null; const XF = $('extra-form');
+  function syncKind() { const k = getChip(XF, 'kind'); $('x-used-box').classList.toggle('hide', !(k === 'opt' || k === 'other')); $('x-call-box').classList.toggle('hide', k !== 'net'); }
+  function openExtra(x) {
+    editX = x; const v = x || { kind: 'opt' };
+    $('ex-h').textContent = x ? '支払いを直す' : 'ほかの支払いを書く'; $('x-ok').textContent = x ? '直す' : '書く';
+    setChip(XF, 'kind', v.kind); setChip(XF, 'used', v.used || null); setChip(XF, 'callin', v.callin || null);
+    $('x-name').value = v.name || ''; $('x-amount').value = typeof v.amount === 'number' ? v.amount : '';
+    $('x-del').classList.toggle('hide', !x); $('x-err').textContent = ''; syncKind(); try { $('extra-dlg').showModal(); } catch (e) {}
+  }
+  $('btn-add-extra').addEventListener('click', () => openExtra(null));
+  $('x-cancel').addEventListener('click', () => $('extra-dlg').close());
+  XF.addEventListener('submit', (e) => {
+    e.preventDefault(); const err = $('x-err'); err.textContent = '';
+    const s = $('x-amount').value; const amount = s === '' ? 0 : Number(s);
+    if (!Number.isInteger(amount) || amount < 0 || amount > 1000000) { err.textContent = '金額は0以上の整数で入れてください。'; return; }
+    const v = { kind: getChip(XF, 'kind') || 'opt', name: $('x-name').value.trim().slice(0, 30), amount, used: getChip(XF, 'used'), callin: getChip(XF, 'callin') };
+    if (editX) Object.assign(editX, v); else { db.extras.push(Object.assign({ id: newId() }, v)); track('extra_add', { kind: v.kind }); }
+    save(); $('extra-dlg').close(); render();
+  });
+  $('x-del').addEventListener('click', () => { if (!editX || !confirm('この支払いのメモを消しますか？')) return; db.extras = db.extras.filter((x) => x !== editX); save(); $('extra-dlg').close(); render(); });
+
+  // 印刷と画像
+  function printNode(node, ev) { const pa = $('print-area'); pa.innerHTML = ''; pa.append(node); track(ev, {}); setTimeout(() => window.print(), 50); }
+  $('btn-print-letter').addEventListener('click', () => printNode($('letter').cloneNode(true), 'letter_print'));
+  $('btn-print-shield').addEventListener('click', () => printNode($('shield').cloneNode(true), 'shield_print'));
+  $('btn-print-script').addEventListener('click', () => {
+    if (!owned()) return;
+    const d = document.createElement('div'); d.className = 'shield script-print';
+    const steps = scriptSteps(); const pick = steps.filter((s) => s.b === '持ち物' || s.b === 'お店で言うこと');
+    d.innerHTML = '<h3>' + esc(db.to || 'お母さん') + 'へ　当日のメモ</h3>' + pick.map((s) => '<p style="margin:10px 0 2px"><b>' + esc(s.b) + '</b></p><ol>' + s.items.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ol>').join('') + '<p class="src">困ったら、その場で決めずに「家族と相談します」で大丈夫。</p>';
+    printNode(d, 'script_print');
+  });
+  async function nodeToImage(kind) {
+    try { if (document.fonts) await document.fonts.ready; } catch (e) {}
+    const W = 900; const pen = '"Klee One", cursive', min = '"Zen Old Mincho", serif', gth = '"Zen Kaku Gothic New", sans-serif';
+    const c = document.createElement('canvas'); const x = c.getContext('2d');
+    const wrap = (text, maxW, font) => { x.font = font; const out = []; let line = ''; for (const ch of [...text]) { if (x.measureText(line + ch).width > maxW) { out.push(line); line = ch; } else line += ch; } if (line) out.push(line); return out; };
+    let blocks = [];
+    if (kind === 'letter') {
+      const L = letterParts(); const tmp = document.createElement('div');
+      L.lines.forEach((l) => { tmp.innerHTML = l.h; if (l.t === 'ol') [...tmp.querySelectorAll('li')].forEach((li, i) => blocks.push({ t: (i + 1) + '. ' + li.textContent, f: '34px ' + pen })); else blocks.push({ t: tmp.textContent, f: (l.c === 'from' ? '34px ' : '34px ') + pen, right: l.c === 'from' }); });
+      blocks.push({ t: '', f: '20px ' + gth }); blocks.push({ t: L.fine, f: '20px ' + gth, gray: true });
+    } else {
+      blocks.push({ t: '電話で「安くなります」と言われたら', f: '900 40px ' + min, center: true });
+      [...$('shield').querySelectorAll('li')].forEach((li, i) => blocks.push({ t: (i + 1) + '. ' + li.textContent, f: '34px ' + gth }));
+      blocks.push({ t: '消費者ホットライン　１８８', f: '900 52px ' + min, center: true, red: true });
+      blocks.push({ t: '国民生活センター・消費者庁の案内をもとに作成 ・ 実家のてがみ', f: '20px ' + gth, center: true, gray: true });
+    }
+    const lh = (f) => parseInt(f.match(/(\d+)px/)[1], 10) * 1.9; let H = 120; const laid = [];
+    blocks.forEach((b) => { const ls = b.t ? wrap(b.t, W - 160, b.f) : ['']; laid.push({ b, ls }); H += ls.length * lh(b.f); });
+    c.width = W; c.height = H + 80;
+    x.fillStyle = '#FFFDF6'; x.fillRect(0, 0, W, c.height);
+    if (kind === 'letter') { x.strokeStyle = '#E6CFBF'; x.lineWidth = 1.5; for (let y = 120; y < c.height - 40; y += 64) { x.beginPath(); x.moveTo(60, y); x.lineTo(W - 50, y); x.stroke(); } x.strokeStyle = 'rgba(184,69,46,.4)'; x.beginPath(); x.moveTo(70, 40); x.lineTo(70, c.height - 30); x.stroke(); }
+    else { x.strokeStyle = '#2B3A55'; x.lineWidth = 6; x.strokeRect(30, 30, W - 60, c.height - 60); x.lineWidth = 2; x.strokeRect(42, 42, W - 84, c.height - 84); }
+    let y = 100;
+    laid.forEach(({ b, ls }) => { ls.forEach((l) => { x.font = b.f; x.fillStyle = b.red ? '#B8452E' : b.gray ? '#5D6678' : '#2C2A28'; x.textAlign = b.center ? 'center' : b.right ? 'right' : 'left'; x.fillText(l, b.center ? W / 2 : b.right ? W - 80 : 90, y); y += lh(b.f); }); });
+    return new Promise((res) => c.toBlob(res, 'image/png'));
+  }
+  window.__jikka.nodeToImage = nodeToImage;
+  async function shareImage(kind) {
+    const blob = await nodeToImage(kind); if (!blob) return;
+    const name = (kind === 'letter' ? '実家のてがみ' : '電話の横に貼る紙') + '.png'; const file = new File([blob], name, { type: 'image/png' });
+    track(kind === 'letter' ? 'letter_image' : 'shield_image', {});
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { try { await navigator.share({ files: [file] }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+    $('letter-msg').textContent = '画像を保存しました。LINE のトークで、写真として送れます。';
+  }
+  $('btn-image-letter').addEventListener('click', () => shareImage('letter'));
+  $('btn-image-shield').addEventListener('click', () => shareImage('shield'));
+
+  // 購入（買い切り）
+  const msg = (t) => { $('pr-msg').textContent = t || ''; };
+  async function api(path, body) { const opt = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {}; const r = await fetch(PAY_API + path, opt); let j = {}; try { j = await r.json(); } catch (e) {} return { ok: r.ok, status: r.status, data: j }; }
+  $('btn-buy').addEventListener('click', () => { track('begin_checkout', { value: PRICE, currency: 'JPY', items: [{ item_id: 'jikka_lifetime', item_name: '手続きの台本' }] }); location.href = LINK; });
+  $('script-sec').addEventListener('toggle', () => {}, true);
+  let previewed = false; new IntersectionObserver((es) => { if (!previewed && es.some((e) => e.isIntersecting)) { previewed = true; track('script_preview', {}); } }).observe($('paywall'));
+  async function verifyPurchase(sid) {
+    msg('ご購入を確認しています…'); try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    try { const r = await api('/verify?session_id=' + encodeURIComponent(sid));
+      if (r.ok && r.data.premium && r.data.plan === 'jikka_lifetime') { prem = { token: r.data.token, plan: r.data.plan, premium: true, checkedAt: Date.now() }; savePrem(); track('purchase', { transaction_id: sid, value: PRICE, currency: 'JPY', items: [{ item_id: 'jikka_lifetime', item_name: '手続きの台本' }] }); render(); msg('ありがとうございます。手続きの台本が開きました。'); $('h-script').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      else { msg('ご購入を確認できませんでした。お支払いが完了している場合は、少し待ってからページを開き直してください。'); track('purchase_verify_failed', { reason: r.data.error || String(r.status) }); }
+    } catch (e) { try { history.replaceState(null, '', location.pathname + '?session_id=' + encodeURIComponent(sid)); } catch (x) {} msg('通信できませんでした。電波の良い所でページを開き直すと、もう一度確認します。'); }
+  }
+  $('btn-show-code').addEventListener('click', () => $('code-box').classList.toggle('hide'));
+  $('btn-copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('my-code').value); msg('コピーしました。'); } catch (e) { $('my-code').select(); msg('コードを選びました。長押し（右クリック）でコピーしてください。'); } });
+  $('btn-restore').addEventListener('click', async () => {
+    const code = $('restore-code').value.trim();
+    if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(code)) { msg('コードの形が正しくありません。購入した端末に出るコードを、そのまま貼り付けてください。'); return; }
+    msg('確認しています…');
+    try { const r = await api('/status', { token: code });
+      if (r.ok && r.data.premium && r.data.plan === 'jikka_lifetime') { prem = { token: code, plan: r.data.plan, premium: true, checkedAt: Date.now() }; savePrem(); render(); $('restore-code').value = ''; track('premium_restore', {}); msg('引き継ぎました。この端末でも台本が開きます。'); }
+      else msg('このコードは使えませんでした。');
+    } catch (e) { msg('通信できませんでした。電波の良い所でもう一度お試しください。'); }
+  });
+
+  // 保管
+  const kmsg = (t) => { $('keep-msg').textContent = t || ''; };
+  $('btn-export').addEventListener('click', () => { const blob = new Blob([JSON.stringify({ app: 'jikka', v: 1, exported: new Date().toISOString(), data: db })], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = '実家のてがみ_' + todayKey().replace(/-/g, '') + '.json'; document.body.append(a); a.click(); a.remove(); kmsg('書き出しました。'); track('backup_export', {}); });
+  $('btn-import').addEventListener('click', () => $('import-file').click());
+  $('import-file').addEventListener('change', async (e) => {
+    const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    try { if (f.size > 1024 * 1024) throw 0; const j = JSON.parse(await f.text()); const d = j && j.app === 'jikka' && j.data;
+      if (!d || !Array.isArray(d.phones) || !Array.isArray(d.extras) || !d.phones.every((p) => p && typeof p.id === 'string' && CO[p.co])) throw 0;
+      if (!confirm('読み込んだ内容で、今のメモを置き換えますか？')) return;
+      db = { to: String(d.to || '').slice(0, 12), from: String(d.from || '').slice(0, 12), note: String(d.note || '').slice(0, 60), phones: d.phones, extras: d.extras }; save(); render(); kmsg('読み込みました。');
+    } catch (x) { kmsg('このファイルは読み込めませんでした。実家のてがみで書き出したファイルを選んでください。'); }
+  });
+  $('btn-clear').addEventListener('click', () => { if (!confirm('すべてのメモを消しますか？ 元に戻せません。')) return; db = { to: '', from: '', note: '', phones: [], extras: [] }; save(); render(); kmsg('すべて消しました。'); });
+
+  render();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderLetter);
+  const sid = new URLSearchParams(location.search).get('session_id');
+  if (sid && /^cs_(test|live)_[A-Za-z0-9]+$/.test(sid)) verifyPurchase(sid);
+  else if (prem && prem.token) api('/status', { token: prem.token }).then((r) => { if (r.ok && r.data.reason === 'invalid_token') { prem = null; savePrem(); render(); } }).catch(() => {});
+})();
+</script>
+</body>
+</html>
