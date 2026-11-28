@@ -1,0 +1,16 @@
+{
+  "name": "てぬぐい染め",
+  "short_name": "てぬぐい染め",
+  "description": "数字でぬる、和柄と日本の色。毎日1枚、手ぬぐいを染める。",
+  "lang": "ja",
+  "start_url": "./?utm_source=homescreen",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F0E7D5",
+  "theme_color": "#24496B",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

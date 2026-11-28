@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YPSE6ZHVK1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  (function () { var sp = new URLSearchParams(location.search); sp.delete('session_id'); var q = sp.toString();
+    gtag('config', 'G-YPSE6ZHVK1', { page_location: location.origin + location.pathname + (q ? '?' + q : '') }); })();
+</script>
+<title>てぬぐい染め｜数字でぬる、和柄と日本の色</title>
+<meta name="description" content="麻の葉・青海波・七宝の文様を、数字のとおりに日本の伝統色で染めていく大人の塗り絵。染め上がると絵が浮かび、手ぬぐいになります。広告なし・登録なし・毎日1枚無料。">
+<meta name="theme-color" content="#24496B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Yuji+Syuku&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --kinari:#F0E7D5; --cloth:#F7F1E4; --ai:#24496B; --ai-d:#1B3753; --sumi:#2A2725; --sumi-2:#5E5850; --sumi-3:#98907F; --shu:#C2452D; --line:#D9CDB6;
+    --mincho:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif; --fude:"Yuji Syuku","Shippori Mincho B1",serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;color:var(--sumi);font-family:var(--gothic);line-height:1.75;background:var(--kinari);-webkit-font-smoothing:antialiased;
+    background-image:repeating-linear-gradient(0deg,rgba(120,95,60,.035) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,95,60,.03) 0 1px,transparent 1px 4px)}
+  button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+  :focus-visible{outline:2px solid var(--shu);outline-offset:3px}
+  .hide{display:none!important}
+  .wrap{max-width:820px;margin:0 auto;padding:0 14px}
+
+  /* 暖簾 */
+  .noren{background:var(--ai);color:#F4EEE2;position:relative;padding:20px 0 26px;overflow:hidden}
+  .noren::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22px;
+    background:linear-gradient(90deg,transparent calc(33.33% - 3px),var(--kinari) calc(33.33% - 3px),var(--kinari) calc(33.33% + 3px),transparent calc(33.33% + 3px),transparent calc(66.66% - 3px),var(--kinari) calc(66.66% - 3px),var(--kinari) calc(66.66% + 3px),transparent calc(66.66% + 3px))}
+  .noren .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .noren h1{margin:0;font-family:var(--fude);font-weight:400;font-size:clamp(34px,9vw,48px);letter-spacing:.12em;line-height:1.1}
+  .noren p{margin:4px 0 0;font-size:12.5px;letter-spacing:.14em;opacity:.85}
+  .mon{width:64px;height:64px;border:2px solid #F4EEE2;border-radius:50%;display:grid;place-items:center;font-family:var(--mincho);font-weight:800;font-size:26px;flex:none}
+
+  h2{font-family:var(--mincho);font-weight:800;font-size:20px;letter-spacing:.08em;margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+  h2::before{content:"";width:16px;height:16px;background:var(--ai);transform:rotate(45deg);flex:none}
+  .sub{font-size:13px;color:var(--sumi-2);margin:-4px 0 10px}
+
+  /* きょうの一枚 */
+  .today{display:grid;grid-template-columns:150px 1fr;gap:16px;background:var(--cloth);border:1px solid var(--line);padding:14px;align-items:center}
+  .today canvas{width:150px;height:200px;display:block;border:1px solid var(--line);background:var(--cloth)}
+  .today .date{font-family:var(--mincho);font-weight:800;font-size:18px}
+  .today .meta{font-size:13px;color:var(--sumi-2)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:0 20px;border:1.5px solid var(--sumi);background:var(--cloth);font-weight:700;font-size:15px;white-space:nowrap}
+  .btn.ai{background:var(--ai);border-color:var(--ai);color:#F4EEE2}
+  .btn.shu{background:var(--shu);border-color:var(--shu);color:#fff}
+  .btn.sm{min-height:36px;padding:0 12px;font-size:13px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+  /* 一覧（反物の棚） */
+  .days{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory}
+  .tile{flex:none;width:96px;text-align:center;scroll-snap-align:start;position:relative}
+  .tile canvas,.tile img{width:96px;height:128px;display:block;border:1px solid var(--line);background:var(--cloth)}
+  .tile .t{font-size:12px;margin-top:3px;line-height:1.4;display:block}
+  .tile .t small{display:block;color:var(--sumi-2);font-size:11px}
+  .tile .lock{position:absolute;top:6px;right:6px;background:var(--sumi);color:#F4EEE2;font-size:10.5px;padding:1px 6px}
+  .tile .done{position:absolute;top:96px;right:4px;width:30px;height:30px;border:2px solid var(--shu);color:var(--shu);border-radius:50%;display:grid;place-items:center;font-family:var(--mincho);font-weight:800;font-size:14px;transform:rotate(-10deg);background:rgba(247,241,228,.85)}
+  .tabs{display:flex;gap:0;border-bottom:1.5px solid var(--sumi);margin-bottom:10px}
+  .tabs button{padding:8px 16px;font-family:var(--mincho);font-weight:800;font-size:15px;border:1.5px solid transparent;border-bottom:0;margin-bottom:-1.5px}
+  .tabs button[aria-selected=true]{border-color:var(--sumi);background:var(--cloth)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px}
+  .grid .tile{width:auto}.grid .tile canvas,.grid .tile img{width:100%;height:auto;aspect-ratio:3/4}
+  .seg{display:inline-flex;border:1.5px solid var(--sumi)}
+  .seg button{padding:4px 12px;font-size:13px;min-height:34px}
+  .seg button[aria-pressed=true]{background:var(--sumi);color:#F4EEE2}
+
+  /* 物干し */
+  .pole{position:relative;padding-top:18px;min-height:60px}
+  .pole::before{content:"";position:absolute;left:0;right:0;top:6px;height:7px;background:linear-gradient(#B79A6A,#8C7246);border-radius:4px}
+  .shelf{display:flex;gap:14px;overflow-x:auto;padding:0 4px 8px}
+  .shelf .hang{flex:none;width:86px;position:relative}
+  .shelf .hang img{width:86px;height:115px;display:block;box-shadow:0 6px 10px -6px rgba(0,0,0,.35)}
+  .shelf .hang::before{content:"";position:absolute;top:-10px;left:50%;width:8px;height:18px;background:#C9B48A;transform:translateX(-50%);border-radius:2px}
+  .shelf .hang span{font-size:11px;display:block;text-align:center;color:var(--sumi-2);line-height:1.4;margin-top:2px}
+  .empty{font-size:13px;color:var(--sumi-2)}
+
+  /* お品書き */
+  .menu{background:var(--cloth);border:1px solid var(--line);padding:16px 18px}
+  .menu dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:4px 16px;font-size:14px}
+  .menu dt{border-bottom:1px dotted var(--sumi-3)}
+  .menu dd{margin:0;font-family:var(--mincho);font-weight:800}
+  .note{font-size:12px;color:var(--sumi-2)}
+  .note a,.foot a{color:var(--sumi-2)}
+  .msg{font-size:13.5px;color:var(--ai);min-height:1.3em;margin:8px 0 0}
+  .hint-a2hs{border:1.5px dashed var(--sumi-3);padding:10px 12px;font-size:13px;margin-top:18px}
+  .foot{padding:22px 0 40px;font-size:12px;color:var(--sumi-2);text-align:center}
+
+  /* 染め場（遊ぶ画面） */
+  #play{position:fixed;inset:0;background:#E9DFCB;display:flex;flex-direction:column;z-index:10}
+  .bar{display:flex;align-items:center;gap:8px;padding:8px 10px;padding-top:max(8px,env(safe-area-inset-top));background:var(--ai);color:#F4EEE2}
+  .bar .ttl{flex:1;min-width:0;font-family:var(--mincho);font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar .pct{font-size:13px;font-variant-numeric:tabular-nums}
+  .bar button{min-height:38px;min-width:38px;padding:0 10px;border:1.5px solid rgba(244,238,226,.7);font-size:14px}
+  #stage{flex:1;position:relative;overflow:hidden;touch-action:none}
+  #cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+  .zoom{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px}
+  .zoom button{width:44px;height:44px;background:rgba(247,241,228,.92);border:1.5px solid var(--sumi);font-size:20px;font-weight:700}
+  #toast{position:absolute;left:50%;top:10px;transform:translateX(-50%);background:rgba(42,39,37,.86);color:#F4EEE2;font-size:13px;padding:5px 12px;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap}
+  #toast.on{opacity:1}
+  .tray{display:flex;gap:8px;overflow-x:auto;padding:10px 10px;padding-bottom:max(10px,env(safe-area-inset-bottom));background:var(--cloth);border-top:1.5px solid var(--sumi)}
+  .sw{flex:none;width:70px;border:1.5px solid var(--sumi-3);background:#fff;position:relative;text-align:center;padding:0 0 4px}
+  .sw .chip{height:44px;display:grid;place-items:center}
+  .sw .no{font-family:var(--mincho);font-weight:800;font-size:19px;background:rgba(247,241,228,.92);color:var(--sumi);min-width:30px;height:30px;display:grid;place-items:center;border-radius:50%;line-height:1}
+  .sw .nm{display:block;font-size:11px;line-height:1.3;margin-top:3px;font-weight:700}
+  .sw .left{display:block;font-size:10.5px;color:var(--sumi-2);line-height:1.2}
+  .sw[aria-pressed=true]{border:3px solid var(--sumi);transform:translateY(-4px)}
+  .sw[aria-pressed=true]::after{content:"";position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--shu)}
+  .sw.fin .chip::after{content:"済";position:absolute;top:6px;right:4px;font-family:var(--mincho);font-weight:800;font-size:12px;color:var(--shu);border:1.5px solid var(--shu);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;background:rgba(255,255,255,.85)}
+  .sw.fin .no{opacity:.4}
+  #loading{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mincho);font-size:16px;background:#E9DFCB}
+
+  /* 染め上がり */
+  dialog{border:1.5px solid var(--sumi);padding:0;background:var(--cloth);color:var(--sumi);width:min(520px,calc(100% - 20px));max-height:calc(100dvh - 20px)}
+  dialog::backdrop{background:rgba(27,55,83,.55)}
+  .dlg{padding:18px}
+  .dlg h3{font-family:var(--mincho);font-weight:800;font-size:20px;margin:0 0 4px}
+  .fin-img{display:block;margin:10px auto;max-width:100%;max-height:46dvh;box-shadow:0 10px 18px -10px rgba(0,0,0,.4)}
+  .cols{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12.5px;margin:6px 0 12px}
+  .cols span{display:inline-flex;align-items:center;gap:5px}
+  .cols i{width:14px;height:14px;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+  @media (max-width:540px){.today{grid-template-columns:110px 1fr;gap:12px}.today canvas{width:110px;height:147px}.today .date{font-size:15.5px}.mon{width:50px;height:50px;font-size:20px}}
+</style>
+</head>
+<body>
+<header class="noren"><div class="wrap"><div><h1>てぬぐい染め</h1><p>数字でぬる、和柄と日本の色</p></div><span class="mon" aria-hidden="true">染</span></div></header>
+<main class="wrap" id="home">
+  <h2>きょうの一枚</h2>
+  <div class="today">
+    <canvas id="today-cv" width="150" height="200" aria-hidden="true"></canvas>
+    <div>
+      <div class="date" id="today-date"></div>
+      <div class="meta" id="today-meta"></div>
+      <p class="note" style="margin:6px 0 10px">何の絵が浮かぶかは、染めてのお楽しみ。数字のとおりに、色をのせていきます。</p>
+      <button class="btn ai" type="button" id="btn-today">染めはじめる</button>
+    </div>
+  </div>
+
+  <h2>この一週間</h2>
+  <p class="sub">毎日1枚ずつ増えます。7日分は無料で染められます。</p>
+  <div class="days" id="days"></div>
+
+  <h2>文様から選ぶ</h2>
+  <p class="sub">3つの文様 × 10枚 × 2つの細かさ。<span id="lib-note">買い切りで、ぜんぶ選べます。</span></p>
+  <div class="tabs" role="tablist" id="pat-tabs"></div>
+  <div class="row" style="margin-bottom:10px"><span class="note">マスの細かさ</span><div class="seg" id="size-seg"><button type="button" data-v="zakkuri" aria-pressed="true">ざっくり</button><button type="button" data-v="komakai" aria-pressed="false">こまかい</button></div></div>
+  <div class="grid" id="lib"></div>
+
+  <h2>物干し</h2>
+  <p class="sub">染め上がった手ぬぐい。</p>
+  <div class="pole"><div class="shelf" id="shelf"></div></div>
+
+  <h2 id="h-menu">お品書き</h2>
+  <div class="menu" id="menu">
+    <dl>
+      <dt>きょうの一枚・この一週間（毎日1枚）</dt><dd>無料</dd>
+      <dt>広告</dt><dd>ありません</dd>
+      <dt>ぜんぶの文様と絵・こまかいマス・壁紙の保存</dt><dd>買い切り 1,200円</dd>
+    </dl>
+    <p class="note" style="margin:10px 0">月額ではありません。1回のお支払いで、この先に増える絵もずっと使えます。</p>
+    <div id="buy-box"><button class="btn shu" type="button" id="btn-buy">1,200円で買い切る</button>
+      <p class="note" id="pr-test" hidden style="margin-top:6px">テスト中のため、実際の請求は発生しません。</p>
+      <p class="note" style="margin-top:6px">お支払いは Stripe で処理され、カード情報はこのアプリに保存されません。<a href="tokushoho.html">特定商取引法に基づく表記</a></p>
+      <details style="margin-top:6px"><summary class="note" style="cursor:pointer">購入済みの方（別の端末で使う）</summary>
+        <input id="restore-code" type="text" autocomplete="off" spellcheck="false" placeholder="購入した端末に出るコード" style="width:100%;font-size:16px;padding:8px;border:1.5px solid var(--sumi);background:#fff;margin-top:6px">
+        <button class="btn sm" type="button" id="btn-restore" style="margin-top:6px">引き継ぐ</button>
+      </details>
+    </div>
+    <div id="owned" class="hide"><p style="margin:0;font-weight:700">買い切り済みです。ぜんぶの文様と絵を染められます。</p>
+      <button class="btn sm" type="button" id="btn-show-code" style="margin-top:8px">別の端末で使う</button>
+      <div id="code-box" class="hide" style="margin-top:8px"><p class="note">使いたい端末の「購入済みの方」に貼り付けてください。</p><textarea id="my-code" readonly rows="3" style="width:100%;font-size:12px;word-break:break-all"></textarea><button class="btn sm" type="button" id="btn-copy">コピー</button></div>
+    </div>
+    <p class="msg" id="pr-msg" aria-live="polite"></p>
+  </div>
+
+  <div class="hint-a2hs" id="a2hs"><b>ホーム画面に追加すると、アプリのように開けます。</b><br>iPhone は共有ボタン →「ホーム画面に追加」。Android は右上のメニュー →「ホーム画面に追加」。しばらく開かないと、ブラウザが記録を消すことがあるので、時々「書き出す」で保管してください。</div>
+  <h2>記録の保管</h2>
+  <div class="row"><button class="btn sm" type="button" id="btn-export">書き出す</button><button class="btn sm" type="button" id="btn-import">読み込む</button><input type="file" id="import-file" accept="application/json,.json" class="hide"></div>
+  <p class="msg" id="keep-msg" aria-live="polite"></p>
+  <footer class="foot">てぬぐい染め ・ 運営 HRlab ・ 広告なし<br>文様と絵は、すべて図形から自作しています。色の名前は伝統色の呼び名、色の値は目安です。<br><a href="privacy.html">プライバシー</a> ・ <a href="tokushoho.html">特定商取引法に基づく表記</a></footer>
+</main>
+
+<section id="play" class="hide" aria-label="染め場">
+  <div class="bar">
+    <button type="button" id="btn-back" aria-label="もどる">←</button>
+    <span class="ttl" id="play-ttl"></span>
+    <span class="pct" id="play-pct">0%</span>
+    <button type="button" id="btn-hint">さがす</button>
+  </div>
+  <div id="stage">
+    <canvas id="cv"></canvas>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <div class="zoom"><button type="button" id="z-in" aria-label="拡大">＋</button><button type="button" id="z-out" aria-label="縮小">－</button><button type="button" id="z-fit" aria-label="全体を見る" style="font-size:13px">全体</button></div>
+    <div id="loading">染め場を支度しています…</div>
+  </div>
+  <div class="tray" id="tray" role="toolbar" aria-label="色"></div>
+</section>
+
+<dialog id="fin-dlg" aria-labelledby="fin-h"><div class="dlg">
+  <h3 id="fin-h">染め上がりました</h3>
+  <p class="note" id="fin-sub" style="margin:0"></p>
+  <img class="fin-img" id="fin-img" alt="">
+  <div class="cols" id="fin-cols"></div>
+  <div class="row"><button class="btn ai" type="button" id="btn-wall">壁紙に保存</button><button class="btn" type="button" id="btn-fin-close">物干しに掛ける</button></div>
+  <p class="note" id="wall-note" style="margin-top:6px"></p>
+</div></dialog>
+
+<script src="engine.js"></script>
+<script>
+(function () {
+  'use strict';
+  const E = window.SomeEngine;
+  const KEY = 'tenugui_v1', PKEY = 'tenugui_premium_v1', PLAN = 'tenugui_lifetime', PRICE = 1200;
+  const PAY_API = 'https://kotei-premium.h-c-hrlab.workers.dev';
+  const LINK = 'https://buy.stripe.com/test_dRm5kD6VPg2Lb7W8PWfjG0d';
+  const BASE_DAY = '2026-11-28';
+  const PIDS = ['asanoha', 'seigaiha', 'shippo'];
+  const KANJI = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+  const $ = (id) => document.getElementById(id);
+  const track = (n, p) => { try { if (typeof gtag === 'function') gtag('event', n, p || {}); } catch (e) {} };
+  const pad = (n) => String(n).padStart(2, '0');
+  const dkey = (d) => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  const today = () => dkey(new Date());
+  const dayNo = (k) => Math.round((Date.UTC(+k.slice(0, 4), +k.slice(5, 7) - 1, +k.slice(8)) - Date.UTC(2026, 10, 28)) / 86400000);
+  const addDays = (k, n) => { const d = new Date(+k.slice(0, 4), +k.slice(5, 7) - 1, +k.slice(8) + n); return dkey(d); };
+  const mod = (a, m) => ((a % m) + m) % m;
+  const kan = (n) => n <= 10 ? KANJI[n] : n < 20 ? '十' + KANJI[n - 10] : n < 100 ? KANJI[Math.floor(n / 10)] + '十' + (n % 10 ? KANJI[n % 10] : '') : String(n);
+  const jpDate = (k) => kan(+k.slice(5, 7)) + '月' + kan(+k.slice(8)) + '日';
+  const pidOf = (pat, sc, size) => pat + '.' + sc + '.' + size;
+  function daily(k) { const d = dayNo(k); return { pat: PIDS[mod(d, 3)], sc: E.SCENES[mod(d * 7, 10)].id, size: 'zakkuri' }; }
+  const sceneNo = (id) => E.SCENES.findIndex((s) => s.id === id) + 1;
+
+  let db = { v: 1, prog: {}, thumbs: {}, shelf: [] };
+  try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && typeof v === 'object') db = Object.assign(db, v); } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) { toast('保存できませんでした。端末の空きを確かめてください。'); } };
+  let prem = null; try { prem = JSON.parse(localStorage.getItem(PKEY) || 'null'); } catch (e) {}
+  const savePrem = () => { try { if (prem) localStorage.setItem(PKEY, JSON.stringify(prem)); else localStorage.removeItem(PKEY); } catch (e) {} };
+  const owned = () => !!(prem && prem.premium && prem.plan === PLAN);
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+
+  function freeSet() { const s = new Set(), t = today(); for (let i = 0; i < 7; i++) { const d = daily(addDays(t, -i)); s.add(pidOf(d.pat, d.sc, d.size)); } return s; }
+  function canPlay(id) { return owned() || freeSet().has(id) || !!db.prog[id]; }
+
+  // ---- 小さな見本（文様の線だけ） ----
+  function drawThumb(cv, pat, size) {
+    const w = cv.width, h = cv.height, g = cv.getContext('2d'), im = g.createImageData(w, h), P = E.PATTERNS[pat], sc = E.W / w, s = E.SIZES[size].s[pat];
+    const key = (x, y) => P.key(x * sc - (E.W % s) / 2, y * sc, s);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const k = key(x + 0.5, y + 0.5), edge = k !== key(x + 1.5, y + 0.5) || k !== key(x + 0.5, y + 1.5), i = (y * w + x) * 4;
+      const c = edge ? [36, 73, 107] : [247, 241, 228]; im.data[i] = c[0]; im.data[i + 1] = c[1]; im.data[i + 2] = c[2]; im.data[i + 3] = 255;
+    }
+    g.putImageData(im, 0, 0);
+  }
+  function tile(pat, sc, size, label, sub, small) {
+    const id = pidOf(pat, sc, size), b = document.createElement('button'); b.type = 'button'; b.className = 'tile'; b.dataset.id = id;
+    const done = db.thumbs[id];
+    if (done) { const im = document.createElement('img'); im.src = done; im.alt = ''; b.append(im); }
+    else { const cv = document.createElement('canvas'); cv.width = 72; cv.height = 96; drawThumb(cv, pat, size); b.append(cv); }
+    const t = document.createElement('span'); t.className = 't'; t.textContent = label; const s2 = document.createElement('small'); s2.textContent = sub; t.append(s2); b.append(t);
+    if (done) { const d = document.createElement('span'); d.className = 'done'; d.textContent = '済'; d.setAttribute('aria-label', '染め上がり'); b.append(d); }
+    else if (db.prog[id]) { const d = document.createElement('span'); d.className = 'lock'; d.style.background = 'var(--ai)'; d.textContent = '途中'; b.append(d); }
+    if (!canPlay(id)) { const l = document.createElement('span'); l.className = 'lock'; l.textContent = '買い切り'; b.append(l); }
+    b.setAttribute('aria-label', label + ' ' + sub + (done ? ' 染め上がり' : '') + (!canPlay(id) ? ' 買い切りで染められます' : ''));
+    b.addEventListener('click', () => openPuzzle(pat, sc, size));
+    return b;
+  }
+  let curPat = 'asanoha', curSize = 'zakkuri';
+  function renderHome() {
+    const t = today(), d = daily(t), id = pidOf(d.pat, d.sc, d.size);
+    $('today-date').textContent = jpDate(t) + 'の手ぬぐい';
+    const pg = db.prog[id]; $('today-meta').textContent = '文様：' + E.PATTERNS[d.pat].name + '（' + E.PATTERNS[d.pat].yomi + '）・' + E.SIZES[d.size].name + (db.thumbs[id] ? '・染め上がり' : pg ? '・途中から' : '');
+    $('btn-today').textContent = db.thumbs[id] ? 'もう一度見る' : pg ? 'つづきを染める' : '染めはじめる';
+    if (db.thumbs[id]) { const g = $('today-cv').getContext('2d'); const im = new Image(); im.onload = () => g.drawImage(im, 0, 0, 150, 200); im.src = db.thumbs[id]; } else drawThumb($('today-cv'), d.pat, d.size);
+    const days = $('days'); days.innerHTML = '';
+    for (let i = 0; i < 7; i++) { const k = addDays(t, -i), dd = daily(k); days.append(tile(dd.pat, dd.sc, dd.size, i === 0 ? 'きょう' : jpDate(k), E.PATTERNS[dd.pat].name)); }
+    const tabs = $('pat-tabs'); tabs.innerHTML = '';
+    PIDS.forEach((p) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', p === curPat ? 'true' : 'false'); b.textContent = E.PATTERNS[p].name; b.addEventListener('click', () => { curPat = p; renderHome(); }); tabs.append(b); });
+    document.querySelectorAll('#size-seg button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.v === curSize ? 'true' : 'false'));
+    const lib = $('lib'); lib.innerHTML = '';
+    E.SCENES.forEach((s, i) => { const id2 = pidOf(curPat, s.id, curSize); lib.append(tile(curPat, s.id, curSize, kan(i + 1) + '番', db.thumbs[id2] ? s.name : '何が出るかな')); });
+    const shelf = $('shelf'); shelf.innerHTML = '';
+    if (!db.shelf.length) shelf.innerHTML = '<p class="empty">まだありません。染め上がると、ここに掛かります。</p>';
+    db.shelf.slice().reverse().forEach((id2) => { if (!db.thumbs[id2]) return; const [p, s] = id2.split('.'); const h = document.createElement('button'); h.type = 'button'; h.className = 'hang'; const im = document.createElement('img'); im.src = db.thumbs[id2]; im.alt = E.PATTERNS[p].name + '・' + (E.SCENES.find((x) => x.id === s) || {}).name; const sp = document.createElement('span'); sp.textContent = (E.SCENES.find((x) => x.id === s) || {}).name; h.append(im, sp); h.addEventListener('click', () => openPuzzle(p, s, id2.split('.')[2])); shelf.append(h); });
+    $('lib-note').textContent = owned() ? 'ぜんぶ選べます。' : '買い切りで、ぜんぶ選べます。';
+    $('buy-box').classList.toggle('hide', owned()); $('owned').classList.toggle('hide', !owned());
+    $('pr-test').hidden = LINK.indexOf('/test_') < 0; if (owned()) $('my-code').value = prem.token || '';
+    $('a2hs').classList.toggle('hide', window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  }
+  $('btn-today').addEventListener('click', () => { const d = daily(today()); openPuzzle(d.pat, d.sc, d.size); });
+  document.querySelectorAll('#size-seg button').forEach((b) => b.addEventListener('click', () => { curSize = b.dataset.v; renderHome(); }));
+
+  // ---- 染め場 ----
+  let B = null, cur = null, filled = null, sel = 0, img = null, art = null, actx = null, cellRGB = null, doneCount = 0, leftByNum = [];
+  const cv = $('cv'), ctx = cv.getContext('2d'), view = { s: 1, x: 0, y: 0 };
+  let toastT = 0; function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 1600); }
+  function encode(u8) { const bits = new Uint8Array(Math.ceil(u8.length / 8)); for (let i = 0; i < u8.length; i++) if (u8[i]) bits[i >> 3] |= 1 << (i & 7); let s = ''; for (const b of bits) s += String.fromCharCode(b); return btoa(s); }
+  function decode(str, n) { const out = new Uint8Array(n); try { const s = atob(str); for (let i = 0; i < n; i++) if (s.charCodeAt(i >> 3) & (1 << (i & 7))) out[i] = 1; } catch (e) {} return out; }
+  let saveT = 0; function saveProg() { clearTimeout(saveT); saveT = setTimeout(() => { if (!cur) return; db.prog[cur.id] = { f: encode(filled), t: Date.now(), v: E.VERSION }; save(); }, 250); }
+
+  function openPuzzle(pat, sc, size) {
+    const id = pidOf(pat, sc, size);
+    if (!canPlay(id)) { track('premium_interest', { from: 'tile' }); $('h-menu').scrollIntoView({ behavior: 'smooth', block: 'start' }); $('pr-msg').textContent = 'この一枚は、買い切りで染められます（毎日の1枚と、この一週間の分は無料です）。'; return; }
+    cur = { id, pat, sc, size }; $('home').classList.add('hide'); document.querySelector('.noren').classList.add('hide'); $('play').classList.remove('hide'); $('loading').classList.remove('hide');
+    $('play-ttl').textContent = E.PATTERNS[pat].name + '・' + kan(sceneNo(sc)) + '番' + (size === 'komakai' ? '（こまかい）' : '');
+    try { history.pushState({ play: id }, ''); } catch (e) {}
+    track('puzzle_open', { pattern: pat, size, daily: freeSet().has(id) ? 1 : 0 });
+    setTimeout(() => {
+      B = E.build(pat, sc, size);
+      const pg = db.prog[id]; filled = pg && pg.v === E.VERSION ? decode(pg.f, B.n) : new Uint8Array(B.n);
+      for (let c = 0; c < B.n; c++) if (B.pre[c]) filled[c] = 1;
+      cellRGB = B.cellHex.map(E.hex);
+      art = document.createElement('canvas'); art.width = B.W; art.height = B.H; actx = art.getContext('2d'); img = actx.createImageData(B.W, B.H);
+      leftByNum = B.colors.map(() => 0); doneCount = 0;
+      for (const c of B.playable) { if (filled[c]) doneCount++; else leftByNum[B.num[c]]++; }
+      sel = Math.max(0, leftByNum.findIndex((x) => x > 0));
+      for (let c = 0; c < B.n; c++) paintCell(c);
+      actx.putImageData(img, 0, 0);
+      renderTray(); $('loading').classList.add('hide'); sizeCanvas(); fit(); updatePct(); draw();
+      window.__tenugui.B = B;
+    }, 30);
+  }
+  function paintCell(c) {
+    const d = img.data, W = B.W, isF = filled[c] && (!B.pre[c] || doneCount === B.total), target = cellRGB[c], hl = !isF && B.num[c] === sel;
+    const lum = (target[0] * 0.299 + target[1] * 0.587 + target[2] * 0.114) / 255, g0 = 214 + lum * 14;
+    for (let q = B.start[c]; q < B.start[c + 1]; q++) {
+      const p = B.pix[q], i = p * 4; let r, g, b;
+      if (isF) { if (B.line[p]) { r = target[0] * 0.72; g = target[1] * 0.72; b = target[2] * 0.72; } else { r = target[0]; g = target[1]; b = target[2]; } }
+      else if (B.line[p]) { r = 128; g = 118; b = 102; }
+      else if (hl) { const x = p % W, y = (p / W) | 0; if ((x + y) % 9 < 3) { r = 150; g = 140; b = 120; } else { r = 196; g = 187; b = 168; } }
+      else { r = g0; g = g0 - 4; b = g0 - 13; }
+      d[i] = r; d[i + 1] = g; d[i + 2] = b; d[i + 3] = 255;
+    }
+  }
+  function putCell(c) { actx.putImageData(img, 0, 0, B.bx0[c], B.by0[c], B.bx1[c] - B.bx0[c] + 1, B.by1[c] - B.by0[c] + 1); }
+  function selectNum(k) {
+    if (k === sel || !B) return; const old = sel; sel = k;
+    for (const c of B.playable) if (!filled[c] && (B.num[c] === old || B.num[c] === k)) paintCell(c);
+    actx.putImageData(img, 0, 0); renderTray(); draw();
+    const col = B.colors[k]; toast(kan(k + 1) + '　' + col.name + '（' + col.yomi + '）');
+  }
+  function renderTray() {
+    const tr = $('tray'); tr.innerHTML = '';
+    B.colors.forEach((col, k) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'sw' + (leftByNum[k] === 0 ? ' fin' : ''); b.setAttribute('aria-pressed', k === sel ? 'true' : 'false'); b.dataset.k = k;
+      b.setAttribute('aria-label', (k + 1) + '番 ' + col.name + ' のこり' + leftByNum[k]);
+      const chip = document.createElement('span'); chip.className = 'chip'; chip.style.background = col.hex; const no = document.createElement('span'); no.className = 'no'; no.textContent = k + 1; chip.append(no);
+      const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = col.name; const lf = document.createElement('span'); lf.className = 'left'; lf.textContent = leftByNum[k] ? 'のこり' + leftByNum[k] : '染め済み';
+      b.append(chip, nm, lf); b.addEventListener('click', () => selectNum(k)); tr.append(b);
+    });
+    const on = tr.querySelector('[aria-pressed=true]'); if (on && on.scrollIntoView) on.scrollIntoView({ block: 'nearest', inline: 'center' });
+  }
+  function updatePct() { $('play-pct').textContent = Math.floor(doneCount / B.total * 100) + '%'; }
+  function fillCell(c) {
+    if (filled[c] || B.pre[c] || B.num[c] !== sel) return false;
+    filled[c] = 1; doneCount++; leftByNum[sel]--; paintCell(c); putCell(c);
+    if (doneCount === 1 && !Object.keys(db.prog).includes(cur.id)) track('puzzle_start', { pattern: cur.pat, size: cur.size });
+    saveProg();
+    if (leftByNum[sel] === 0) { const nx = leftByNum.findIndex((x) => x > 0); renderTray(); if (nx >= 0) { setTimeout(() => selectNum(nx), 250); } }
+    else { const sw = $('tray').querySelector('[data-k="' + sel + '"] .left'); if (sw) sw.textContent = 'のこり' + leftByNum[sel]; }
+    updatePct();
+    if (doneCount === B.total) { for (let k = 0; k < B.n; k++) if (B.pre[k]) paintCell(k); actx.putImageData(img, 0, 0); draw(); setTimeout(complete, 350); }
+    return true;
+  }
+
+  // 表示
+  function sizeCanvas() { const r = $('stage').getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2.5); cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); cv._dpr = dpr; cv._w = r.width; cv._h = r.height; }
+  function fit() { const s = Math.min(cv._w / B.W, cv._h / B.H) * 0.94; view.s = s; view.x = (cv._w - B.W * s) / 2; view.y = (cv._h - B.H * s) / 2; }
+  function clampView() { const fitS = Math.min(cv._w / B.W, cv._h / B.H) * 0.94; view.s = Math.min(Math.max(view.s, fitS * 0.9), fitS * 10); const w = B.W * view.s, h = B.H * view.s, m = 60; view.x = Math.min(Math.max(view.x, m - w), cv._w - m); view.y = Math.min(Math.max(view.y, m - h), cv._h - m); }
+  let raf = 0; function draw() { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; render(); }); }
+  function render() {
+    if (!B) return; const dpr = cv._dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = '#E9DFCB'; ctx.fillRect(0, 0, cv._w, cv._h);
+    ctx.imageSmoothingEnabled = view.s < 2; ctx.imageSmoothingQuality = 'high';
+    ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.18)'; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4; ctx.fillStyle = '#fff'; ctx.fillRect(view.x, view.y, B.W * view.s, B.H * view.s); ctx.restore();
+    ctx.drawImage(art, view.x, view.y, B.W * view.s, B.H * view.s);
+    const x0 = -view.x / view.s, y0 = -view.y / view.s, x1 = (cv._w - view.x) / view.s, y1 = (cv._h - view.y) / view.s;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const c of B.playable) {
+      if (filled[c]) continue; const r = B.lr[c] * view.s; if (r < 6.5) continue; const x = B.lx[c], y = B.ly[c]; if (x < x0 || x > x1 || y < y0 || y > y1) continue;
+      const fs = Math.min(r * 1.15, 22), hl = B.num[c] === sel; ctx.font = (hl ? '700 ' : '500 ') + fs + 'px "Zen Kaku Gothic New", sans-serif'; ctx.fillStyle = hl ? '#2A2725' : '#7C7465';
+      ctx.fillText(String(B.num[c] + 1), view.x + x * view.s, view.y + y * view.s + 0.5);
+    }
+  }
+  function toBoard(cx, cy) { const r = cv.getBoundingClientRect(); return [(cx - r.left - view.x) / view.s, (cy - r.top - view.y) / view.s]; }
+  function cellAt(cx, cy) { const [x, y] = toBoard(cx, cy); if (x < 0 || y < 0 || x >= B.W || y >= B.H) return -1; return B.idmap[(y | 0) * B.W + (x | 0)]; }
+  function zoomAt(f, cx, cy) { const r = cv.getBoundingClientRect(), px = cx - r.left, py = cy - r.top; const ns = view.s * f; const fitS = Math.min(cv._w / B.W, cv._h / B.H) * 0.94; const s2 = Math.min(Math.max(ns, fitS * 0.9), fitS * 10); view.x = px - (px - view.x) * s2 / view.s; view.y = py - (py - view.y) * s2 / view.s; view.s = s2; clampView(); draw(); }
+  function tapAt(cx, cy) {
+    const c = cellAt(cx, cy); if (c < 0) return; if (filled[c]) return;
+    if (B.num[c] === sel) { fillCell(c); return; }
+    const col = B.colors[B.num[c]]; toast('ここは ' + (B.num[c] + 1) + '（' + col.name + '）です');
+  }
+  // 指の操作：1本で移動・軽く触れて塗る・長押しのまま動かすと、なぞって塗る
+  const ptrs = new Map(); let gesture = null;
+  cv.addEventListener('pointerdown', (e) => {
+    cv.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (ptrs.size === 1) { gesture = { type: 'tap', sx: e.clientX, sy: e.clientY, t: Date.now(), vx: view.x, vy: view.y }; gesture.hold = setTimeout(() => { if (gesture && gesture.type === 'tap') { gesture.type = 'paint'; tapAt(gesture.sx, gesture.sy); toast('なぞって染める'); } }, 380); }
+    else if (ptrs.size === 2) { if (gesture) clearTimeout(gesture.hold); const [a, b] = [...ptrs.values()]; gesture = { type: 'pinch', d: Math.hypot(a.x - b.x, a.y - b.y), mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 }; }
+  });
+  cv.addEventListener('pointermove', (e) => {
+    if (!ptrs.has(e.pointerId) || !gesture) return; ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (gesture.type === 'pinch' && ptrs.size >= 2) { const [a, b] = [...ptrs.values()]; const d = Math.hypot(a.x - b.x, a.y - b.y), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2; view.x += mx - gesture.mx; view.y += my - gesture.my; zoomAt(d / gesture.d, mx, my); gesture.d = d; gesture.mx = mx; gesture.my = my; return; }
+    if (gesture.type === 'paint') { const c = cellAt(e.clientX, e.clientY); if (c >= 0) fillCell(c); return; }
+    const dx = e.clientX - gesture.sx, dy = e.clientY - gesture.sy;
+    if (gesture.type === 'tap' && Math.hypot(dx, dy) > 8) { clearTimeout(gesture.hold); gesture.type = 'pan'; }
+    if (gesture.type === 'pan') { view.x = gesture.vx + dx; view.y = gesture.vy + dy; clampView(); draw(); }
+  });
+  function endPtr(e) {
+    if (!ptrs.has(e.pointerId)) return; ptrs.delete(e.pointerId);
+    if (gesture && gesture.type === 'tap' && e.type === 'pointerup' && ptrs.size === 0) { clearTimeout(gesture.hold); tapAt(gesture.sx, gesture.sy); }
+    if (gesture) clearTimeout(gesture.hold);
+    if (ptrs.size === 0) gesture = null; else if (ptrs.size === 1 && gesture && gesture.type === 'pinch') { const [a] = [...ptrs.values()]; gesture = { type: 'pan', sx: a.x, sy: a.y, vx: view.x, vy: view.y }; }
+  }
+  cv.addEventListener('pointerup', endPtr); cv.addEventListener('pointercancel', endPtr);
+  cv.addEventListener('wheel', (e) => { e.preventDefault(); zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX, e.clientY); }, { passive: false });
+  const center = () => { const r = cv.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+  $('z-in').addEventListener('click', () => zoomAt(1.5, ...center()));
+  $('z-out').addEventListener('click', () => zoomAt(1 / 1.5, ...center()));
+  $('z-fit').addEventListener('click', () => { fit(); draw(); });
+  $('btn-hint').addEventListener('click', () => {
+    if (!B) return; let best = -1; for (const c of B.playable) if (!filled[c] && B.num[c] === sel && (best < 0 || B.lr[c] > B.lr[best])) best = c;
+    if (best < 0) return; const s = Math.max(view.s, 20 / B.lr[best]); view.s = s; view.x = cv._w / 2 - B.lx[best] * s; view.y = cv._h / 2 - B.ly[best] * s; clampView(); draw(); track('hint_use', {});
+    flash(best);
+  });
+  function flash(c) { let k = 0; const iv = setInterval(() => { if (!B || filled[c]) { clearInterval(iv); return; } const on = k % 2 === 0; const d = img.data; for (let q = B.start[c]; q < B.start[c + 1]; q++) { const i = B.pix[q] * 4; if (on) { d[i] = 194; d[i + 1] = 69; d[i + 2] = 45; } } if (!on) paintCell(c); putCell(c); draw(); if (++k >= 6) { clearInterval(iv); paintCell(c); putCell(c); draw(); } }, 180); }
+  window.addEventListener('resize', () => { if (B && !$('play').classList.contains('hide')) { sizeCanvas(); clampView(); draw(); } });
+  function closePlay() { if (cur && filled) { clearTimeout(saveT); db.prog[cur.id] = { f: encode(filled), t: Date.now(), v: E.VERSION }; save(); } $('play').classList.add('hide'); $('home').classList.remove('hide'); document.querySelector('.noren').classList.remove('hide'); B = null; cur = null; renderHome(); }
+  $('btn-back').addEventListener('click', () => { try { if (history.state && history.state.play) { history.back(); return; } } catch (e) {} closePlay(); });
+  window.addEventListener('popstate', () => { if (!$('play').classList.contains('hide')) closePlay(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden && cur && filled) { db.prog[cur.id] = { f: encode(filled), t: Date.now(), v: E.VERSION }; save(); } });
+
+  // 染め上がり
+  function thumbOf() { const c = document.createElement('canvas'); c.width = 150; c.height = 200; const g = c.getContext('2d'); g.imageSmoothingQuality = 'high'; g.drawImage(art, 0, 0, 150, 200); return c.toDataURL('image/jpeg', 0.82); }
+  function complete() {
+    db.thumbs[cur.id] = thumbOf(); db.shelf = db.shelf.filter((x) => x !== cur.id).concat(cur.id); db.prog[cur.id] = { f: encode(filled), t: Date.now(), v: E.VERSION }; save();
+    track('puzzle_complete', { pattern: cur.pat, size: cur.size });
+    const sc = E.SCENES.find((s) => s.id === cur.sc);
+    $('fin-sub').textContent = E.PATTERNS[cur.pat].name + ' × ' + sc.name;
+    $('fin-img').src = art.toDataURL('image/png'); $('fin-img').alt = E.PATTERNS[cur.pat].name + 'の手ぬぐい（' + sc.name + '）';
+    const cols = $('fin-cols'); cols.innerHTML = ''; B.colors.forEach((c) => { const s = document.createElement('span'); const i = document.createElement('i'); i.style.background = c.hex; s.append(i, document.createTextNode(c.name + '（' + c.yomi + '）')); cols.append(s); });
+    $('wall-note').textContent = owned() ? '' : '壁紙の保存は、買い切りで使えます。';
+    try { $('fin-dlg').showModal(); } catch (e) {}
+  }
+  $('btn-fin-close').addEventListener('click', () => { $('fin-dlg').close(); });
+  $('fin-dlg').addEventListener('close', () => { if (cur) closePlay(); });
+  function wallpaper() {
+    const c = document.createElement('canvas'); c.width = 1080; c.height = 1920; const g = c.getContext('2d');
+    g.fillStyle = '#F0E7D5'; g.fillRect(0, 0, 1080, 1920);
+    const w = 900, h = w * B.H / B.W, x = 90, y = (1920 - h) / 2 - 40;
+    g.fillStyle = 'rgba(0,0,0,.12)'; g.fillRect(x + 8, y + 14, w, h);
+    g.imageSmoothingQuality = 'high'; g.drawImage(art, x, y, w, h);
+    g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 1.5; for (let i = 0; i < 90; i++) { const xx = x + 4 + i * (w - 8) / 89; g.beginPath(); g.moveTo(xx, y + h); g.lineTo(xx + (i % 3 - 1) * 1.5, y + h + 10 + (i * 7) % 9); g.stroke(); }
+    return new Promise((res) => c.toBlob(res, 'image/png'));
+  }
+  $('btn-wall').addEventListener('click', async () => {
+    if (!owned()) { track('premium_interest', { from: 'wallpaper' }); $('fin-dlg').close(); setTimeout(() => $('h-menu').scrollIntoView({ behavior: 'smooth' }), 50); return; }
+    const blob = await wallpaper(); if (!blob) return; const name = 'てぬぐい染め_' + cur.pat + '_' + cur.sc + '.png', file = new File([blob], name, { type: 'image/png' });
+    track('wallpaper_save', {});
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { try { await navigator.share({ files: [file] }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+    $('wall-note').textContent = '保存しました。写真のアプリから壁紙に設定できます。';
+  });
+
+  // 購入
+  const msg = (t) => { $('pr-msg').textContent = t || ''; };
+  async function api(path, body) { const opt = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {}; const r = await fetch(PAY_API + path, opt); let j = {}; try { j = await r.json(); } catch (e) {} return { ok: r.ok, status: r.status, data: j }; }
+  $('btn-buy').addEventListener('click', () => { track('begin_checkout', { value: PRICE, currency: 'JPY', items: [{ item_id: PLAN, item_name: 'てぬぐい染め 買い切り' }] }); location.href = LINK; });
+  async function verifyPurchase(sid) {
+    msg('ご購入を確認しています…'); $('h-menu').scrollIntoView({ block: 'start' }); try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    try { const r = await api('/verify?session_id=' + encodeURIComponent(sid));
+      if (r.ok && r.data.premium && r.data.plan === PLAN) { prem = { token: r.data.token, plan: r.data.plan, premium: true, checkedAt: Date.now() }; savePrem(); track('purchase', { transaction_id: sid, value: PRICE, currency: 'JPY', items: [{ item_id: PLAN, item_name: 'てぬぐい染め 買い切り' }] }); renderHome(); msg('ありがとうございます。ぜんぶの文様と絵を染められるようになりました。'); }
+      else { msg('ご購入を確認できませんでした。お支払いが完了している場合は、少し待ってからページを開き直してください。'); track('purchase_verify_failed', { reason: r.data.error || String(r.status) }); }
+    } catch (e) { try { history.replaceState(null, '', location.pathname + '?session_id=' + encodeURIComponent(sid)); } catch (x) {} msg('通信できませんでした。電波の良い所でページを開き直すと、もう一度確認します。'); }
+  }
+  $('btn-show-code').addEventListener('click', () => $('code-box').classList.toggle('hide'));
+  $('btn-copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('my-code').value); msg('コピーしました。'); } catch (e) { $('my-code').select(); msg('コードを選びました。長押し（右クリック）でコピーしてください。'); } });
+  $('btn-restore').addEventListener('click', async () => {
+    const code = $('restore-code').value.trim();
+    if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(code)) { msg('コードの形が正しくありません。購入した端末に出るコードを、そのまま貼り付けてください。'); return; }
+    msg('確認しています…');
+    try { const r = await api('/status', { token: code });
+      if (r.ok && r.data.premium && r.data.plan === PLAN) { prem = { token: code, plan: r.data.plan, premium: true, checkedAt: Date.now() }; savePrem(); $('restore-code').value = ''; renderHome(); track('premium_restore', {}); msg('引き継ぎました。この端末でも、ぜんぶ染められます。'); }
+      else msg('このコードは使えませんでした。');
+    } catch (e) { msg('通信できませんでした。電波の良い所でもう一度お試しください。'); }
+  });
+
+  // 保管
+  const kmsg = (t) => { $('keep-msg').textContent = t || ''; };
+  $('btn-export').addEventListener('click', () => { const blob = new Blob([JSON.stringify({ app: 'tenugui', v: 1, exported: new Date().toISOString(), data: db })], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'てぬぐい染め_' + today().replace(/-/g, '') + '.json'; document.body.append(a); a.click(); a.remove(); kmsg('書き出しました。'); track('backup_export', {}); });
+  $('btn-import').addEventListener('click', () => $('import-file').click());
+  $('import-file').addEventListener('change', async (e) => {
+    const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    try { if (f.size > 8 * 1024 * 1024) throw 0; const j = JSON.parse(await f.text()); const d = j && j.app === 'tenugui' && j.data;
+      if (!d || typeof d.prog !== 'object' || typeof d.thumbs !== 'object' || !Array.isArray(d.shelf)) throw 0;
+      const okId = (id) => /^(asanoha|seigaiha|shippo)\.[a-z]+\.(zakkuri|komakai)$/.test(id);
+      if (!Object.keys(d.prog).every(okId) || !d.shelf.every(okId) || !Object.values(d.thumbs).every((u) => typeof u === 'string' && u.indexOf('data:image/jpeg;base64,') === 0)) throw 0;
+      if (!confirm('読み込んだ内容で、今の記録を置き換えますか？')) return;
+      db = { v: 1, prog: d.prog, thumbs: d.thumbs, shelf: d.shelf }; save(); renderHome(); kmsg('読み込みました。');
+    } catch (x) { kmsg('このファイルは読み込めませんでした。てぬぐい染めで書き出したファイルを選んでください。'); }
+  });
+
+  window.__tenugui = { E, daily, freeSet, canPlay, dayNo, pidOf, get B() { return B; }, set B(v) {}, fill: (c) => fillCell(c), select: (k) => selectNum(k), get sel() { return sel; }, get view() { return view; }, get filled() { return filled; } };
+  renderHome();
+  const sid = new URLSearchParams(location.search).get('session_id');
+  if (sid && /^cs_(test|live)_[A-Za-z0-9]+$/.test(sid)) verifyPurchase(sid);
+  else if (prem && prem.token) api('/status', { token: prem.token }).then((r) => { if (r.ok && r.data.reason === 'invalid_token') { prem = null; savePrem(); renderHome(); } }).catch(() => {});
+})();
+</script>
+</body>
+</html>
