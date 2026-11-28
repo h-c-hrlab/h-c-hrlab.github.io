@@ -28,8 +28,8 @@
     const k = Math.max(1, n);
     if (k > 30) {
       // 31面から先：面ごとに形を変える（板の数・錠・色・板の長さ）。10面ごとに少しやさしい「ひと息」の面
-      const h = hashStr('shape-' + k), rest = k % 10 === 0, long = (h >> 9) % 3;
-      return { plates: rest ? 9 + (h % 3) : 10 + (h % 6), colors: 6 + ((h >> 3) % 3), swaps: 0, win: 0, triple: 0.2 + ((h >> 5) % 4) * 0.1, locks: rest ? 1 : 1 + ((h >> 7) % 4),
+      const h = hashStr('shape-' + k), rest = k % 10 === 0, long = (h >>> 9) % 3;
+      return { plates: rest ? 9 + (h % 3) : 10 + (h % 6), colors: 6 + ((h >>> 3) % 3), swaps: 0, win: 0, triple: 0.2 + ((h >>> 5) % 4) * 0.1, locks: rest ? 1 : 1 + ((h >>> 7) % 4),
         lenMin: [90, 110, 140][long], lenSpan: [90, 130, 120][long], band: rest ? [0.45, 0.92] : [0.12, 0.75] };
     }
     return { plates: Math.min(4 + Math.floor((k - 1) / 3), 15), colors: Math.min(3 + Math.floor((k - 1) / 8), 8), swaps: Math.min(4 + k * 2, 120), win: Math.min(4 + Math.floor(k / 3), 20), triple: Math.min(0.15 + k * 0.01, 0.5), locks: k < 6 ? 0 : k < 16 ? 1 : k < 40 ? 2 : 3, band: k <= 5 ? [0, 1] : k <= 15 ? [0.3, 0.97] : k <= 30 ? [0.3, 0.88] : [0.12, 0.75] };
